@@ -25,18 +25,23 @@ public class DriverViewSubsystem extends SubsystemBase
     private ShooterSubsystem m_Shooter;
     private TurretSubsystem m_Turret;
     private HopperSubsystem m_Hopper;
+    private DriveSubsystem m_Drive;
 
     private ShuffleboardTab m_driver_view_tab;
     private NetworkTableEntry m_shooter_velocity;
     private NetworkTableEntry m_turret_angle;
     private NetworkTableEntry m_beam_break_top;
     private NetworkTableEntry m_beam_break_bot;
+    private NetworkTableEntry m_navx_yaw;
+    private NetworkTableEntry m_navx_pitch;
+    private NetworkTableEntry m_navx_roll;
 
-    public DriverViewSubsystem(ShooterSubsystem p_Shooter, TurretSubsystem p_Turret, HopperSubsystem p_Hopper)
+    public DriverViewSubsystem(ShooterSubsystem p_Shooter, TurretSubsystem p_Turret, HopperSubsystem p_Hopper, DriveSubsystem p_Drive)
     {
         m_Shooter = p_Shooter;
         m_Turret = p_Turret;
         m_Hopper = p_Hopper;
+        m_Drive = p_Drive;
 
         // setup driver view tab
         m_driver_view_tab = Shuffleboard.getTab("Driver View");
@@ -46,6 +51,9 @@ public class DriverViewSubsystem extends SubsystemBase
             2).withSize(2, 2).withProperties(Map.of("min", -180, "max", 180)).getEntry();
         m_beam_break_top = m_driver_view_tab.add("Top Beam Status", false).withPosition(0, 0).getEntry();
         m_beam_break_bot = m_driver_view_tab.add("Bottom Beam Status", false).withPosition(0, 1).getEntry();
+        m_navx_yaw = m_driver_view_tab.add("NavX Yaw", 0).withPosition(2, 3).withSize(1, 1).withProperties(Map.of("min", -180, "max", 180)).getEntry();
+        m_navx_pitch = m_driver_view_tab.add("NavX Pitch", 0).withPosition(2, 3).withSize(1, 1).withProperties(Map.of("min", -180, "max", 180)).getEntry();
+        m_navx_roll = m_driver_view_tab.add("NavX Roll", 0).withPosition(2, 3).withSize(1, 1).withProperties(Map.of("min", -180, "max", 180)).getEntry();
 
         HttpCamera limelightFeed = new HttpCamera("limelight", "http://limelight.local:5800/stream.mjpg",
             HttpCameraKind.kMJPGStreamer);
@@ -56,6 +64,9 @@ public class DriverViewSubsystem extends SubsystemBase
     @Override
     public void periodic()
     {
+        m_navx_yaw.setDouble(m_Drive.getNavxYaw());
+        m_navx_pitch.setDouble(m_Drive.getNavxPitch());
+        m_navx_roll.setDouble(m_Drive.getNavxRoll());
         m_shooter_velocity.setDouble(m_Shooter.getVelocity());
         m_turret_angle.setDouble(m_Turret.getTurretAngle());
         m_beam_break_top.setBoolean(m_Hopper.topBeamStatus());
