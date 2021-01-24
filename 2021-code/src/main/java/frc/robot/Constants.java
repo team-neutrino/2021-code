@@ -131,4 +131,14 @@ public final class Constants
         public static final double ANGLE_SCALE = (7.0 * 360.0) / (27.0 * 1024.0);
         public static final double kP = 0.04;
     }
+
+    public static final class PathStrings
+    {
+        public static final String BARREL_PATH = "paths/barrel_path.wpilib.json";
+        public static final String GSA_PATH = "paths/galacticSearchA_path.wpilib.json";
+        public static final String GSB_PATH = "paths/galacticSearchB_path.wpilib.json";
+        public static final String SLALOM_PATH = "paths/SlalomOne.wpilib.json";
+        public static final String BOUNCE_PATH = "paths/bounce_path.wpilib.json";
+        
+    }
 }

@@ -33,6 +33,7 @@ import java.nio.file.Path;
 
 import frc.robot.subsystems.*;
 import frc.robot.util.TriggerToBoolean;
+import frc.robot.util.RamseteGen;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
@@ -76,6 +77,8 @@ public class RobotContainer
     private ThreeAuton m_ThreeAuton;
     private DumpAuton m_DumpAuton;
     private EightBallAuto m_EightBallAuto;
+    private RamsetePathCommand m_RamsetePath;
+    //private RamseteGen m_RamseteGen;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -88,6 +91,7 @@ public class RobotContainer
         m_DumpAuton = new DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 10);
         m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
+        m_RamsetePath = new RamsetePathCommand(m_Drive);
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
     }
 
@@ -141,8 +145,10 @@ public class RobotContainer
      */
     public Command getAutonomousCommand()
     {
-        String trajectoryJSON = "paths/Line.wpilib.json";
+        //m_RamseteGen = new RamseteGen(barrel_path);
+        /*
         Trajectory trajectory = new Trajectory();
+        String trajectoryJSON = "paths/Unnamed.wpilib.json";
         try {
             Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
             trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
@@ -153,9 +159,9 @@ public class RobotContainer
             trajectory, 
             m_Drive::getPose, 
             new RamseteController(DriveConstants.K_RAMSETE_B, 
-                                  DriveConstants.K_RAMSETE_ZETA), 
+                                    DriveConstants.K_RAMSETE_ZETA), 
             new SimpleMotorFeedforward(DriveConstants.KS_VOLTS,
-                                       DriveConstants.KV_VOLT_SECONDS_PER_METER,
+                                        DriveConstants.KV_VOLT_SECONDS_PER_METER,
                                     DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
             DriveConstants.K_DRIVE_KINEMATICS, 
             m_Drive::getWheelSpeeds, 
@@ -164,17 +170,17 @@ public class RobotContainer
             m_Drive::tankDriveVolts, 
             m_Drive
         );
-        m_Drive.resetOdometry(trajectory.getInitialPose());
+        */
         m_Drive.initAuton();
         // return m_SixBallAuto;
-        return m_ThreeAuton;
+        //return m_ThreeAuton;
         //return m_DumpAuton;
         // return m_EightBallAuto;
-        // return trajectoryRamsete;
+        return m_RamsetePath;
     }
 
     public void teleopInit()
-    {
+    {   
         configureButtonBindings();
         final Command tankDriveCommand = new RunCommand(
             () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
