@@ -129,11 +129,48 @@ public class RobotContainer
      */
     public Command getAutonomousCommand()
     {
+        String trajectoryJSON = "paths/B_Red.wpilib.json";
+        Trajectory trajectory = new Trajectory();
+        AnalogPotentiometer analogPot = new AnalogPotentiometer(0, 30);
+        try {
+            if(analogPot != 0){
+                Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+                trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+            }
+            else {
+                Spark left = new Spark(0);
+                Spark right = new Spark(1);
+
+                SpeedControllerGroup leftMotor = new SpeedControllerGroup(left);
+                SpeedControllerGroup rightMotor = new SpeedControllerGroup(right);
+
+                DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
+
+            }
+        } 
+        catch (IOException ex) {
+            DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+        }
+        RamseteCommand trajectoryRamsete = new RamseteCommand(
+            trajectory, 
+            m_Drive::getPose, 
+            new RamseteController(DriveConstants.K_RAMSETE_B, 
+                                  DriveConstants.K_RAMSETE_ZETA), 
+            new SimpleMotorFeedforward(DriveConstants.KS_VOLTS,
+                                       DriveConstants.KV_VOLT_SECONDS_PER_METER,
+                                    DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
+            DriveConstants.K_DRIVE_KINEMATICS, 
+            m_Drive::getWheelSpeeds, 
+            new PIDController(DriveConstants.KP_DRIVE_VEL, 0, 0), 
+            new PIDController(DriveConstants.KP_DRIVE_VEL, 0, 0),
+            m_Drive::tankDriveVolts, 
+            m_Drive
+        );
         m_Drive.initAuton();
         // return m_SixBallAuto;
         // return m_ThreeAuton;
         //return m_DumpAuton;
-        return m_EightBallAuto;
+        return trajectoryPath;
     }
 
     public void teleopInit()
