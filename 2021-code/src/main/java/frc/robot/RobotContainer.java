@@ -65,6 +65,14 @@ public class RobotContainer
     private DumpAuton m_DumpAuton;
     private EightBallAuto m_EightBallAuto;
 
+    private Spark left = new Spark(0);
+    private Spark right = new Spark(1);
+
+    private SpeedControllerGroup leftMotor = new SpeedControllerGroup(left);
+    private SpeedControllerGroup rightMotor = new SpeedControllerGroup(right);
+
+    private DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
+
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
@@ -131,20 +139,19 @@ public class RobotContainer
     {
         String trajectoryJSON = "paths/B_Red.wpilib.json";
         Trajectory trajectory = new Trajectory();
-        AnalogPotentiometer analogPot = new AnalogPotentiometer(0, 30);
+        AnalogPotentiometer analogPot = new AnalogPotentiometer(0, 30, 0);
         try {
             if(analogPot != 0){
                 Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
                 trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
             }
             else {
-                Spark left = new Spark(0);
-                Spark right = new Spark(1);
-
-                SpeedControllerGroup leftMotor = new SpeedControllerGroup(left);
-                SpeedControllerGroup rightMotor = new SpeedControllerGroup(right);
-
-                DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
+                if(20 < analogPot.get() < 22) {
+                   System.out.print(analogPot.get());
+                }
+                else {
+                    System.out.print("lol u did it wrong ecksdee");
+                }
 
             }
         } 
