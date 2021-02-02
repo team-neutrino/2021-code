@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -17,20 +19,27 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.Constants.*;
 import static edu.wpi.first.wpilibj.XboxController.Button;
+
+import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import frc.robot.subsystems.*;
 import frc.robot.util.TriggerToBoolean;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 /**
- * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
- * little robot logic should actually be handled in the {@link Robot} periodic methods (other than the scheduler calls).
- * Instead, the structure of the robot (including subsystems, commands, and button mappings) should be declared here.
+ * This class is where the bulk of the robot should be declared. Since
+ * Command-based is a "declarative" paradigm, very little robot logic should
+ * actually be handled in the {@link Robot} periodic methods (other than the
+ * scheduler calls). Instead, the structure of the robot (including subsystems,
+ * commands, and button mappings) should be declared here.
  */
-public class RobotContainer
-{
+public class RobotContainer {
+    private static final AnalogInput AnalogInput = null;
     // The robot's subsystems and commands are defined here...
     private final IntakePIDSubsystem m_Intake = new IntakePIDSubsystem();
     private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
@@ -71,7 +80,7 @@ public class RobotContainer
     private SpeedControllerGroup leftMotor = new SpeedControllerGroup(left);
     private SpeedControllerGroup rightMotor = new SpeedControllerGroup(right);
 
-    private DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
+    private DifferentialDrive drive = new DifferentialDrive(leftMotor, rightMotor);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -139,21 +148,24 @@ public class RobotContainer
     {
         String trajectoryJSON = "paths/B_Red.wpilib.json";
         Trajectory trajectory = new Trajectory();
-        AnalogPotentiometer analogPot = new AnalogPotentiometer(0, 30, 0);
+        AnalogInput input = new AnalogInput(0);
+        AnalogPotentiometer analogPot = new AnalogPotentiometer(input, 5);
+        System.out.print(analogPot.get());
+
         try {
-            if(analogPot != 0){
+            //if(){
                 Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
                 trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-            }
-            else {
-                if(20 < analogPot.get() < 22) {
+            //}
+           // else {
+                /*if(20 < analogPot.get() < 22) {
                    System.out.print(analogPot.get());
                 }
                 else {
                     System.out.print("lol u did it wrong ecksdee");
-                }
+                } */
 
-            }
+            //}
         } 
         catch (IOException ex) {
             DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
