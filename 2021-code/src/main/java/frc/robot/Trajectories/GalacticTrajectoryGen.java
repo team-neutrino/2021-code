@@ -17,17 +17,16 @@ public class GalacticTrajectoryGen {
     public GalacticTrajectoryGen() {
         
       // 2018 cross scale auto waypoints.
-      var sideStart = new Pose2d(Units.feetToMeters(1.54), Units.feetToMeters(23.23),
-          Rotation2d.fromDegrees(-180));
-      var crossScale = new Pose2d(Units.feetToMeters(23.7), Units.feetToMeters(6.8),
-          Rotation2d.fromDegrees(-160));
+      var sideStart = new Pose2d(Units.feetToMeters(2.5), Units.feetToMeters(5),
+          Rotation2d.fromDegrees(0));
+      var crossScale = new Pose2d(Units.feetToMeters(7.5), Units.feetToMeters(5),
+          Rotation2d.fromDegrees(-90));
   
       var interiorWaypoints = new ArrayList<Translation2d>();
-      interiorWaypoints.add(new Translation2d(Units.feetToMeters(14.54), Units.feetToMeters(23.23)));
-      interiorWaypoints.add(new Translation2d(Units.feetToMeters(21.04), Units.feetToMeters(18.23)));
-  
-      TrajectoryConfig config = new TrajectoryConfig(Units.feetToMeters(12), Units.feetToMeters(12));
-      config.setReversed(true);
+      interiorWaypoints.add(new Translation2d(Units.feetToMeters(5), Units.feetToMeters(5)));
+      
+      TrajectoryConfig config = new TrajectoryConfig(Units.feetToMeters(5), Units.feetToMeters(6.6));
+      config.setReversed(false);
   
         var trajectory = TrajectoryGenerator.generateTrajectory(
             sideStart,

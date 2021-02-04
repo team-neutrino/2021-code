@@ -64,6 +64,7 @@ public class RobotContainer
     private ThreeAuton m_ThreeAuton;
     private DumpAuton m_DumpAuton;
     private EightBallAuto m_EightBallAuto;
+    private GalacticSearchAuton m_GalacticSearchAuton;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -133,7 +134,8 @@ public class RobotContainer
         // return m_SixBallAuto;
         // return m_ThreeAuton;
         //return m_DumpAuton;
-        return m_EightBallAuto;
+        //return m_EightBallAuto;
+        return m_GalacticSearchAuton;
     }
 
     public void teleopInit()

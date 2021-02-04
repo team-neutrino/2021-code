@@ -33,7 +33,7 @@ public class GalacticSearchAuton extends SequentialCommandGroup
     /**
      * Creates a new DumpAuton.
      */
-    public GalacticSearchAuton(ShooterSubsystem p_Shooter, HopperSubsystem p_Hopper, IntakePIDSubsystem p_Intake,
+    public GalacticSearchAuton(HopperSubsystem p_Hopper, IntakePIDSubsystem p_Intake,
             DriveSubsystem p_Drive, TurretSubsystem p_Turret)
     {
         Trajectory trajectory = GalacticTrajectoryGen.GalacticTrajectory;
