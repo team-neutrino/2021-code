@@ -7,18 +7,32 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
+import edu.wpi.first.wpilibj.controller.PIDController;
+import edu.wpi.first.wpilibj.controller.RamseteController;
+import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
+import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants.*;
 import static edu.wpi.first.wpilibj.XboxController.Button;
+
+import java.io.IOException;
+import java.nio.file.Path;
+
 import frc.robot.subsystems.*;
 import frc.robot.util.TriggerToBoolean;
 import frc.robot.commands.*;
@@ -38,7 +52,7 @@ public class RobotContainer
     private final ClimberSubsystem m_climber = new ClimberSubsystem();
     private final HopperSubsystem m_Hopper = new HopperSubsystem(m_Shooter);
     private final TurretSubsystem m_Turret = new TurretSubsystem();
-    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
+    //private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper, m_Drive);
 
     private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_PORT);
     private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK__PORT);
@@ -64,6 +78,8 @@ public class RobotContainer
     private ThreeAuton m_ThreeAuton;
     private DumpAuton m_DumpAuton;
     private EightBallAuto m_EightBallAuto;
+    private RamsetePathCommand m_RamsetePath;
+    //private RamseteGen m_RamseteGen;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -76,6 +92,7 @@ public class RobotContainer
         m_DumpAuton = new DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 10);
         m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
+        m_RamsetePath = new RamsetePathCommand(m_Drive);
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
     }
 
@@ -129,15 +146,72 @@ public class RobotContainer
      */
     public Command getAutonomousCommand()
     {
+        /*var autoVoltageConstraint = // reference later from our NeutrinoTrajectoryConfigs.java... holdover?
+        new DifferentialDriveVoltageConstraint(
+            new SimpleMotorFeedforward(Constants.DriveConstants.KS_VOLTS,
+                                       Constants.DriveConstants.KV_VOLT_SECONDS_PER_METER,
+                                       Constants.DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
+            Constants.DriveConstants.K_DRIVE_KINEMATICS, 10);*/
+
+        // Create config for trajectory
+        /*TrajectoryConfig config =
+            new TrajectoryConfig(Constants.DriveConstants.K_MAX_SPEED_METERS_PER_SECOND,
+                                Constants.DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED)
+                // Add kinematics to ensure max speed is actually obeyed
+                .setKinematics(Constants.DriveConstants.K_DRIVE_KINEMATICS)
+                // Apply the voltage constraint
+                .addConstraint(autoVoltageConstraint);*/
+
+        /*// An example trajectory to follow.  All units in meters.
+        Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
+            // Start at the origin facing the +X direction
+            new Pose2d(0, 0, new Rotation2d(0)),
+            // Pass through these two interior waypoints, making an 's' curve path
+            List.of(
+                new Translation2d(1, 1),
+                new Translation2d(2, -1)
+            ),
+            // End 3 meters straight ahead of where we started, facing forward
+            new Pose2d(3, 0, new Rotation2d(0)),
+            // Pass config
+            config
+        );*/
+
+        String trajectoryJSON = "paths/Slolam.wpilib.json";
+        Trajectory trajectory = new Trajectory();
+        try {
+            Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+            trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+        } catch (IOException ex) {
+            DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+        }
+
+        RamseteCommand ramseteCommand = new RamseteCommand(
+            trajectory,
+            m_Drive::getPose,
+            new RamseteController(Constants.DriveConstants.K_RAMSETE_B, Constants.DriveConstants.K_RAMSETE_ZETA),
+            new SimpleMotorFeedforward(Constants.DriveConstants.KS_VOLTS,
+                                    Constants.DriveConstants.KV_VOLT_SECONDS_PER_METER,
+                                    Constants.DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
+            Constants.DriveConstants.K_DRIVE_KINEMATICS,
+            m_Drive::getWheelSpeeds,
+            new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
+            new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
+            // RamseteCommand passes volts to the callback
+            m_Drive::tankDriveVolts,
+            m_Drive
+        );
+
+        // Reset odometry to the starting pose of the trajectory.
+        //m_Drive.resetOdometry(exampleTrajectory.getInitialPose());
         m_Drive.initAuton();
-        // return m_SixBallAuto;
-        // return m_ThreeAuton;
-        //return m_DumpAuton;
-        return m_EightBallAuto;
+
+        // Run path following command, then stop at the end.
+        return ramseteCommand.andThen(() -> m_Drive.tankDriveVolts(0, 0));
     }
 
     public void teleopInit()
-    {
+    {   
         configureButtonBindings();
         final Command tankDriveCommand = new RunCommand(
             () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
