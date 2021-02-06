@@ -17,7 +17,8 @@ import frc.robot.Constants;
 import frc.robot.Constants.CanId;
 import edu.wpi.first.wpilibj.Timer;
 
-public class IntakePIDSubsystem extends PIDSubsystem{
+public class IntakePIDSubsystem extends PIDSubsystem
+{
 
     private TalonSRX m_IntakeFeedMotor = new TalonSRX(CanId.MOTOR_CONTROLLER_INTAKE_FEED);
     private TalonSRX m_IntakeArmMotor = new TalonSRX(CanId.MOTOR_CONTROLLER_INTAKE_POSITION);
@@ -98,8 +99,5 @@ public class IntakePIDSubsystem extends PIDSubsystem{
             m_arm_timer.reset();
             m_IntakeArmMotor.set(ControlMode.PercentOutput, 0);
         }
-        
-        // disable();
-        // m_IntakeArmMotor.set(ControlMode.PercentOutput, 0.3);
     }
 }
