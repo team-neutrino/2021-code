@@ -24,6 +24,10 @@ public class IntakePIDSubsystem extends PIDSubsystem
     private TalonSRX m_IntakeArmMotor = new TalonSRX(CanId.MOTOR_CONTROLLER_INTAKE_POSITION);
     private DutyCycleEncoder m_DutyCycleEncoder = new DutyCycleEncoder(Constants.IntakeConstants.ENCODER_PORT);
     private Timer m_arm_timer = new Timer();
+
+    // private TalonSRX.SupplyCurrentLimitConfiguration m_arm_current_limit_config = 
+    //     new SupplyCurrentLimitConfiguration()
+
     /**
      * Creates a new IntakePIDSubsystem.
      */
@@ -34,6 +38,10 @@ public class IntakePIDSubsystem extends PIDSubsystem
             new PIDController(Constants.IntakeConstants.KP, Constants.IntakeConstants.KI,
                 Constants.IntakeConstants.KD));
         m_DutyCycleEncoder.setDistancePerRotation(Constants.IntakeConstants.POSITION_MULTIPLIER); //degrees
+        
+        m_IntakeArmMotor.configContinuousCurrentLimit( 10, 500 );
+        m_IntakeArmMotor.configPeakCurrentLimit( 15, 20);
+        m_IntakeArmMotor.enableCurrentLimit( true );
     }
 
     @Override
