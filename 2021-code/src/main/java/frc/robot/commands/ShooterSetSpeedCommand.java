@@ -43,7 +43,7 @@ public class ShooterSetSpeedCommand extends CommandBase
     @Override
     public void end(boolean interrupted)
     {
-        m_shooter.setPower(0);
+        m_shooter.turnOff();        
     }
 
     // Returns true when the command should end.
