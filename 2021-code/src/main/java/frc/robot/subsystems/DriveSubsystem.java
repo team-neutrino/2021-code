@@ -139,4 +139,28 @@ public class DriveSubsystem extends SubsystemBase
             return input;
         }
     }
+
+    //get navX information: yaw, pitch, roll
+    public float getNavxYaw()
+    {
+        return m_navX.getYaw();
+    }
+
+    public float getNavxRoll()
+    {
+        return m_navX.getRoll();
+    }
+
+    public float getNavxPitch()
+    {
+        return m_navX.getPitch();
+    }
+    public double getLeftEncoderPosition()
+    {
+        return m_rEncoder.getPosition();
+    }
+    public double getRightEncoderPosition()
+    {
+        return m_lEncoder.getPosition();
+    }
 }
