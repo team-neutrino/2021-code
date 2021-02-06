@@ -78,7 +78,7 @@ public class RobotContainer
     private ThreeAuton m_ThreeAuton;
     private DumpAuton m_DumpAuton;
     private EightBallAuto m_EightBallAuto;
-    private RamsetePathCommand m_RamsetePath;
+    //private RamsetePathCommand m_RamsetePath;
     //private RamseteGen m_RamseteGen;
 
     /**
@@ -92,7 +92,7 @@ public class RobotContainer
         m_DumpAuton = new DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 10);
         m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
-        m_RamsetePath = new RamsetePathCommand(m_Drive);
+        //m_RamsetePath = new RamsetePathCommand(m_Drive);
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
     }
 
@@ -216,6 +216,7 @@ public class RobotContainer
         final Command tankDriveCommand = new RunCommand(
             () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
         m_Drive.setDefaultCommand(tankDriveCommand);
+        m_Drive.initAuton();
     }
 
 }
