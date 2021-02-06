@@ -167,13 +167,8 @@ public class RobotContainer
             m_Drive::tankDriveVolts, 
             m_Drive
         );
-    
         m_Drive.initAuton();
-        // return m_SixBallAuto;
-        //return m_ThreeAuton;
-        //return m_DumpAuton;
-        // return m_EightBallAuto;
-        return trajectoryRamsete.andThen(() -> m_Drive.tankDriveVolts(0, 0));
+        return trajectoryRamsete.andThen(() -> m_Drive.tankDrive(0, 0));
     }
 
     public void teleopInit()
