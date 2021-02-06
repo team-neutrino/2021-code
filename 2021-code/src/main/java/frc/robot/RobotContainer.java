@@ -33,7 +33,6 @@ import java.nio.file.Path;
 
 import frc.robot.subsystems.*;
 import frc.robot.util.TriggerToBoolean;
-import frc.robot.util.RamseteGen;
 import frc.robot.commands.*;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
@@ -145,10 +144,8 @@ public class RobotContainer
      */
     public Command getAutonomousCommand()
     {
-        //m_RamseteGen = new RamseteGen(barrel_path);
-        /*
         Trajectory trajectory = new Trajectory();
-        String trajectoryJSON = "paths/Unnamed.wpilib.json";
+        String trajectoryJSON = "paths/Line.wpilib.json";
         try {
             Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
             trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
@@ -170,13 +167,13 @@ public class RobotContainer
             m_Drive::tankDriveVolts, 
             m_Drive
         );
-        */
+    
         m_Drive.initAuton();
         // return m_SixBallAuto;
         //return m_ThreeAuton;
         //return m_DumpAuton;
         // return m_EightBallAuto;
-        return m_RamsetePath;
+        return trajectoryRamsete.andThen(() -> m_Drive.tankDriveVolts(0, 0));
     }
 
     public void teleopInit()
@@ -185,6 +182,7 @@ public class RobotContainer
         final Command tankDriveCommand = new RunCommand(
             () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
         m_Drive.setDefaultCommand(tankDriveCommand);
+        m_Drive.initAuton();
     }
 
 }
