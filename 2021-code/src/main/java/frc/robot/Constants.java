@@ -24,16 +24,16 @@ public final class Constants
     public static final class DriveConstants
     {
 
-        public static final double KS_VOLTS = 0.183;
-        public static final double KV_VOLT_SECONDS_PER_METER = 1.29;
-        public static final double KA_VOLT_SECONDS_SQUARED_PER_METER = 0.167;
-        public static final double KP_DRIVE_VEL = 2.64;
+        public static final double KS_VOLTS = 0.177;
+        public static final double KV_VOLT_SECONDS_PER_METER = 3.21;
+        public static final double KA_VOLT_SECONDS_SQUARED_PER_METER = 0.444;
+        public static final double KP_DRIVE_VEL = 2.15;
         public static final double K_TRACK_WIDTH_METERS = 0.7;
         public static final DifferentialDriveKinematics K_DRIVE_KINEMATICS = new DifferentialDriveKinematics(
             K_TRACK_WIDTH_METERS);
 
-        public static final double K_MAX_SPEED_METERS_PER_SECOND = 1.5;
-        public static final double K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 2;
+        public static final double K_MAX_SPEED_METERS_PER_SECOND = .96;
+        public static final double K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 6.8;
         public static final double K_RAMSETE_B = 2;
         public static final double K_RAMSETE_ZETA = 0.7;
 

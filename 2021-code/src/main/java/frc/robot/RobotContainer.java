@@ -24,6 +24,8 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.Joystick;
@@ -114,10 +116,10 @@ public class RobotContainer
 
         m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
             m_climber);
-
+        
         m_A.whenHeld( new ShooterSetSpeedCommand(m_Shooter, 80000));
         m_Y.whenHeld( new ShooterSetSpeedCommand(m_Shooter, 95000));
-        
+
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
         m_BumperRight.whileHeld(new InstantCommand(m_Hopper::reverse, m_Hopper), false).whenReleased(
@@ -146,6 +148,7 @@ public class RobotContainer
      */
     public Command getAutonomousCommand()
     {
+        m_Drive.initAuton();
         /*var autoVoltageConstraint = // reference later from our NeutrinoTrajectoryConfigs.java... holdover?
         new DifferentialDriveVoltageConstraint(
             new SimpleMotorFeedforward(Constants.DriveConstants.KS_VOLTS,
@@ -204,19 +207,21 @@ public class RobotContainer
 
         // Reset odometry to the starting pose of the trajectory.
         //m_Drive.resetOdometry(exampleTrajectory.getInitialPose());
-        m_Drive.initAuton();
+       
 
         // Run path following command, then stop at the end.
+        //Command resetCommand = new InstantCommand(m_Drive::initAuton);
+        //return resetCommand.andThen(ramseteCommand).andThen(() -> m_Drive.tankDriveVolts(0, 0));
         return ramseteCommand.andThen(() -> m_Drive.tankDriveVolts(0, 0));
     }
 
-    public void teleopInit()
+    public void teleopInit() 
     {   
+        m_Drive.initAuton();
         configureButtonBindings();
         final Command tankDriveCommand = new RunCommand(
             () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
         m_Drive.setDefaultCommand(tankDriveCommand);
-        m_Drive.initAuton();
     }
 
 }
