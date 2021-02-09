@@ -10,8 +10,6 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -19,8 +17,6 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import frc.robot.Constants.*;
 import static edu.wpi.first.wpilibj.XboxController.Button;
 
@@ -38,8 +34,9 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
  * scheduler calls). Instead, the structure of the robot (including subsystems,
  * commands, and button mappings) should be declared here.
  */
-public class RobotContainer {
-    private static final AnalogInput AnalogInput = null;
+public class RobotContainer
+{
+    //private static final AnalogInput AnalogInput = null;
     // The robot's subsystems and commands are defined here...
     private final IntakePIDSubsystem m_Intake = new IntakePIDSubsystem();
     private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
@@ -75,14 +72,8 @@ public class RobotContainer {
     private DumpAuton m_DumpAuton;
     private EightBallAuto m_EightBallAuto;
 
-    private Spark left = new Spark(0);
-    private Spark right = new Spark(1);
-
-    private SpeedControllerGroup leftMotor = new SpeedControllerGroup(left);
-    private SpeedControllerGroup rightMotor = new SpeedControllerGroup(right);
-
-    private DifferentialDrive drive = new DifferentialDrive(leftMotor, rightMotor);
-
+    AnalogInput input = new AnalogInput(1);
+    AnalogPotentiometer analogPot = new AnalogPotentiometer(input, 102.35);
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
@@ -145,52 +136,20 @@ public class RobotContainer {
      *
      * @return the command to run in autonomous
      */
+
+     public void periodic()
+     {
+        System.out.println("****analogPot.get()");
+        System.out.println(analogPot.get());  
+     }
     public Command getAutonomousCommand()
     {
-        String trajectoryJSON = "paths/B_Red.wpilib.json";
-        Trajectory trajectory = new Trajectory();
-        AnalogInput input = new AnalogInput(0);
-        AnalogPotentiometer analogPot = new AnalogPotentiometer(input, 5);
-        System.out.print(analogPot.get());
 
-        try {
-            //if(){
-                Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-                trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-            //}
-           // else {
-                /*if(20 < analogPot.get() < 22) {
-                   System.out.print(analogPot.get());
-                }
-                else {
-                    System.out.print("lol u did it wrong ecksdee");
-                } */
-
-            //}
-        } 
-        catch (IOException ex) {
-            DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-        }
-        RamseteCommand trajectoryRamsete = new RamseteCommand(
-            trajectory, 
-            m_Drive::getPose, 
-            new RamseteController(DriveConstants.K_RAMSETE_B, 
-                                  DriveConstants.K_RAMSETE_ZETA), 
-            new SimpleMotorFeedforward(DriveConstants.KS_VOLTS,
-                                       DriveConstants.KV_VOLT_SECONDS_PER_METER,
-                                    DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
-            DriveConstants.K_DRIVE_KINEMATICS, 
-            m_Drive::getWheelSpeeds, 
-            new PIDController(DriveConstants.KP_DRIVE_VEL, 0, 0), 
-            new PIDController(DriveConstants.KP_DRIVE_VEL, 0, 0),
-            m_Drive::tankDriveVolts, 
-            m_Drive
-        );
         m_Drive.initAuton();
         // return m_SixBallAuto;
         // return m_ThreeAuton;
         //return m_DumpAuton;
-        return trajectoryPath;
+        return m_EightBallAuto;
     }
 
     public void teleopInit()
