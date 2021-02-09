@@ -144,8 +144,9 @@ public class RobotContainer
      */
     public Command getAutonomousCommand()
     {
+        m_Drive.initAuton();
         Trajectory trajectory = new Trajectory();
-        String trajectoryJSON = "paths/Line.wpilib.json";
+        String trajectoryJSON = "paths/bounce.wpilib.json";
         try {
             Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
             trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
@@ -167,7 +168,6 @@ public class RobotContainer
             m_Drive::tankDriveVolts, 
             m_Drive
         );
-        m_Drive.initAuton();
         return trajectoryRamsete.andThen(() -> m_Drive.tankDrive(0, 0));
     }
 
