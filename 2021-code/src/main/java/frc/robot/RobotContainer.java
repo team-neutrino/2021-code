@@ -117,13 +117,8 @@ public class RobotContainer
 
         m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
             m_climber);
-<<<<<<< HEAD
         
         m_A.whenHeld( new ShooterSetSpeedCommand(m_Shooter, 80000));
-=======
-
-        m_A.whenHeld( new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
->>>>>>> 1c051936aa4ee92754a9b9c0751d0e2a63d5d5e7
         m_Y.whenHeld( new ShooterSetSpeedCommand(m_Shooter, 95000));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
