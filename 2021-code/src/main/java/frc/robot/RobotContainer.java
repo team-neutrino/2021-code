@@ -72,6 +72,10 @@ public class RobotContainer
     private POVButton m_UpPovButton = new POVButton(m_OperatorController, 0);
     private POVButton m_RightPovButton = new POVButton(m_OperatorController, 90);
     private POVButton m_DownPovButton = new POVButton(m_OperatorController, 180);
+
+    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
+    private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive, m_Intake);
+
     private SixBallAuto m_SixBallAuto;
     private ThreeAuton m_ThreeAuton;
     private DumpAuton m_DumpAuton;
@@ -110,7 +114,7 @@ public class RobotContainer
         m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
             m_climber);
         
-        // m_A.whenHeld( new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
+        m_A.whenHeld( new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         m_Y.whenHeld( new ShooterSetSpeedCommand(m_Shooter, 95000));
         m_B.whenActive(new InstantCommand(m_Drive::initAuton));
 
