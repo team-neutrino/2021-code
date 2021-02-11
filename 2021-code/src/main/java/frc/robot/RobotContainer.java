@@ -73,7 +73,7 @@ public class RobotContainer
     private EightBallAuto m_EightBallAuto;
 
     AnalogInput input = new AnalogInput(1);
-    AnalogPotentiometer analogPot = new AnalogPotentiometer(input, 102.35);
+    AnalogPotentiometer analogPot = new AnalogPotentiometer(input, 511.77);
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
