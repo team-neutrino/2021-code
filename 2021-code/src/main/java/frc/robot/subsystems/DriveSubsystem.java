@@ -169,9 +169,6 @@ public class DriveSubsystem extends SubsystemBase
     {
         return m_navX.getPitch();
     }
-<<<<<<< HEAD
-
-=======
     public double getLeftEncoderPosition()
     {
         return m_rEncoder.getPosition();
@@ -180,5 +177,4 @@ public class DriveSubsystem extends SubsystemBase
     {
         return m_lEncoder.getPosition();
     }
->>>>>>> master
 }
