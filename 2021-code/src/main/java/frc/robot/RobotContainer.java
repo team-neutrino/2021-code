@@ -147,7 +147,7 @@ public class RobotContainer
     {
         m_Drive.initAuton();
 
-        String trajectoryJSON = "paths/Slolam.wpilib.json";
+        String trajectoryJSON = "paths/jixistraight.wpilib.json";
         Trajectory trajectory = new Trajectory();
         try {
             Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
