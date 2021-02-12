@@ -16,12 +16,17 @@ import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
+<<<<<<< HEAD
+=======
+import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
+>>>>>>> master
 import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.Joystick;
@@ -50,7 +55,12 @@ public class RobotContainer
     private final ClimberSubsystem m_climber = new ClimberSubsystem();
     private final HopperSubsystem m_Hopper = new HopperSubsystem(m_Shooter);
     private final TurretSubsystem m_Turret = new TurretSubsystem();
+<<<<<<< HEAD
     private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper, m_Drive);
+=======
+    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
+    private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive, m_Intake);
+>>>>>>> master
 
     private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_PORT);
     private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK__PORT);
@@ -90,7 +100,11 @@ public class RobotContainer
         m_DumpAuton = new DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 10);
         m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
+<<<<<<< HEAD
         m_RamsetePath = new RamsetePathCommand(m_Drive);
+=======
+        //m_RamsetePath = new RamsetePathCommand(m_Drive);
+>>>>>>> master
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
     }
 
@@ -112,10 +126,10 @@ public class RobotContainer
 
         m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
             m_climber);
-
-        m_A.whenHeld( new ShooterSetSpeedCommand(m_Shooter, 80000));
-        m_Y.whenHeld( new ShooterSetSpeedCommand(m_Shooter, 95000));
         
+        m_A.whenHeld( new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
+        m_Y.whenHeld( new ShooterSetSpeedCommand(m_Shooter, 95000));
+
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
         m_BumperRight.whileHeld(new InstantCommand(m_Hopper::reverse, m_Hopper), false).whenReleased(
@@ -169,6 +183,7 @@ public class RobotContainer
         );
     
         m_Drive.initAuton();
+<<<<<<< HEAD
         // return m_SixBallAuto;
         //return m_ThreeAuton;
         //return m_DumpAuton;
@@ -178,6 +193,41 @@ public class RobotContainer
 
     public void teleopInit()
     {   
+=======
+
+        String trajectoryJSON = "paths/Slolam.wpilib.json";
+        Trajectory trajectory = new Trajectory();
+        try {
+            Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+            trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+        } catch (IOException ex) {
+            DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+        }
+
+        RamseteCommand ramseteCommand = new RamseteCommand(
+            trajectory,
+            m_Drive::getPose,
+            new RamseteController(Constants.DriveConstants.K_RAMSETE_B, Constants.DriveConstants.K_RAMSETE_ZETA),
+            new SimpleMotorFeedforward(Constants.DriveConstants.KS_VOLTS,
+                                    Constants.DriveConstants.KV_VOLT_SECONDS_PER_METER,
+                                    Constants.DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
+            Constants.DriveConstants.K_DRIVE_KINEMATICS,
+            m_Drive::getWheelSpeeds,
+            new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
+            new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
+      
+            m_Drive::tankDriveVolts,
+            m_Drive
+        );
+
+
+        return ramseteCommand.andThen(() -> m_Drive.tankDriveVolts(0, 0));
+    }
+
+    public void teleopInit() 
+    {   
+        m_Drive.initAuton();
+>>>>>>> master
         configureButtonBindings();
         final Command tankDriveCommand = new RunCommand(
             () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
