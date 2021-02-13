@@ -1,9 +1,9 @@
 {
-  "lengthUnit": "Inch",
+  "lengthUnit": "Meter",
   "exportUnit": "Always Meters",
-  "maxVelocity": 59.0,
-  "maxAcceleration": 79.0,
-  "wheelBase": 28.0,
-  "gameName": "Infinite Recharge",
-  "outputDir": "../../../../../Desktop/pathWeaver.output"
+  "maxVelocity": 0.96,
+  "maxAcceleration": 6.8,
+  "wheelBase": 0.62,
+  "gameName": "Slalom Path",
+  "outputDir": ".."
 }

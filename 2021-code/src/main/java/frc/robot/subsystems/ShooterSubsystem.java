@@ -32,6 +32,7 @@ public class ShooterSubsystem extends SubsystemBase
     private TalonSRX m_wheelMotor;
     private TalonSRX m_wheelMotor2;
     private TalonSRX m_wheelMotor3;
+    private double m_targetVelocity;
 
     /**
      * Creates a new Shooter.
@@ -69,6 +70,17 @@ public class ShooterSubsystem extends SubsystemBase
         return m_wheelMotor.getSelectedSensorVelocity();
     }
 
+    public double getTargetVelocity()
+    {
+        return m_targetVelocity; 
+    }
+
+    public void turnOff()
+    {
+        m_targetVelocity = 0; 
+        setPower(0); 
+    }
+    
     public void setPower(double power)
     {
         m_wheelMotor.set(ControlMode.PercentOutput, power);
@@ -76,6 +88,7 @@ public class ShooterSubsystem extends SubsystemBase
 
     public void setVelocity(double velocity)
     {
+        m_targetVelocity = velocity; 
         m_wheelMotor.set(ControlMode.Velocity, velocity);
     }
 
