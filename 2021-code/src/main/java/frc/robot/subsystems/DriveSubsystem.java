@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.CanId;
@@ -80,7 +81,8 @@ public class DriveSubsystem extends SubsystemBase
     public void periodic()
     {
         m_odometry.update(Rotation2d.fromDegrees(getHeading()), m_lEncoder.getPosition(), m_rEncoder.getPosition());
-
+        SmartDashboard.putNumber("pose X", getTranslationX());
+        SmartDashboard.putNumber("pose Y", getTranslationY());
         var translation = m_odometry.getPoseMeters().getTranslation();
         m_xEntry.setNumber(translation.getX());
         m_yEntry.setNumber(translation.getY());
@@ -114,6 +116,15 @@ public class DriveSubsystem extends SubsystemBase
         return m_odometry.getPoseMeters();
     }
 
+    public double getTranslationX()
+    {
+        return m_odometry.getPoseMeters().getX();
+    }
+    public double getTranslationY() {
+        return m_odometry.getPoseMeters().getY();
+    }
+
+    
     public void resetOdometry(Pose2d pose)
     {
         m_lEncoder.setPosition(0);
