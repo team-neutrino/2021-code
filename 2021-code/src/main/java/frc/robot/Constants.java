@@ -135,5 +135,7 @@ public final class Constants
     public static final class PathConstants
     {
         public static final String SLOLAM_PATH = "paths/BetterSlolam.wpilib.json";
+        public static final String GALACTIC_RED_A_PATH = "paths/GalacticARed.wpilib.json";
+        public static final String GALACTIC_BLUE_A_PATH = "paths/blueone.wpilib.json";
     }
 }

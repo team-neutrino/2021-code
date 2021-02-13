@@ -76,11 +76,12 @@ public class RobotContainer
     private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive, m_Intake);
 
-    private SixBallAuto m_SixBallAuto;
+    /*private SixBallAuto m_SixBallAuto;
     private ThreeAuton m_ThreeAuton;
     private DumpAuton m_DumpAuton;
-    private EightBallAuto m_EightBallAuto;
+    private EightBallAuto m_EightBallAuto;*/
     private RamseteGenCommand m_RamseteGen;
+    private BounceAuto m_BounceAuto;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -89,12 +90,13 @@ public class RobotContainer
     {
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
         //m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
-        m_SixBallAuto = new SixBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
+        /*m_SixBallAuto = new SixBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_DumpAuton = new DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 10);
-        m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
-        m_RamseteGen = new RamseteGenCommand(m_Drive, Constants.PathConstants.SLOLAM_PATH);
+        m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);*/
+        m_RamseteGen = new RamseteGenCommand(m_Drive, Constants.PathConstants.GALACTIC_RED_A_PATH);
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
+        m_BounceAuto = new BounceAuto(m_Drive);
 
     }
 
@@ -179,7 +181,8 @@ public class RobotContainer
 
 
         return ramseteCommand.andThen(() -> m_Drive.tankDriveVolts(0, 0));*/
-        return m_RamseteGen;
+        //return m_RamseteGen;
+        return m_BounceAuto;
     }
 
     public void teleopInit()
