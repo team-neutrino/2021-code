@@ -76,6 +76,7 @@ public class RobotContainer
     private ThreeAuton m_ThreeAuton;
     private DumpAuton m_DumpAuton;
     private EightBallAuto m_EightBallAuto;
+    private RamseteGenCommand m_RamseteGen;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -88,7 +89,9 @@ public class RobotContainer
         m_DumpAuton = new DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 10);
         m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
+        m_RamseteGen = new RamseteGenCommand(m_Drive, Constants.PathConstants.SLOLAM_PATH);
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
+
     }
 
     /**
@@ -142,9 +145,10 @@ public class RobotContainer
      */
     public Command getAutonomousCommand()
     {
+        /*
         m_Drive.initAuton();
 
-        String trajectoryJSON = "paths/Slolam.wpilib.json";
+        String trajectoryJSON = "paths/BetterSlolam.wpilib.json";
         Trajectory trajectory = new Trajectory();
         try {
             Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
@@ -170,7 +174,8 @@ public class RobotContainer
         );
 
 
-        return ramseteCommand.andThen(() -> m_Drive.tankDriveVolts(0, 0));
+        return ramseteCommand.andThen(() -> m_Drive.tankDriveVolts(0, 0));*/
+        return m_RamseteGen;
     }
 
     public void teleopInit()

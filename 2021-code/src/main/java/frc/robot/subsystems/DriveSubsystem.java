@@ -12,6 +12,7 @@ import frc.robot.Constants;
 import frc.robot.Constants.CanId;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.JoystickConstants;
+import frc.robot.commands.Reset_navXCommand;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
@@ -38,6 +39,7 @@ public class DriveSubsystem extends SubsystemBase
     private SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(m_rightMotor1, m_rightMotor2);
     private CANEncoder m_lEncoder;
     private CANEncoder m_rEncoder;
+    private Reset_navXCommand m_resetNavX = new Reset_navXCommand();
     private AHRS m_navX = new AHRS(SPI.Port.kMXP);
     private final DifferentialDriveOdometry m_odometry;
 
