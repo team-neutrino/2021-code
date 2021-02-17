@@ -151,37 +151,6 @@ public class RobotContainer
      */
     public Command getAutonomousCommand()
     {
-        /*
-        m_Drive.initAuton();
-
-        String trajectoryJSON = "paths/BetterSlolam.wpilib.json";
-        Trajectory trajectory = new Trajectory();
-        try {
-            Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-            trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-        } catch (IOException ex) {
-            DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-        }
-
-        RamseteCommand ramseteCommand = new RamseteCommand(
-            trajectory,
-            m_Drive::getPose,
-            new RamseteController(Constants.DriveConstants.K_RAMSETE_B, Constants.DriveConstants.K_RAMSETE_ZETA),
-            new SimpleMotorFeedforward(Constants.DriveConstants.KS_VOLTS,
-                                    Constants.DriveConstants.KV_VOLT_SECONDS_PER_METER,
-                                    Constants.DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
-            Constants.DriveConstants.K_DRIVE_KINEMATICS,
-            m_Drive::getWheelSpeeds,
-            new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-            new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-      
-            m_Drive::tankDriveVolts,
-            m_Drive
-        );
-
-
-        return ramseteCommand.andThen(() -> m_Drive.tankDriveVolts(0, 0));*/
-        //return m_RamseteGen;
         return m_BounceAuto;
     }
 
