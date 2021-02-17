@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.XboxController.Axis;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -52,8 +51,6 @@ public class RobotContainer
     private final ClimberSubsystem m_climber = new ClimberSubsystem();
     private final HopperSubsystem m_Hopper = new HopperSubsystem(m_Shooter);
     private final TurretSubsystem m_Turret = new TurretSubsystem();
-    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
-    private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive, m_Intake);
 
     private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_PORT);
     private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK__PORT);
@@ -75,10 +72,16 @@ public class RobotContainer
     private POVButton m_UpPovButton = new POVButton(m_OperatorController, 0);
     private POVButton m_RightPovButton = new POVButton(m_OperatorController, 90);
     private POVButton m_DownPovButton = new POVButton(m_OperatorController, 180);
-    private SixBallAuto m_SixBallAuto;
+
+    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
+    private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive, m_Intake);
+
+    /*private SixBallAuto m_SixBallAuto;
     private ThreeAuton m_ThreeAuton;
     private DumpAuton m_DumpAuton;
-    private EightBallAuto m_EightBallAuto;
+    private EightBallAuto m_EightBallAuto;*/
+    private RamseteGenCommand m_RamseteGen;
+    private BounceAuto m_BounceAuto;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -87,12 +90,14 @@ public class RobotContainer
     {
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
         //m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
-        m_SixBallAuto = new SixBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
+        /*m_SixBallAuto = new SixBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_DumpAuton = new DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 10);
-        m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
-        //m_RamsetePath = new RamsetePathCommand(m_Drive);
+        m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);*/
+        m_RamseteGen = new RamseteGenCommand(m_Drive, Constants.PathConstants.GALACTIC_RED_A_PATH);
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
+        m_BounceAuto = new BounceAuto(m_Drive);
+
     }
 
     /**
@@ -116,6 +121,7 @@ public class RobotContainer
         
         m_A.whenHeld( new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         m_Y.whenHeld( new ShooterSetSpeedCommand(m_Shooter, 95000));
+        m_B.whenActive(new InstantCommand(m_Drive::initAuton));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
@@ -145,44 +151,16 @@ public class RobotContainer
      */
     public Command getAutonomousCommand()
     {
-        m_Drive.initAuton();
-
-        String trajectoryJSON = "paths/Slolam.wpilib.json";
-        Trajectory trajectory = new Trajectory();
-        try {
-            Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-            trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-        } catch (IOException ex) {
-            DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
-        }
-
-        RamseteCommand ramseteCommand = new RamseteCommand(
-            trajectory,
-            m_Drive::getPose,
-            new RamseteController(Constants.DriveConstants.K_RAMSETE_B, Constants.DriveConstants.K_RAMSETE_ZETA),
-            new SimpleMotorFeedforward(Constants.DriveConstants.KS_VOLTS,
-                                    Constants.DriveConstants.KV_VOLT_SECONDS_PER_METER,
-                                    Constants.DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
-            Constants.DriveConstants.K_DRIVE_KINEMATICS,
-            m_Drive::getWheelSpeeds,
-            new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-            new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-      
-            m_Drive::tankDriveVolts,
-            m_Drive
-        );
-
-
-        return ramseteCommand.andThen(() -> m_Drive.tankDriveVolts(0, 0));
+        return m_BounceAuto;
     }
 
-    public void teleopInit() 
-    {   
-        m_Drive.initAuton();
+    public void teleopInit()
+    {
         configureButtonBindings();
         final Command tankDriveCommand = new RunCommand(
             () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
         m_Drive.setDefaultCommand(tankDriveCommand);
+
     }
 
 }

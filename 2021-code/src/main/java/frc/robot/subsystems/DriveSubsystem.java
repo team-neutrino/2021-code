@@ -7,11 +7,14 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.CanId;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.JoystickConstants;
+
+import edu.wpi.first.wpilibj.geometry.Translation2d;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
@@ -21,6 +24,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import java.util.concurrent.TimeUnit;
 
 import com.kauailabs.navx.frc.AHRS;
+ 
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -33,14 +37,12 @@ public class DriveSubsystem extends SubsystemBase
     private CANSparkMax m_leftMotor2 = new CANSparkMax(CanId.MOTOR_CONTROLLER_DRIVER_LEFT2, MotorType.kBrushless);
     private CANSparkMax m_rightMotor1 = new CANSparkMax(CanId.MOTOR_CONTROLLER_DRIVER_RIGHT1, MotorType.kBrushless);
     private CANSparkMax m_rightMotor2 = new CANSparkMax(CanId.MOTOR_CONTROLLER_DRIVER_RIGHT2, MotorType.kBrushless);
-
     private SpeedControllerGroup m_leftMotors = new SpeedControllerGroup(m_leftMotor1, m_leftMotor2);
     private SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(m_rightMotor1, m_rightMotor2);
     private CANEncoder m_lEncoder;
     private CANEncoder m_rEncoder;
     private AHRS m_navX = new AHRS(SPI.Port.kMXP);
     private final DifferentialDriveOdometry m_odometry;
-
     private double velocity = 0;
 
     public DriveSubsystem()
@@ -80,7 +82,9 @@ public class DriveSubsystem extends SubsystemBase
     public void periodic()
     {
         m_odometry.update(Rotation2d.fromDegrees(getHeading()), m_lEncoder.getPosition(), m_rEncoder.getPosition());
-
+        SmartDashboard.putNumber("getYaw()", getNavxYaw());
+        SmartDashboard.putNumber("getX()", getTranslationX());
+        SmartDashboard.putNumber("getY()", getTranslationY());
         var translation = m_odometry.getPoseMeters().getTranslation();
         m_xEntry.setNumber(translation.getX());
         m_yEntry.setNumber(translation.getY());
@@ -112,6 +116,16 @@ public class DriveSubsystem extends SubsystemBase
     public Pose2d getPose()
     {
         return m_odometry.getPoseMeters();
+    }
+
+    public double getTranslationX() 
+    {
+        return m_odometry.getPoseMeters().getX();
+    }
+
+    public double getTranslationY() 
+    {
+        return m_odometry.getPoseMeters().getY();
     }
 
     public void resetOdometry(Pose2d pose)
