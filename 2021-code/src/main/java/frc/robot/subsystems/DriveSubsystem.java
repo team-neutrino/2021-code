@@ -13,15 +13,13 @@ import frc.robot.Constants;
 import frc.robot.Constants.CanId;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.JoystickConstants;
-import frc.robot.commands.Reset_navXCommand;
+
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-//import org.graalvm.compiler.lir.amd64.vector.AMD64VectorShuffle.ShuffleBytesOp;
 
 import java.util.concurrent.TimeUnit;
 
@@ -43,8 +41,6 @@ public class DriveSubsystem extends SubsystemBase
     private SpeedControllerGroup m_rightMotors = new SpeedControllerGroup(m_rightMotor1, m_rightMotor2);
     private CANEncoder m_lEncoder;
     private CANEncoder m_rEncoder;
-    private Pose2d m_pose2d;
-    private Reset_navXCommand m_resetNavX = new Reset_navXCommand();
     private AHRS m_navX = new AHRS(SPI.Port.kMXP);
     private final DifferentialDriveOdometry m_odometry;
     private double velocity = 0;
