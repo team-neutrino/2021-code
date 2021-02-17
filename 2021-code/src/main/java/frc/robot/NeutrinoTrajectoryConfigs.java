@@ -35,7 +35,7 @@ public class NeutrinoTrajectoryConfigs
     public static final TrajectoryConfig m_SlowForwardConfig = new TrajectoryConfig(1.25, 6.8).setKinematics(
         DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
 
-        public static final TrajectoryConfig m_SlowReverseConfig = new TrajectoryConfig(1.25, 6.8).setKinematics(
-            DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
+    public static final TrajectoryConfig m_SlowReverseConfig = new TrajectoryConfig(1.25, 6.8).setKinematics(
+        DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
 
 }
