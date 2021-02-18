@@ -98,7 +98,7 @@ public class ExampleTrajectory
                 public static final Trajectory bounce5 = TrajectoryGenerator.generateTrajectory(
                 List.of(new Pose2d(5.8, 0.6, Rotation2d.fromDegrees(285)),
                 //List.of(new Translation2d(6.1, 0.50)),
-                new Pose2d(6.8, 0.20, Rotation2d.fromDegrees(180))), 
+                new Pose2d(6.8, 0.20, Rotation2d.fromDegrees(-180))), 
                 NeutrinoTrajectoryConfigs.m_SlowReverseConfig);
 
     //public static final Trajectory traj = TrajectoryGenerator.generateTrajectory(initial, interiorWaypoints, end, config)
