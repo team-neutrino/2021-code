@@ -42,7 +42,6 @@ public class BounceAuto extends SequentialCommandGroup {
         m_Drive::getWheelSpeeds,
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-  
         m_Drive::tankDriveVolts,
         m_Drive
     );
@@ -57,7 +56,6 @@ public class BounceAuto extends SequentialCommandGroup {
         m_Drive::getWheelSpeeds,
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-  
         m_Drive::tankDriveVolts,
         m_Drive
     );
@@ -72,7 +70,6 @@ public class BounceAuto extends SequentialCommandGroup {
         m_Drive::getWheelSpeeds,
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-  
         m_Drive::tankDriveVolts,
         m_Drive
     );
@@ -87,7 +84,6 @@ public class BounceAuto extends SequentialCommandGroup {
         m_Drive::getWheelSpeeds,
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-  
         m_Drive::tankDriveVolts,
         m_Drive
     );
@@ -102,7 +98,6 @@ public class BounceAuto extends SequentialCommandGroup {
         m_Drive::getWheelSpeeds,
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-  
         m_Drive::tankDriveVolts,
         m_Drive
     );
@@ -116,10 +111,8 @@ public class BounceAuto extends SequentialCommandGroup {
         Constants.DriveConstants.K_DRIVE_KINEMATICS,
         m_Drive::getWheelSpeeds,
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-        new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-  
-        m_Drive::tankDriveVolts,
-        m_Drive
+        new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0), 
+        m_Drive::tankDriveVolts, m_Drive
     );
     addCommands(bounce0Command, bounce1Command, bounce2Command, bounce3Command, bounce4Command, bounce5Command, new InstantCommand(() -> m_Drive.tankDriveVolts(0, 0)));
   }
