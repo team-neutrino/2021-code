@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.Trajectories;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
-import frc.robot.Trajectories.ExampleTrajectory;
+import frc.robot.Trajectories.SixBallTrajectory;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.IntakePIDSubsystem;
@@ -27,15 +27,15 @@ import frc.robot.subsystems.TurretSubsystem;
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
-public class SixBallAuto extends SequentialCommandGroup
+public class SixBallAuton extends SequentialCommandGroup
 {
     /**
      * Creates a new SixBallAuto.
      */
-    public SixBallAuto(ShooterSubsystem p_Shooter, HopperSubsystem p_Hopper, IntakePIDSubsystem p_Intake,
+    public SixBallAuton(ShooterSubsystem p_Shooter, HopperSubsystem p_Hopper, IntakePIDSubsystem p_Intake,
             DriveSubsystem p_Drive, TurretSubsystem p_Turret)
     {
-        Trajectory trajectory = ExampleTrajectory.sixBall0;
+        Trajectory trajectory = SixBallTrajectory.sixBall0;
 
         PIDController leftController = new PIDController(DriveConstants.KP_DRIVE_VEL, 0, 0);
         PIDController rightController = new PIDController(DriveConstants.KP_DRIVE_VEL, 0, 0);

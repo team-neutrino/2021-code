@@ -106,5 +106,4 @@ public class ShooterSubsystem extends SubsystemBase
         wheelMasterConfig.openloopRamp = 1;
         wheelFollowerConfig.openloopRamp = wheelMasterConfig.openloopRamp;
     }
-
 }
