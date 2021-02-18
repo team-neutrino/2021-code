@@ -69,23 +69,22 @@ public class ExampleTrajectory
     public static final Trajectory bounce0 = TrajectoryGenerator.generateTrajectory(
         new Pose2d(0, 0, new Rotation2d(0)),
         List.of(new Translation2d(0.8, 0.1)),
-        new Pose2d(0.80, 1.20, Rotation2d.fromDegrees(90)),
+        new Pose2d(0.80, 1.0, Rotation2d.fromDegrees(90)),
         NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
 
     public static final Trajectory bounce1 = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(0.80, 1.20, Rotation2d.fromDegrees(90)),
-        List.of(new Translation2d(2.0, -1.40)),
-        new Pose2d(2.8, -1.62, Rotation2d.fromDegrees(180)), 
-        NeutrinoTrajectoryConfigs.m_ReverseConfig); 
+        List.of(new Pose2d(0.80, 1.0, Rotation2d.fromDegrees(90)),
+        new Pose2d(2.8, -1.62, Rotation2d.fromDegrees(180))), 
+        NeutrinoTrajectoryConfigs.m_SlowReverseConfig ); 
 
         public static final Trajectory bounce2 = TrajectoryGenerator.generateTrajectory(
-            new Pose2d(2.8, -1.62, Rotation2d.fromDegrees(180)),
-            List.of(new Translation2d(3.0, -1.62)),
-            new Pose2d(3.4, 1.20, Rotation2d.fromDegrees(270)), 
-            NeutrinoTrajectoryConfigs.m_ReverseConfig); 
+            List.of(new Pose2d(2.8, -1.62, Rotation2d.fromDegrees(180)),
+            //List.of(new Translation2d(3.0, -1.62)),
+            new Pose2d(3.4, 1.0, Rotation2d.fromDegrees(270))), 
+            NeutrinoTrajectoryConfigs.m_SlowReverseConfig); 
 
             public static final Trajectory bounce3 = TrajectoryGenerator.generateTrajectory(
-                new Pose2d(3.4, 1.20, Rotation2d.fromDegrees(270)),
+                new Pose2d(3.4, 1.0, Rotation2d.fromDegrees(270)),
                 List.of(new Translation2d(3.5, -0.11)),
                 new Pose2d(3.6, -1.62, Rotation2d.fromDegrees(285)), 
                 NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
@@ -93,13 +92,14 @@ public class ExampleTrajectory
                 public static final Trajectory bounce4 = TrajectoryGenerator.generateTrajectory(
                 new Pose2d(3.6, -1.62, Rotation2d.fromDegrees(285)),
                 List.of(new Translation2d(5.6, -1.62)),
-                new Pose2d(5.8, 1.00, Rotation2d.fromDegrees(285)), 
+                new Pose2d(5.8, 0.6, Rotation2d.fromDegrees(285)), 
                 NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
 
                 public static final Trajectory bounce5 = TrajectoryGenerator.generateTrajectory(
-                new Pose2d(5.8, 1.20, Rotation2d.fromDegrees(285)),
-                List.of(new Translation2d(6.1, 0.90)),
-                new Pose2d(6.4, 0.80, Rotation2d.fromDegrees(180)), 
-                NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
+                List.of(new Pose2d(5.8, 0.6, Rotation2d.fromDegrees(285)),
+                //List.of(new Translation2d(6.1, 0.50)),
+                new Pose2d(6.8, 0.20, Rotation2d.fromDegrees(180))), 
+                NeutrinoTrajectoryConfigs.m_SlowReverseConfig);
+
     //public static final Trajectory traj = TrajectoryGenerator.generateTrajectory(initial, interiorWaypoints, end, config)
 }
