@@ -123,10 +123,6 @@ public class HopperSubsystem extends SubsystemBase
     public void periodic()
     {
         rollerTowardsIntake();
-        /*
-         * if (m_rollerTimer.get() < 1) { rollerTowardsIntake(); } else { rollerTowardsTower(); } if
-         * (m_rollerTimer.get() > 2) { m_rollerTimer.reset(); }
-         */
     }
 
 }

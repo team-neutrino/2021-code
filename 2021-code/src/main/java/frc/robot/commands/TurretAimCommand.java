@@ -52,5 +52,4 @@ public class TurretAimCommand extends CommandBase
     {
         return false;
     }
-
 }
