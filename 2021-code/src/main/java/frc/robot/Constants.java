@@ -131,4 +131,11 @@ public final class Constants
         public static final double ANGLE_SCALE = (7.0 * 360.0) / (27.0 * 1024.0);
         public static final double kP = 0.04;
     }
+
+    public static final class PathConstants
+    {
+        public static final String SLOLAM_PATH = "paths/BetterSlolam.wpilib.json";
+        public static final String GALACTIC_RED_A_PATH = "paths/GalacticARed.wpilib.json";
+        public static final String GALACTIC_BLUE_A_PATH = "paths/blueone.wpilib.json";
+    }
 }

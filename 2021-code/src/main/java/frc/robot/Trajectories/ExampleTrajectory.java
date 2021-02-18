@@ -66,4 +66,18 @@ public class ExampleTrajectory
         List.of(new Pose2d(1.6, 0, Rotation2d.fromDegrees(0)), new Pose2d(4.6, 0, Rotation2d.fromDegrees(0))),
         NeutrinoTrajectoryConfigs.m_DefaultConfig);
 
+    public static final Trajectory bounce0 = TrajectoryGenerator.generateTrajectory(
+        new Pose2d(0, 0, new Rotation2d(0)),
+        List.of(new Translation2d(1.05, 0.10)),
+        new Pose2d(1.30, 0.80, Rotation2d.fromDegrees(90)),
+        NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
+
+    public static final Trajectory bounce1 = TrajectoryGenerator.generateTrajectory(
+        new Pose2d(1.30, 0.80, Rotation2d.fromDegrees(90)),
+        List.of(new Translation2d(2.0, -1.40)),
+        new Pose2d(2.8, -1.62, Rotation2d.fromDegrees(180)), 
+        NeutrinoTrajectoryConfigs.m_ReverseConfig); 
+
+
+    //public static final Trajectory traj = TrajectoryGenerator.generateTrajectory(initial, interiorWaypoints, end, config)
 }
