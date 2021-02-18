@@ -101,7 +101,12 @@ public class RobotContainer
         m_DumpAuton = new DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 10);
         m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);*/
-        m_RamseteGen = new RamseteGenCommand(m_Drive, Constants.PathConstants.GALACTIC_RED_A_PATH);
+        if (140 < analogPot.get() && analogPot.get() < 160){
+            m_RamseteGen = new RamseteGenCommand(m_Drive, Constants.PathConstants.GALACTIC_RED_A_PATH);
+        }
+        else{
+            m_RamseteGen = new RamseteGenCommand(m_Drive, Constants.PathConstants.GALACTIC_BLUE_A_PATH);
+        }
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
         m_BounceAuto = new BounceAuto(m_Drive);
 
@@ -159,8 +164,8 @@ public class RobotContainer
 
      public void periodic()
      {
-        System.out.println("****analogPot.get()");
-        System.out.println(analogPot.get());  
+        //System.out.println("****analogPot.get()");
+        //System.out.println(analogPot.get());  
      }
     public Command getAutonomousCommand()
     {
