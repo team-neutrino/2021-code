@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import frc.robot.NeutrinoTrajectoryConfigs;
 
 public class BounceTrajectory {
+    //I added 2.48 to every x value because the robot went backwards by 19 inches
     public static final Trajectory bounce0 = TrajectoryGenerator.generateTrajectory(
         new Pose2d(0, 0, new Rotation2d(0)),
         List.of(new Translation2d(1.28, 0.1)),
