@@ -152,11 +152,7 @@ public class RobotContainer
      * @return the command to run in autonomous
      */
 
-     public void periodic()
-     {
-        //System.out.println("****analogPot.get()");
-        //System.out.println(analogPot.get());  
-     }
+     
     public Command getAutonomousCommand()
     {
         return m_EightBallAuto;    
