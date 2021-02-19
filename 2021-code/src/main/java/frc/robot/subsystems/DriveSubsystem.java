@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
-import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -14,14 +13,10 @@ import frc.robot.Constants.CanId;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.JoystickConstants;
 
-import edu.wpi.first.wpilibj.geometry.Translation2d;
-
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-import java.util.concurrent.TimeUnit;
 
 import com.kauailabs.navx.frc.AHRS;
  
@@ -142,10 +137,6 @@ public class DriveSubsystem extends SubsystemBase
 
         return (velocity - oldVelocity) / 2;
     }
-    /*
-     * public ArrayList<Double> getCANTemp() { double tempLeftOne =
-     * CANSparkMax.getMotorTempearture(DriveConstants.MOTOR_CONTROLLER_DRIVER_LEFT1); }
-     */
 
     /**
      * Initalize the drive subsystem for Auton
@@ -183,10 +174,12 @@ public class DriveSubsystem extends SubsystemBase
     {
         return m_navX.getPitch();
     }
+
     public double getLeftEncoderPosition()
     {
         return m_rEncoder.getPosition();
     }
+    
     public double getRightEncoderPosition()
     {
         return m_lEncoder.getPosition();
