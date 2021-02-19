@@ -8,19 +8,12 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Axis;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.RamseteController;
-import edu.wpi.first.wpilibj.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -37,6 +30,7 @@ import java.nio.file.Path;
 import frc.robot.subsystems.*;
 import frc.robot.util.TriggerToBoolean;
 import frc.robot.commands.*;
+import frc.robot.commands.Trajectories.*;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 /**
@@ -81,12 +75,8 @@ public class RobotContainer
     private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive, m_Intake);
 
-    /*private SixBallAuto m_SixBallAuto;
-    private ThreeAuton m_ThreeAuton;
-    private DumpAuton m_DumpAuton;
-    private EightBallAuto m_EightBallAuto;*/
-    private RamseteGenCommand m_RamseteGen;
-    private BounceAuto m_BounceAuto;
+    private EightBallAuton m_EightBallAuto;
+    private BounceAuton m_BounceAuton;
 
     AnalogInput input = new AnalogInput(1);
     AnalogPotentiometer analogPot = new AnalogPotentiometer(input, 511.77);
@@ -108,7 +98,7 @@ public class RobotContainer
             m_RamseteGen = new RamseteGenCommand(m_Drive, Constants.PathConstants.GALACTIC_BLUE_A_PATH);
         }
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
-        m_BounceAuto = new BounceAuto(m_Drive);
+        m_BounceAuton = new BounceAuton(m_Drive);
 
     }
 
@@ -169,7 +159,7 @@ public class RobotContainer
      }
     public Command getAutonomousCommand()
     {
-        return m_BounceAuto;
+        return m_EightBallAuto;    
     }
 
     public void teleopInit()
@@ -180,5 +170,4 @@ public class RobotContainer
         m_Drive.setDefaultCommand(tankDriveCommand);
 
     }
-
 }
