@@ -20,6 +20,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants.*;
+import frc.robot.Trajectories.EightBallTrajectory;
+import frc.robot.Trajectories.SixBallTrajectory;
+
 import static edu.wpi.first.wpilibj.XboxController.Button;
 
 import java.io.IOException;
@@ -68,10 +71,11 @@ public class RobotContainer
     private POVButton m_DownPovButton = new POVButton(m_OperatorController, 180);
 
     private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
-    private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive, m_Intake);
+    private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive, m_Intake, m_climber);
 
-    private EightBallAuton m_EightBallAuto;
+    private EightBallAuton m_EightBallAuton;
     private BounceAuton m_BounceAuton;
+    private SixBallAuton m_SixBallAuton;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -80,12 +84,10 @@ public class RobotContainer
     {
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
         //m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
-        /*m_SixBallAuto = new SixBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
-        m_DumpAuton = new DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
-        m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 10);
-        m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);*/
+        m_SixBallAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
         m_BounceAuton = new BounceAuton(m_Drive);
+        m_EightBallAuton = new EightBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
 
     }
 
@@ -140,7 +142,7 @@ public class RobotContainer
      */
     public Command getAutonomousCommand()
     {
-        return m_EightBallAuto;    
+        return m_SixBallAuton;    
     }
 
     public void teleopInit()
