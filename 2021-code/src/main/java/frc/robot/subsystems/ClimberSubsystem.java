@@ -38,7 +38,14 @@ public class ClimberSubsystem extends SubsystemBase
 
     public void elevatorUp()
     {
-        m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER);
+        if(getHeight() >= ClimberConstants.CLIMBER_FULL_EXTEND)
+        {
+            elevatorStop();
+        }
+        else
+        {
+            m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER);
+        }
     }
 
     public void elevatorDown()
