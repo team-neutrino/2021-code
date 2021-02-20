@@ -28,6 +28,7 @@ public class ClimberSubsystem extends SubsystemBase
     public ClimberSubsystem()
     {
         m_ClimbElevator.setNeutralMode(NeutralMode.Brake);
+        m_ClimbElevator.setSelectedSensorPosition(0);
     }
 
     @Override
@@ -41,21 +42,22 @@ public class ClimberSubsystem extends SubsystemBase
         if(getHeight() >= ClimberConstants.CLIMBER_FULL_EXTEND)
         {
             elevatorStop();
+
         }
         else
         {
-            m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER);
+            m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
         }
     }
 
     public void elevatorDown()
     {
-        m_ClimbElevator.set(ControlMode.PercentOutput, -ClimberConstants.CLIMBER_MOTOR_POWER);
+        m_ClimbElevator.set(ControlMode.PercentOutput, -ClimberConstants.CLIMBER_MOTOR_POWER_DOWN);
     }
 
     public void winchClimb()
     {
-        m_ClimbWinch.set(ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
+        // m_ClimbWinch.set(ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
     }
 
     public void elevatorStop()
@@ -65,12 +67,12 @@ public class ClimberSubsystem extends SubsystemBase
 
     public void winchStop()
     {
-        m_ClimbWinch.set(0);
+        // m_ClimbWinch.set(0);
     }
 
     public void winchReverse()
     {
-        m_ClimbWinch.set(-ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
+        // m_ClimbWinch.set(-ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
     }
 
     public double getHeight()

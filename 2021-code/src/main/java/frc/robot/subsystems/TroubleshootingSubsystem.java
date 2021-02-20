@@ -51,8 +51,8 @@ public class TroubleshootingSubsystem extends SubsystemBase
     public void periodic()
     {
         m_navx_yaw.setDouble(m_Drive.getNavxYaw());
-        m_navx_pitch.setDouble(m_Drive.getNavxPitch());
-        m_navx_roll.setDouble(m_Drive.getNavxRoll());
+        // m_navx_pitch.setDouble(m_Drive.getNavxPitch());
+        // m_navx_roll.setDouble(m_Drive.getNavxRoll());
         m_left_encoder.setDouble(m_Drive.getLeftEncoderPosition());
         m_right_encoder.setDouble(m_Drive.getRightEncoderPosition());
         m_arm_angle.setDouble(m_Intake.getMeasurement());
