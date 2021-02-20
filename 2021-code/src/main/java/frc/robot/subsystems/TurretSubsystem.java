@@ -20,6 +20,7 @@ import frc.robot.Constants;
 import frc.robot.Constants.CanId;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TurretSubsystem extends SubsystemBase
 {
@@ -58,6 +59,10 @@ public class TurretSubsystem extends SubsystemBase
         m_turretAngle = m_turretMotor.getSelectedSensorPosition() - m_dynamicOffset;
         m_headingError = tX.getDouble(0.0);
         m_getValidTarget = tV.getDouble(0.0);
+        SmartDashboard.putNumber("tX", tX.getDouble(0.0));
+        SmartDashboard.putNumber("getTurretAngle()", getTurretAngle());
+        SmartDashboard.putNumber("getHeadingError()", getHeadingError());
+        SmartDashboard.putNumber("limited sum", turretLimit(getTurretAngle()+getHeadingError()));
     }
 
     public void startTimer()

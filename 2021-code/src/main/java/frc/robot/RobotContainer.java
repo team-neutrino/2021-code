@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.Joystick;
@@ -110,7 +111,11 @@ public class RobotContainer
         
         m_A.whenHeld( new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         m_Y.whenHeld( new ShooterSetSpeedCommand(m_Shooter, 95000));
-        m_B.whenActive(new InstantCommand(m_Drive::initAuton));
+        m_B.toggleWhenPressed(
+            new StartEndCommand(m_Turret::setLightOn,
+            m_Turret::setLightOff,
+            m_Turret)
+        );
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
