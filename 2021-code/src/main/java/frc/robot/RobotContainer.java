@@ -73,10 +73,7 @@ public class RobotContainer
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
         m_Intake, m_climber);
 
-    private SixBallAuton m_SixBallAuton;
-    private EightBallAuton m_EightBallAuton;
-    private BounceAuton m_BounceAuton;
-    private TenBallAuton m_TenBallAuton;
+    AutonSelector m_AutonSelector = new AutonSelector(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -86,9 +83,6 @@ public class RobotContainer
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
         m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
-        m_BounceAuton = new BounceAuton(m_Drive);
-        m_SixBallAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
-        m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
     }
 
     /**
@@ -142,7 +136,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_TenBallAuton;
+        return m_AutonSelector.GetAuton();
     }
 
     public void teleopInit()
