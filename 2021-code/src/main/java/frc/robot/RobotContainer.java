@@ -82,7 +82,7 @@ public class RobotContainer
     public RobotContainer()
     {
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
-        //m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
+        m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         /*m_SixBallAuto = new SixBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_DumpAuton = new DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 10);
@@ -149,6 +149,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         //m_Turret.setLightOn();
+        
         return m_TenBallAuton;    
     }
 
