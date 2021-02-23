@@ -90,7 +90,7 @@ public class RobotContainer
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
         m_BounceAuton = new BounceAuton(m_Drive);
         m_SixBallAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
-        m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret);
+        m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
     }
 
     /**
