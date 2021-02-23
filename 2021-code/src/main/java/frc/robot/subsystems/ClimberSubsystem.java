@@ -28,13 +28,16 @@ public class ClimberSubsystem extends SubsystemBase
     public ClimberSubsystem()
     {
         m_ClimbElevator.setNeutralMode(NeutralMode.Brake);
-        m_ClimbElevator.setSelectedSensorPosition(0);
     }
 
     @Override
     public void periodic()
     {
         // This method will be called once per scheduler run
+        if(getHeight() < 0)
+        {
+        m_ClimbElevator.setSelectedSensorPosition(0);
+        }
     }
 
     public void elevatorUp()
@@ -42,7 +45,6 @@ public class ClimberSubsystem extends SubsystemBase
         if(getHeight() >= ClimberConstants.CLIMBER_FULL_EXTEND)
         {
             elevatorStop();
-
         }
         else
         {
