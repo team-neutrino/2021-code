@@ -5,6 +5,7 @@
 package frc.robot.commands.Trajectories;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.IntakePIDSubsystem;
@@ -18,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.Constants;
 import frc.robot.Trajectories.TenBallTrajectory;
+import frc.robot.commands.TurretSetAngleCommand;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
@@ -31,6 +33,7 @@ public class TenBallAuton extends SequentialCommandGroup {
     Trajectory m_tenBall0 = TenBallTrajectory.tenBall0;
     Trajectory m_tenBall1 = TenBallTrajectory.tenBall1;
     Trajectory m_tenBall2 = TenBallTrajectory.tenBall2;
+    Trajectory m_tenBall3 = TenBallTrajectory.tenBall3;
 
     RamseteCommand tenBall0 = new RamseteCommand(
         m_tenBall0,
@@ -80,17 +83,39 @@ public class TenBallAuton extends SequentialCommandGroup {
         p_Drive
     );
 
+    RamseteCommand tenBall3 = new RamseteCommand(
+        m_tenBall3,
+        p_Drive::getPose,
+        new RamseteController(Constants.DriveConstants.K_RAMSETE_B, Constants.DriveConstants.K_RAMSETE_ZETA),
+        new SimpleMotorFeedforward(Constants.DriveConstants.KS_VOLTS,
+                                Constants.DriveConstants.KV_VOLT_SECONDS_PER_METER,
+                                Constants.DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
+        Constants.DriveConstants.K_DRIVE_KINEMATICS,
+        p_Drive::getWheelSpeeds,
+        new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
+        new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
+  
+        p_Drive::tankDriveVolts,
+        p_Drive
+    );
+
     addCommands(
       new InstantCommand(p_Turret::setLightOn),
+      // new InstantCommand(p_Turret::startTimer),
+      // new InstantCommand(() -> p_Turret.setAngle(70)).alongWith(
       new InstantCommand(p_Intake::setIntakeOn).alongWith(
         new SequentialCommandGroup(
-          new ShootAuton(p_Shooter, p_Hopper, 3, 70000),
+          new ShootAuton(p_Shooter, p_Hopper, 5, 70000),
           tenBall0,
-          new ShootAuton(p_Shooter, p_Hopper, 3, 70000), 
+          new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)),
+          new ShootAuton(p_Shooter, p_Hopper, 5, 70000), 
           tenBall1, 
           tenBall2,
-          new ShootAuton(p_Shooter, p_Hopper, 3, 70000),
-          new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)))
+          new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)),
+          new ShootAuton(p_Shooter, p_Hopper, 5, 70000),
+          tenBall3,
+          new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)),
+          new ShootAuton(p_Shooter, p_Hopper, 5, 70000))
       )
     );
   }

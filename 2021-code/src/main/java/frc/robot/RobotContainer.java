@@ -82,12 +82,12 @@ public class RobotContainer
     public RobotContainer()
     {
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
-        m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
+        //m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         /*m_SixBallAuto = new SixBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_DumpAuton = new DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 10);
-        m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);*/
-        //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
+        kjm,m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);*/
+        //limelig+uihtFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
         m_BounceAuton = new BounceAuton(m_Drive);
         m_SixBallAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
