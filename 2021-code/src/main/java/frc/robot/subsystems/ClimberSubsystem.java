@@ -42,14 +42,7 @@ public class ClimberSubsystem extends SubsystemBase
 
     public void elevatorUp()
     {
-        if(getHeight() >= ClimberConstants.CLIMBER_FULL_EXTEND)
-        {
-            elevatorStop();
-        }
-        else
-        {
-            m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
-        }
+        m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
     }
 
     public void elevatorDown()
@@ -76,7 +69,7 @@ public class ClimberSubsystem extends SubsystemBase
     {
         m_ClimbWinch.set(-ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
     }
-
+    
     public double getHeight()
     {
         return m_ClimbElevator.getSelectedSensorPosition();
