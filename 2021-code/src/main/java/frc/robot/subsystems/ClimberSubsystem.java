@@ -59,7 +59,7 @@ public class ClimberSubsystem extends SubsystemBase
 
     public void winchClimb()
     {
-        // m_ClimbWinch.set(ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
+        m_ClimbWinch.set(ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
     }
 
     public void elevatorStop()
@@ -69,12 +69,12 @@ public class ClimberSubsystem extends SubsystemBase
 
     public void winchStop()
     {
-        // m_ClimbWinch.set(0);
+        m_ClimbWinch.set(0);
     }
 
     public void winchReverse()
     {
-        // m_ClimbWinch.set(-ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
+        m_ClimbWinch.set(-ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
     }
 
     public double getHeight()
