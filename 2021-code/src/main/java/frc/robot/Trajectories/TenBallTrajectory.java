@@ -31,15 +31,15 @@ public class TenBallTrajectory {
             NeutrinoTrajectoryConfigs.m_SlowForwardConfig);*/
         
             public static final Trajectory tenBall1 = TrajectoryGenerator.generateTrajectory(
-                List.of(new Pose2d(4.55, -1.24, Rotation2d.fromDegrees(-120)), new Pose2d(3.2, -2.75, Rotation2d.fromDegrees(-135))),
+                List.of(new Pose2d(4.55, -1.24, Rotation2d.fromDegrees(-120)), new Pose2d(4.7, -1.9, Rotation2d.fromDegrees(-135))),
                 NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
 
             public static final Trajectory tenBall2 = TrajectoryGenerator.generateTrajectory(
-                List.of(new Pose2d(3.2, -2.75, Rotation2d.fromDegrees(-135)), new Pose2d(3.5, -3.19, Rotation2d.fromDegrees(-55))),
+                List.of(new Pose2d(4.7, -1.9, Rotation2d.fromDegrees(-135)), new Pose2d(3.6, -3.19, Rotation2d.fromDegrees(-55))),
                 NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
 
             public static final Trajectory tenBall3 = TrajectoryGenerator.generateTrajectory(
-                List.of(new Pose2d(3.5, -3.19, Rotation2d.fromDegrees(-55)), new Pose2d(5, -5, Rotation2d.fromDegrees(-90))),
+                List.of(new Pose2d(3.6, -3.19, Rotation2d.fromDegrees(-55)), new Pose2d(3.5, -6.4, Rotation2d.fromDegrees(-90))),
                 NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
 
         

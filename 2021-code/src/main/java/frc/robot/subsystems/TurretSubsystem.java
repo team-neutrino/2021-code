@@ -35,7 +35,7 @@ public class TurretSubsystem extends SubsystemBase
     private double m_headingError;
     private double m_getValidTarget;
     private double m_dynamicOffset;
-    private double currentPosition;
+    //private double currentPosition;
 
     /**
      * Creates a new TurretSubsystem.
@@ -90,17 +90,20 @@ public class TurretSubsystem extends SubsystemBase
         if (m_Timer1.get() < 0.5)
         {
             setpointSetAngle(angle);
+            System.out.println("true");
         }
         else
         {
-            if (currentPosition < 90)
+            setpointSetAngle(turretLimit(getTurretAngle() + getHeadingError()));
+            /* for future GKC
+            if (getTurretAngle() < 90)
             {
                 setpointSetAngle(turretLimit(getTurretAngle() + getHeadingError()));
             }
             else
             {
                 setPower(0);
-            }
+            }*/
         }
     }
 

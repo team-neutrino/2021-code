@@ -100,22 +100,21 @@ public class TenBallAuton extends SequentialCommandGroup {
     );
 
     addCommands(
-      new InstantCommand(p_Turret::setLightOn),
-      // new InstantCommand(p_Turret::startTimer),
-      // new InstantCommand(() -> p_Turret.setAngle(70)).alongWith(
-      new InstantCommand(p_Intake::setIntakeOn).alongWith(
+      new TurretSetAngleCommand(p_Turret, 70).alongWith(
+        new InstantCommand(p_Turret::setLightOn),
+        new InstantCommand(p_Intake::setIntakeOn),
         new SequentialCommandGroup(
-          new ShootAuton(p_Shooter, p_Hopper, 5, 70000),
+          new ShootAuton(p_Shooter, p_Hopper, 4, 70000),
           tenBall0,
-          new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)),
-          new ShootAuton(p_Shooter, p_Hopper, 5, 70000), 
+          new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)), 
+          new ShootAuton(p_Shooter, p_Hopper, 5, 75000),
           tenBall1, 
           tenBall2,
           new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)),
-          new ShootAuton(p_Shooter, p_Hopper, 5, 70000),
+          new ShootAuton(p_Shooter, p_Hopper, 5, 74000),
           tenBall3,
           new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)),
-          new ShootAuton(p_Shooter, p_Hopper, 5, 70000))
+          new ShootAuton(p_Shooter, p_Hopper, 5, 73000))
       )
     );
   }
