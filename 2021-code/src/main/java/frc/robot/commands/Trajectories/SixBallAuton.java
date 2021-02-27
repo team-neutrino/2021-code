@@ -45,18 +45,14 @@ public class SixBallAuton extends SequentialCommandGroup
         SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(DriveConstants.KS_VOLTS,
             DriveConstants.KV_VOLT_SECONDS_PER_METER, DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER);
 
-        // Six ball auton trajectory
         RamseteCommand sixBallTraj0 = new RamseteCommand(trajectory, p_Drive::getPose, controller, feedforward,
             DriveConstants.K_DRIVE_KINEMATICS, p_Drive::getWheelSpeeds, leftController, rightController,
             p_Drive::tankDriveVolts, p_Drive);
 
-        addCommands(
-            // TurretSetAngleCommand coexists with the default TurretAimCommand
-            // as a ParallelCommandGroup
-            new InstantCommand(() -> p_Turret.setAngle(45)).alongWith(
-                new SequentialCommandGroup(new InstantCommand(p_Intake::setArmDown), new WaitCommand(.75),
-                    new ShootAuton(p_Shooter, p_Hopper, 3, 80000), new InstantCommand(p_Intake::setIntakeOn, p_Intake),
-                    sixBallTraj0, new InstantCommand(() -> p_Intake.setAngle(Constants.IntakeConstants.ARM_UP_ANGLE)),
-                    new ShootAuton(p_Shooter, p_Hopper, 7, 85000))));
+        addCommands(new InstantCommand(() -> p_Turret.setAngle(45)).alongWith(
+            new SequentialCommandGroup(new InstantCommand(p_Intake::setArmDown), new WaitCommand(.75),
+                new ShootAuton(p_Shooter, p_Hopper, 3, 80000), new InstantCommand(p_Intake::setIntakeOn, p_Intake),
+                sixBallTraj0, new InstantCommand(() -> p_Intake.setAngle(Constants.IntakeConstants.ARM_UP_ANGLE)),
+                new ShootAuton(p_Shooter, p_Hopper, 7, 85000))));
     }
 }

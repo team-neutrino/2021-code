@@ -33,6 +33,7 @@ public final class Constants
             K_TRACK_WIDTH_METERS);
 
         public static final double K_MAX_SPEED_METERS_PER_SECOND = .96;
+        public static final double K_MAAAX_SPEED_METERS_PER_SECOND = 2.0;
         public static final double K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 6.8;
         public static final double K_RAMSETE_B = 2;
         public static final double K_RAMSETE_ZETA = 0.7;
@@ -78,6 +79,7 @@ public final class Constants
         public static final double WHEEL_I = 0;
         public static final double WHEEL_D = 2;
         public static final double WHEEL_F = 0.008;
+        public static final double SHOOTER_CONVERSION = 0;
     }
 
     public static final class CanId

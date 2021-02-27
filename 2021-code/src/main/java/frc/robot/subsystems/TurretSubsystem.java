@@ -20,6 +20,7 @@ import frc.robot.Constants;
 import frc.robot.Constants.CanId;
 
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TurretSubsystem extends SubsystemBase
 {
@@ -34,7 +35,6 @@ public class TurretSubsystem extends SubsystemBase
     private double m_headingError;
     private double m_getValidTarget;
     private double m_dynamicOffset;
-    private double currentPosition;
 
     /**
      * Creates a new TurretSubsystem.
@@ -58,6 +58,10 @@ public class TurretSubsystem extends SubsystemBase
         m_turretAngle = m_turretMotor.getSelectedSensorPosition() - m_dynamicOffset;
         m_headingError = tX.getDouble(0.0);
         m_getValidTarget = tV.getDouble(0.0);
+        SmartDashboard.putNumber("tX", tX.getDouble(0.0));
+        SmartDashboard.putNumber("getTurretAngle()", getTurretAngle());
+        SmartDashboard.putNumber("getHeadingError()", getHeadingError());
+        SmartDashboard.putNumber("limited sum", turretLimit(getTurretAngle() + getHeadingError()));
     }
 
     public void startTimer()
@@ -88,14 +92,7 @@ public class TurretSubsystem extends SubsystemBase
         }
         else
         {
-            if (currentPosition < 90)
-            {
-                setpointSetAngle(turretLimit(getTurretAngle() + getHeadingError()));
-            }
-            else
-            {
-                setPower(0);
-            }
+            setpointSetAngle(turretLimit(getTurretAngle() + getHeadingError()));
         }
     }
 
@@ -107,7 +104,6 @@ public class TurretSubsystem extends SubsystemBase
         }
         else
         {
-            // Sets angle to desired turret angle plus error if there is a target
             setpointSetAngle(turretLimit(getTurretAngle() + getHeadingError()));
         }
     }
@@ -205,7 +201,7 @@ public class TurretSubsystem extends SubsystemBase
         return setpoint;
     }
 
-    public void setTurretMotorOff() 
+    public void setTurretMotorOff()
     {
         m_turretMotor.set(ControlMode.PercentOutput, 0);
     }
