@@ -71,7 +71,7 @@ public class RobotContainer
 
     private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
-        m_Intake);
+        m_Intake, m_climber);
 
     private SixBallAuton m_SixBallAuton;
     private EightBallAuton m_EightBallAuton;
