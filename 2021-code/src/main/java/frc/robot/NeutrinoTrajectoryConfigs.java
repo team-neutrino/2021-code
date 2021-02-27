@@ -19,19 +19,23 @@ public class NeutrinoTrajectoryConfigs
             DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
         DriveConstants.K_DRIVE_KINEMATICS, 10);
 
-    public static final TrajectoryConfig m_DefaultConfig = new TrajectoryConfig(
+    public static final TrajectoryConfig m_SlowForwardConfig = new TrajectoryConfig(
         DriveConstants.K_MAX_SPEED_METERS_PER_SECOND,
         DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
             DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
 
-    public static final TrajectoryConfig m_ReverseConfig = new TrajectoryConfig(
+    public static final TrajectoryConfig m_SlowReverseConfig = new TrajectoryConfig(
         DriveConstants.K_MAX_SPEED_METERS_PER_SECOND,
         DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
             DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint).setReversed(true);
-    
-    public static final TrajectoryConfig m_SlowForwardConfig = new TrajectoryConfig(1.25, 6.8).setKinematics(
-        DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
 
-    public static final TrajectoryConfig m_SlowReverseConfig = new TrajectoryConfig(2.0, 6.8).setKinematics(
-        DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint).setReversed(true);
+    public static final TrajectoryConfig m_FastForwardConfig = new TrajectoryConfig(
+        DriveConstants.K_MAAAX_SPEED_METERS_PER_SECOND,
+        DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
+            DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
+
+    public static final TrajectoryConfig m_FastReverseConfig = new TrajectoryConfig(
+        DriveConstants.K_MAAAX_SPEED_METERS_PER_SECOND,
+        DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
+            DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint).setReversed(true);
 }

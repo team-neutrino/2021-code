@@ -1,3 +1,4 @@
+
 package frc.robot.subsystems;
 
 import java.util.Map;
@@ -26,25 +27,30 @@ public class TroubleshootingSubsystem extends SubsystemBase
     private NetworkTableEntry m_arm_angle;
     private NetworkTableEntry m_climber_height;
 
-
-    public TroubleshootingSubsystem(ShooterSubsystem p_Shooter, DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake, ClimberSubsystem p_Climber) {
+    public TroubleshootingSubsystem(ShooterSubsystem p_Shooter, DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake, ClimberSubsystem p_Climber)
+    {
         m_Shooter = p_Shooter;
         m_Drive = p_Drive;
         m_Intake = p_Intake;
         m_Climber = p_Climber;
 
         m_troubleshooting_tab = Shuffleboard.getTab("Troubleshooting Tab");
-        m_shooter_velocity_two = m_troubleshooting_tab.add("Shooter Velocity Two", 0).withPosition(2, 0).withSize(2, 2).withWidget(
-            BuiltInWidgets.kDial).withProperties(Map.of("min", 0, "max", 120000)).getEntry();
-        m_input_shooter_Speed = m_troubleshooting_tab.add("Input Shooter Velocity", 0).withPosition(4,0).withSize(1,1).getEntry();
-        m_arm_angle = m_troubleshooting_tab.add("Arm angle", 0).withPosition(1, 0).withSize(1, 1).getEntry();
-        m_climber_height = m_troubleshooting_tab.add("Height of Climber", 0).withPosition(1, 2).withSize(1, 1).getEntry();
+        m_shooter_velocity_two = m_troubleshooting_tab.add("Shooter Velocity Two", 0).withPosition(1, 0).withSize(2,
+            2).withWidget(BuiltInWidgets.kDial).withProperties(Map.of("min", 0, "max", 120000)).getEntry();
+        m_input_shooter_Speed = m_troubleshooting_tab.add("Input Shooter Velocity", 0).withPosition(1, 1).withSize(1,
+            1).getEntry();
+        m_climber_height = m_troubleshooting_tab.add("Climber Height", 0).withPosition(1, 0).withSize(2,
+        2).getEntry();
 
-        m_navx_yaw = m_troubleshooting_tab.add("NavX Yaw", 0).withPosition(0, 0).withSize(1, 1).withProperties(Map.of("min", -180, "max", 180)).getEntry();
-        // m_navx_pitch = m_troubleshooting_tab.add("NavX Pitch", 0).withPosition(2, 3).withSize(1, 1).withProperties(Map.of("min", -180, "max", 180)).getEntry();
-        // m_navx_roll = m_troubleshooting_tab.add("NavX Roll", 0).withPosition(2, 3).withSize(1, 1).withProperties(Map.of("min", -180, "max", 180)).getEntry();
-        m_left_encoder = m_troubleshooting_tab.add("Left encoder", 0).withPosition(1, 0).withSize(1, 1).getEntry();
-        m_right_encoder = m_troubleshooting_tab.add("Right encoder", 0).withPosition(2, 0).withSize(1, 1).getEntry();
+        m_navx_yaw = m_troubleshooting_tab.add("NavX Yaw", 0).withPosition(2, 3).withSize(1, 1).withProperties(
+            Map.of("min", -180, "max", 180)).getEntry();
+        m_navx_pitch = m_troubleshooting_tab.add("NavX Pitch", 0).withPosition(2, 3).withSize(1, 1).withProperties(
+            Map.of("min", -180, "max", 180)).getEntry();
+        m_navx_roll = m_troubleshooting_tab.add("NavX Roll", 0).withPosition(2, 3).withSize(1, 1).withProperties(
+            Map.of("min", -180, "max", 180)).getEntry();
+        m_left_encoder = m_troubleshooting_tab.add("Left encoder", 0).withPosition(2, 3).withSize(1, 1).getEntry();
+        m_right_encoder = m_troubleshooting_tab.add("Right encoder", 0).withPosition(2, 3).withSize(1, 1).getEntry();
+        m_arm_angle = m_troubleshooting_tab.add("Arm angle", 0).getEntry();
     }
 
     @Override
@@ -64,6 +70,6 @@ public class TroubleshootingSubsystem extends SubsystemBase
     public double getVelocity()
     {
         System.out.println(m_speed);
-        return m_speed;  
+        return m_speed;
     }
 }
