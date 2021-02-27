@@ -42,7 +42,7 @@ public class DriverViewSubsystem extends SubsystemBase
         m_driver_view_tab = Shuffleboard.getTab("Driver View");
         m_shooter_velocity = m_driver_view_tab.add("Shooter Velocity", 0).withPosition(2, 2).withSize(2, 2).withWidget(
             BuiltInWidgets.kDial).withProperties(Map.of("min", 0, "max", 120000)).getEntry();
-        m_turret_angle = m_driver_view_tab.add("Turrfet Angle", 0).withWidget(BuiltInWidgets.kDial).withPosition(0,
+        m_turret_angle = m_driver_view_tab.add("Turret Angle", 0).withWidget(BuiltInWidgets.kDial).withPosition(0,
             2).withSize(2, 2).withProperties(Map.of("min", -180, "max", 180)).getEntry();
         m_beam_break_top = m_driver_view_tab.add("Top Beam Status", false).withPosition(0, 0).getEntry();
         m_beam_break_bot = m_driver_view_tab.add("Bottom Beam Status", false).withPosition(0, 1).getEntry();
