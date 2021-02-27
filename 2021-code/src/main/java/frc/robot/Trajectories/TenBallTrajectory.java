@@ -24,12 +24,12 @@ public class TenBallTrajectory
     public static final Trajectory tenBall1 = TrajectoryGenerator.generateTrajectory(
         new Pose2d(4, -2.6, Rotation2d.fromDegrees(-147)),
         List.of(new Translation2d(2.7, -3.9)),
-        new Pose2d(4.23, -3.6, Rotation2d.fromDegrees(20)),
+        new Pose2d(4.3, -3.6, Rotation2d.fromDegrees(25)),
         NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
 
     public static final Trajectory tenBall2 = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(4.23, -3.76, Rotation2d.fromDegrees(20)),
-        List.of(new Translation2d(3.6, -5.9)),
-        new Pose2d(4.25, -7, Rotation2d.fromDegrees(-90)),
+        new Pose2d(4.3, -3.76, Rotation2d.fromDegrees(25)),
+        List.of(new Translation2d(3.7, -5.5)),
+        new Pose2d(3.7, -6.4, Rotation2d.fromDegrees(-90)),
         NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
 }

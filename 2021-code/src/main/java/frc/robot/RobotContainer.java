@@ -112,6 +112,7 @@ public class RobotContainer
 
         m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 95000));
+        //m_B.whenPressed(new InstantCommand(m_Turret::setLightOn));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
@@ -147,6 +148,8 @@ public class RobotContainer
 
     public void teleopInit()
     {
+        //m_leftMotors.setVoltage(0.0);
+        //m_rightMotors.setVoltage(0.0);
         m_Intake.setIntakeOff();
         configureButtonBindings();
         final Command tankDriveCommand = new RunCommand(

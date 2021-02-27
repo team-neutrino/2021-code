@@ -41,6 +41,7 @@ public class DriveSubsystem extends SubsystemBase
 
     public DriveSubsystem()
     {
+
         m_leftMotor1.restoreFactoryDefaults();
         m_leftMotor2.restoreFactoryDefaults();
         m_rightMotor1.restoreFactoryDefaults();

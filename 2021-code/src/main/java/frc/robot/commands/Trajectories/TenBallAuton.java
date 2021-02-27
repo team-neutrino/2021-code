@@ -89,7 +89,7 @@ public class TenBallAuton extends SequentialCommandGroup
                 tenBall0,
                 tenBallHalf,
                 new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)), 
-                new ShootAuton(p_Shooter, p_Hopper, 5, 73000), 
+                new ShootAuton(p_Shooter, p_Hopper, 5, 72800), 
                 tenBall1,
                 tenBall2, 
                 new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)),  
