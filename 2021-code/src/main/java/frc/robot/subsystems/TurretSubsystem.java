@@ -35,7 +35,6 @@ public class TurretSubsystem extends SubsystemBase
     private double m_headingError;
     private double m_getValidTarget;
     private double m_dynamicOffset;
-    //private double currentPosition;
 
     /**
      * Creates a new TurretSubsystem.
@@ -90,7 +89,6 @@ public class TurretSubsystem extends SubsystemBase
         if (m_Timer1.get() < 0.5)
         {
             setpointSetAngle(angle);
-            System.out.println("true");
         }
         else
         {
@@ -106,7 +104,6 @@ public class TurretSubsystem extends SubsystemBase
         }
         else
         {
-            // Sets angle to desired turret angle plus error if there is a target
             setpointSetAngle(turretLimit(getTurretAngle() + getHeadingError()));
         }
     }

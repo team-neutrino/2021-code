@@ -29,11 +29,13 @@ public class NeutrinoTrajectoryConfigs
         DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
             DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint).setReversed(true);
 
-    public static final TrajectoryConfig m_FastForwardConfig = new TrajectoryConfig(2.0,
+    public static final TrajectoryConfig m_FastForwardConfig = new TrajectoryConfig(
+        DriveConstants.K_MAAAX_SPEED_METERS_PER_SECOND,
         DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
             DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
 
-    public static final TrajectoryConfig m_FastReverseConfig = new TrajectoryConfig(2.0,
+    public static final TrajectoryConfig m_FastReverseConfig = new TrajectoryConfig(
+        DriveConstants.K_MAAAX_SPEED_METERS_PER_SECOND,
         DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
             DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint).setReversed(true);
 }
