@@ -14,16 +14,22 @@ public class TenBallTrajectory
 {
 
     public static final Trajectory tenBall0 = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(0, 0, Rotation2d.fromDegrees(0)), List.of(new Translation2d(4.6, 0)),
-        new Pose2d(4.78, -3.87, Rotation2d.fromDegrees(-156.2)), NeutrinoTrajectoryConfigs.m_FastForwardConfig);
+        List.of(new Pose2d(0, 0, Rotation2d.fromDegrees(0)), new Pose2d(4.6, 0, Rotation2d.fromDegrees(0))),
+        NeutrinoTrajectoryConfigs.m_FastForwardConfig);
+
+    public static final Trajectory tenBallHalf = TrajectoryGenerator.generateTrajectory(
+        List.of(new Pose2d(4.6, 0, Rotation2d.fromDegrees(-90)), new Pose2d(4, -2.6, Rotation2d.fromDegrees(-147))),
+        NeutrinoTrajectoryConfigs.m_TwixtForwardConfig);
 
     public static final Trajectory tenBall1 = TrajectoryGenerator.generateTrajectory(
-        List.of(new Pose2d(4.78, -3.87, Rotation2d.fromDegrees(-156.2)),
-            new Pose2d(4.52, -4.82, Rotation2d.fromDegrees(0))),
+        new Pose2d(4, -2.6, Rotation2d.fromDegrees(-147)),
+        List.of(new Translation2d(2.7, -3.9)),
+        new Pose2d(4.23, -3.6, Rotation2d.fromDegrees(20)),
         NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
 
     public static final Trajectory tenBall2 = TrajectoryGenerator.generateTrajectory(
-        List.of(new Pose2d(4.52, -4.82, Rotation2d.fromDegrees(0)),
-            new Pose2d(4.25, -7.74, Rotation2d.fromDegrees(-90))),
+        new Pose2d(4.23, -3.76, Rotation2d.fromDegrees(20)),
+        List.of(new Translation2d(3.6, -5.9)),
+        new Pose2d(4.25, -7, Rotation2d.fromDegrees(-90)),
         NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
 }
