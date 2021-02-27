@@ -69,7 +69,8 @@ public class RobotContainer
     private POVButton m_DownPovButton = new POVButton(m_OperatorController, 180);
 
     private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
-    private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive, m_Intake);
+    private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
+        m_Intake);
 
     private SixBallAuton m_SixBallAuton;
     private EightBallAuton m_EightBallAuton;
@@ -83,10 +84,6 @@ public class RobotContainer
     {
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
         m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
-        /*m_SixBallAuto = new SixBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
-        m_DumpAuton = new DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
-        m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 10);
-        kjm,m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);*/
         //limelig+uihtFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
         m_BounceAuton = new BounceAuton(m_Drive);
         m_SixBallAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
@@ -111,14 +108,9 @@ public class RobotContainer
 
         m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
             m_climber);
-        
-        m_A.whenHeld( new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
-        m_Y.whenHeld( new ShooterSetSpeedCommand(m_Shooter, 95000));
-        /*m_B.toggleWhenPressed(
-            new StartEndCommand(m_Turret::setLightOn,
-            m_Turret::setLightOff,
-            m_Turret)
-        );*/
+
+        m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
+        m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 95000));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
@@ -148,9 +140,6 @@ public class RobotContainer
      */
     public Command getAutonomousCommand()
     {
-        //m_Turret.setLightOn();
-        
-        // return m_TenBallAuton;    
         m_Drive.initAuton();
         return m_TenBallAuton;
     }

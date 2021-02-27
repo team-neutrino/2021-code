@@ -62,7 +62,7 @@ public class TurretSubsystem extends SubsystemBase
         SmartDashboard.putNumber("tX", tX.getDouble(0.0));
         SmartDashboard.putNumber("getTurretAngle()", getTurretAngle());
         SmartDashboard.putNumber("getHeadingError()", getHeadingError());
-        SmartDashboard.putNumber("limited sum", turretLimit(getTurretAngle()+getHeadingError()));
+        SmartDashboard.putNumber("limited sum", turretLimit(getTurretAngle() + getHeadingError()));
     }
 
     public void startTimer()
@@ -95,15 +95,6 @@ public class TurretSubsystem extends SubsystemBase
         else
         {
             setpointSetAngle(turretLimit(getTurretAngle() + getHeadingError()));
-            /* for future GKC
-            if (getTurretAngle() < 90)
-            {
-                setpointSetAngle(turretLimit(getTurretAngle() + getHeadingError()));
-            }
-            else
-            {
-                setPower(0);
-            }*/
         }
     }
 
@@ -213,7 +204,7 @@ public class TurretSubsystem extends SubsystemBase
         return setpoint;
     }
 
-    public void setTurretMotorOff() 
+    public void setTurretMotorOff()
     {
         m_turretMotor.set(ControlMode.PercentOutput, 0);
     }

@@ -15,7 +15,8 @@ import edu.wpi.first.wpilibj.trajectory.Trajectory;
 import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import frc.robot.NeutrinoTrajectoryConfigs;
 
-public class SixBallTrajectory {
+public class SixBallTrajectory
+{
 
     public static final Trajectory sixBall0 = TrajectoryGenerator.generateTrajectory(
         List.of(new Pose2d(0, 0, new Rotation2d(0)), new Pose2d(4.6, 0, new Rotation2d(0))),
