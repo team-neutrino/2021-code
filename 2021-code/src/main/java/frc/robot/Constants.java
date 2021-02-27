@@ -78,6 +78,7 @@ public final class Constants
         public static final double WHEEL_I = 0;
         public static final double WHEEL_D = 2;
         public static final double WHEEL_F = 0.008;
+        public static final double SHOOTER_CONVERSION = 0;
     }
 
     public static final class CanId
@@ -129,7 +130,7 @@ public final class Constants
         public static final double TURRET_OFFSET_ANGLE = -128;
         public static final double DEGREE_BOUNDS = 180.0;
         public static final double ANGLE_SCALE = (7.0 * 360.0) / (27.0 * 1024.0);
-        public static final double kP = 0.08;
+        public static final double kP = 0.12;
     }
 
     public static final class PathConstants
