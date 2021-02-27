@@ -36,21 +36,21 @@ public class TroubleshootingSubsystem extends SubsystemBase
         m_Climber = p_Climber;
 
         m_troubleshooting_tab = Shuffleboard.getTab("Troubleshooting Tab");
-        m_shooter_velocity_two = m_troubleshooting_tab.add("Shooter Velocity Two", 0).withPosition(1, 0).withSize(2,
+        m_shooter_velocity_two = m_troubleshooting_tab.add("Shooter Velocity Two", 0).withPosition(2, 0).withSize(2,
             2).withWidget(BuiltInWidgets.kDial).withProperties(Map.of("min", 0, "max", 120000)).getEntry();
-        m_input_shooter_Speed = m_troubleshooting_tab.add("Input Shooter Velocity", 0).withPosition(1, 1).withSize(1,
+        m_input_shooter_Speed = m_troubleshooting_tab.add("Input Shooter Speed", 0).withPosition(2, 2).withSize(2,
             1).getEntry();
-        m_climber_height = m_troubleshooting_tab.add("Climber Height", 0).withPosition(1, 0).withSize(2, 2).getEntry();
+        m_climber_height = m_troubleshooting_tab.add("Climber Height", 0).withPosition(0, 0).withSize(2, 2).getEntry();
 
-        m_navx_yaw = m_troubleshooting_tab.add("NavX Yaw", 0).withPosition(2, 3).withSize(1, 1).withProperties(
+        m_navx_yaw = m_troubleshooting_tab.add("NavX Yaw", 0).withPosition(1, 3).withSize(1, 1).withProperties(
             Map.of("min", -180, "max", 180)).getEntry();
         m_navx_pitch = m_troubleshooting_tab.add("NavX Pitch", 0).withPosition(2, 3).withSize(1, 1).withProperties(
             Map.of("min", -180, "max", 180)).getEntry();
-        m_navx_roll = m_troubleshooting_tab.add("NavX Roll", 0).withPosition(2, 3).withSize(1, 1).withProperties(
+        m_navx_roll = m_troubleshooting_tab.add("NavX Roll", 0).withPosition(3, 3).withSize(1, 1).withProperties(
             Map.of("min", -180, "max", 180)).getEntry();
-        m_left_encoder = m_troubleshooting_tab.add("Left encoder", 0).withPosition(2, 3).withSize(1, 1).getEntry();
-        m_right_encoder = m_troubleshooting_tab.add("Right encoder", 0).withPosition(2, 3).withSize(1, 1).getEntry();
-        m_arm_angle = m_troubleshooting_tab.add("Arm angle", 0).getEntry();
+        m_left_encoder = m_troubleshooting_tab.add("Left encoder", 0).withPosition(0, 2).withSize(1, 1).getEntry();
+        m_right_encoder = m_troubleshooting_tab.add("Right encoder", 0).withPosition(1, 2).withSize(1, 1).getEntry();
+        m_arm_angle = m_troubleshooting_tab.add("Arm angle", 0).withPosition(0, 3).withSize(1, 1).getEntry();
     }
 
     @Override
