@@ -34,9 +34,9 @@ public class ClimberSubsystem extends SubsystemBase
     public void periodic()
     {
         // This method will be called once per scheduler run
-        if(getHeight() < 0)
+        if (getHeight() < 0)
         {
-        m_ClimbElevator.setSelectedSensorPosition(0);
+            m_ClimbElevator.setSelectedSensorPosition(0);
         }
     }
 
@@ -69,7 +69,7 @@ public class ClimberSubsystem extends SubsystemBase
     {
         m_ClimbWinch.set(-ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
     }
-    
+
     public double getHeight()
     {
         return m_ClimbElevator.getSelectedSensorPosition();

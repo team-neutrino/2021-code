@@ -27,7 +27,8 @@ public class TroubleshootingSubsystem extends SubsystemBase
     private NetworkTableEntry m_arm_angle;
     private NetworkTableEntry m_climber_height;
 
-    public TroubleshootingSubsystem(ShooterSubsystem p_Shooter, DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake, ClimberSubsystem p_Climber)
+    public TroubleshootingSubsystem(ShooterSubsystem p_Shooter, DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake,
+            ClimberSubsystem p_Climber)
     {
         m_Shooter = p_Shooter;
         m_Drive = p_Drive;
@@ -39,8 +40,7 @@ public class TroubleshootingSubsystem extends SubsystemBase
             2).withWidget(BuiltInWidgets.kDial).withProperties(Map.of("min", 0, "max", 120000)).getEntry();
         m_input_shooter_Speed = m_troubleshooting_tab.add("Input Shooter Velocity", 0).withPosition(1, 1).withSize(1,
             1).getEntry();
-        m_climber_height = m_troubleshooting_tab.add("Climber Height", 0).withPosition(1, 0).withSize(2,
-        2).getEntry();
+        m_climber_height = m_troubleshooting_tab.add("Climber Height", 0).withPosition(1, 0).withSize(2, 2).getEntry();
 
         m_navx_yaw = m_troubleshooting_tab.add("NavX Yaw", 0).withPosition(2, 3).withSize(1, 1).withProperties(
             Map.of("min", -180, "max", 180)).getEntry();
