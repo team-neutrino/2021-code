@@ -85,6 +85,7 @@ public class TenBallAuton extends SequentialCommandGroup
         addCommands(new TurretSetAngleCommand(p_Turret, 70).alongWith(new InstantCommand(p_Turret::setLightOn),
             new InstantCommand(p_Intake::setIntakeOn),
             new SequentialCommandGroup(
+                new InstantCommand(() -> p_Intake.setArmDown()),
                 new ShootAuton(p_Shooter, p_Hopper, 3.5, 70000), 
                 tenBall0,
                 tenBallHalf,
