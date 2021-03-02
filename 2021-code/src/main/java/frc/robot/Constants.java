@@ -33,6 +33,7 @@ public final class Constants
             K_TRACK_WIDTH_METERS);
 
         public static final double K_MAX_SPEED_METERS_PER_SECOND = .96;
+        public static final double K_MAAX_SPEED_METERS_PER_SECOND = 1.25;
         public static final double K_MAAAX_SPEED_METERS_PER_SECOND = 2.0;
         public static final double K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 6.8;
         public static final double K_RAMSETE_B = 2;
@@ -46,7 +47,7 @@ public final class Constants
 
     public static final class IntakeConstants
     {
-        public static final double INTAKE_MOTOR_POWER = -0.8;
+        public static final double INTAKE_MOTOR_POWER = -1;
         public static final double OUTTAKE_MOTOR_POWER = 1;
         public static final double ARM_UP_ANGLE = 39;
         public static final int ENCODER_PORT = 8;

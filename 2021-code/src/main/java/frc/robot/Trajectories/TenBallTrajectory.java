@@ -14,22 +14,22 @@ public class TenBallTrajectory
 {
 
     public static final Trajectory tenBall0 = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(0, 0, Rotation2d.fromDegrees(0)), List.of(new Translation2d(4.6, 0)),
-        new Pose2d(4.55, -1.24, Rotation2d.fromDegrees(-120)), NeutrinoTrajectoryConfigs.m_FastForwardConfig);
+        List.of(new Pose2d(0, 0, Rotation2d.fromDegrees(0)), new Pose2d(4.6, 0, Rotation2d.fromDegrees(0))),
+        NeutrinoTrajectoryConfigs.m_FastForwardConfig);
+
+    public static final Trajectory tenBallHalf = TrajectoryGenerator.generateTrajectory(
+        List.of(new Pose2d(4.6, 0, Rotation2d.fromDegrees(-90)), new Pose2d(4, -2.6, Rotation2d.fromDegrees(-147))),
+        NeutrinoTrajectoryConfigs.m_FastForwardConfig);
 
     public static final Trajectory tenBall1 = TrajectoryGenerator.generateTrajectory(
-        List.of(new Pose2d(4.55, -1.24, Rotation2d.fromDegrees(-120)),
-            new Pose2d(4.7, -1.9, Rotation2d.fromDegrees(-135))),
-        NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
+        new Pose2d(4, -2.6, Rotation2d.fromDegrees(-147)),
+        List.of(new Translation2d(2.7, -3.9)),
+        new Pose2d(4.3, -3.6, Rotation2d.fromDegrees(25)),
+        NeutrinoTrajectoryConfigs.m_FastForwardConfig);
 
     public static final Trajectory tenBall2 = TrajectoryGenerator.generateTrajectory(
-        List.of(new Pose2d(4.7, -1.9, Rotation2d.fromDegrees(-135)),
-            new Pose2d(3.6, -3.19, Rotation2d.fromDegrees(-55))),
-        NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
-
-    public static final Trajectory tenBall3 = TrajectoryGenerator.generateTrajectory(
-        List.of(new Pose2d(3.6, -3.19, Rotation2d.fromDegrees(-55)),
-            new Pose2d(3.5, -6.4, Rotation2d.fromDegrees(-90))),
-        NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
-
+        new Pose2d(4.3, -3.76, Rotation2d.fromDegrees(25)),
+        List.of(new Translation2d(3.7, -5.5)),
+        new Pose2d(3.7, -6.4, Rotation2d.fromDegrees(-90)),
+        NeutrinoTrajectoryConfigs.m_FastForwardConfig);
 }
