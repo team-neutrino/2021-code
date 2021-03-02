@@ -27,5 +27,5 @@ public class TenBallTrajectory
 
     public static final Trajectory tenBall2 = TrajectoryGenerator.generateTrajectory(
         new Pose2d(4.3, -3.76, Rotation2d.fromDegrees(25)), List.of(new Translation2d(3.7, -5.5)),
-        new Pose2d(3.7, -6.4, Rotation2d.fromDegrees(-90)), NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
+        new Pose2d(3.7, -6.4, Rotation2d.fromDegrees(-90)), NeutrinoTrajectoryConfigs.m_FastForwardConfig);
 }

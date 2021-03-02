@@ -81,13 +81,21 @@ public class TenBallAuton extends SequentialCommandGroup
             new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
 
             p_Drive::tankDriveVolts, p_Drive);
+        
 
-        addCommands(new TurretSetAngleCommand(p_Turret, 70).alongWith(new InstantCommand(p_Turret::setLightOn),
+        addCommands(new TurretSetAngleCommand(p_Turret, 70),
+            new InstantCommand(p_Turret::setLightOn),
             new InstantCommand(p_Intake::setIntakeOn),
             new SequentialCommandGroup(new InstantCommand(() -> p_Intake.setArmDown()),
-                new ShootAuton(p_Shooter, p_Hopper, 3, 70000), tenBall0, tenBallHalf,
-                new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)), new ShootAuton(p_Shooter, p_Hopper, 5, 73000),
-                tenBall1, tenBall2, new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)),
-                new ShootAuton(p_Shooter, p_Hopper, 5, 73000))));
+                new ShootAuton(p_Shooter, p_Hopper, 3, 70000), 
+                tenBall0, 
+                tenBallHalf,
+                new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)), 
+                new ShootAuton(p_Shooter, p_Hopper, 4.5, 73000),
+                tenBall1, 
+                tenBall2, 
+                new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)),
+                new TurretSetAngleCommand(p_Turret, 55),
+                new ShootAuton(p_Shooter, p_Hopper, 4, 73000)));
     }
 }
