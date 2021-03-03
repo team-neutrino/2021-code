@@ -131,7 +131,6 @@ public class RobotContainer
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
         m_DownPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(90), m_Turret)).whenReleased(
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
-
     }
 
     /**
