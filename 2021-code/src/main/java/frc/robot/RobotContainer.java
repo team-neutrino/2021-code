@@ -73,6 +73,7 @@ public class RobotContainer
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
         m_Intake, m_climber);
 
+
     private SixBallAuton m_SixBallAuton;
     private EightBallAuton m_EightBallAuton;
     private BounceAuton m_BounceAuton;
@@ -112,7 +113,7 @@ public class RobotContainer
 
         m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 95000));
-        //m_B.whenPressed(new InstantCommand(m_Drive::stick, m_Drive));
+        m_B.whenPressed(new InstantCommand(m_Drive::stick, m_Drive));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
@@ -148,8 +149,15 @@ public class RobotContainer
 
         m_Intake.setIntakeOff();
         configureButtonBindings();
-        final Command tankDriveCommand = new RunCommand(
-            () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
-        m_Drive.setDefaultCommand(tankDriveCommand);
+        if(m_rightJoystick.getRawAxis(2) > 0) {
+            final Command tankDriveCommand = new RunCommand(
+                () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_Drive.setDefaultCommand(tankDriveCommand);
+        }
+        else {
+            final Command tankDriveCommand = new RunCommand(
+                () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_Drive.setDefaultCommand(tankDriveCommand);
+        }
     }
 }
