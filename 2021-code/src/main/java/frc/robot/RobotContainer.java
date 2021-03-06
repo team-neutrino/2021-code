@@ -154,17 +154,16 @@ public class RobotContainer
         m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),
             m_Drive);
         m_Drive.setDefaultCommand(m_tankDriveCommand);
-
     }
 
     public void teleopPeriodic()
     {
         if (m_rightJoystick.getRawAxis(2) > 0) 
         {
-            if (isSingleJoystick == false)
+            if (!isSingleJoystick)
             {
                 m_tankDriveCommand.cancel();
-                isSingleJoystick = true;
+                isSingleJoystick = !isSingleJoystick;
                 m_tankDriveCommand = new RunCommand(
                     () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
             }
@@ -173,10 +172,10 @@ public class RobotContainer
         }
         else
         {
-            if (isSingleJoystick == true)
+            if (isSingleJoystick)
             {
                 m_tankDriveCommand.cancel();
-                isSingleJoystick = false;
+                isSingleJoystick = !isSingleJoystick;
                 m_tankDriveCommand = new RunCommand(
                     () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
             }
