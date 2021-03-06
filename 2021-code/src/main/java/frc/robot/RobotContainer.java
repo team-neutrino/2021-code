@@ -80,8 +80,7 @@ public class RobotContainer
 
     private RamseteGenCommand m_RamseteGen;
 
-    AnalogInput input = new AnalogInput(1);
-    AnalogPotentiometer analogPot = new AnalogPotentiometer(input, 511.77);
+    
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
