@@ -30,17 +30,16 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import frc.robot.subsystems.*;
+import frc.robot.util.AutonSelector;
 import frc.robot.util.TriggerToBoolean;
 import frc.robot.commands.*;
 import frc.robot.commands.Trajectories.*;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 /**
- * This class is where the bulk of the robot should be declared. Since
- * Command-based is a "declarative" paradigm, very little robot logic should
- * actually be handled in the {@link Robot} periodic methods (other than the
- * scheduler calls). Instead, the structure of the robot (including subsystems,
- * commands, and button mappings) should be declared here.
+ * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
+ * little robot logic should actually be handled in the {@link Robot} periodic methods (other than the scheduler calls).
+ * Instead, the structure of the robot (including subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer
 {
@@ -84,8 +83,8 @@ public class RobotContainer
     private TenBallAuton m_TenBallAuton;
 
     private RamseteGenCommand m_RamseteGen;
+    private AutonSelector m_AutonSelector = new AutonSelector();
 
-    
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
@@ -93,16 +92,7 @@ public class RobotContainer
     {
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
         //m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
-        /*m_SixBallAuto = new SixBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
-        m_DumpAuton = new DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
-        m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 10);
-        m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);*/
-        if (140 < analogPot.get() && analogPot.get() < 160){
-            m_RamseteGen = new RamseteGenCommand(m_Drive, Constants.PathConstants.GALACTIC_RED_A_PATH);
-        }
-        else{
-            m_RamseteGen = new RamseteGenCommand(m_Drive, Constants.PathConstants.GALACTIC_BLUE_A_PATH);
-        }
+
         m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
         m_BounceAuton = new BounceAuton(m_Drive);
@@ -159,7 +149,6 @@ public class RobotContainer
      * @return the command to run in autonomous
      */
 
-     
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
@@ -173,5 +162,11 @@ public class RobotContainer
         final Command tankDriveCommand = new RunCommand(
             () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
         m_Drive.setDefaultCommand(tankDriveCommand);
+
+    }
+
+    public void teleopPeriodic()
+    {
+        m_AutonSelector.Periodic();
     }
 }
