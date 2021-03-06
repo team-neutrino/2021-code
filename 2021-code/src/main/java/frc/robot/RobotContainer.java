@@ -112,6 +112,7 @@ public class RobotContainer
 
         m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 95000));
+        //m_B.whenPressed(new InstantCommand(m_Drive::stick, m_Drive));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
@@ -120,10 +121,8 @@ public class RobotContainer
         m_rightJoystickButton.toggleWhenActive(
             new TurretOverrideCommand(m_Turret, () -> m_OperatorController.getX(Hand.kRight)));
 
-        m_TriggerLeft.whenActive(
-            new InstantCommand(m_Intake::setIntakeOn, m_Intake).alongWith(new InstantCommand(m_Intake::setArmDown)));
-        m_TriggerLeft.whenInactive(new InstantCommand(m_Intake::setIntakeOff, m_Intake).alongWith(
-            new InstantCommand(() -> m_Intake.setAngle(Constants.IntakeConstants.ARM_UP_ANGLE))));
+        m_TriggerLeft.whenActive(new InstantCommand(m_Intake::setIntakeOn, m_Intake));
+        m_TriggerLeft.whenInactive(new InstantCommand(m_Intake::setIntakeOff, m_Intake));
 
         m_UpPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(-90), m_Turret)).whenReleased(
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
@@ -146,10 +145,11 @@ public class RobotContainer
 
     public void teleopInit()
     {
+
         m_Intake.setIntakeOff();
         configureButtonBindings();
         final Command tankDriveCommand = new RunCommand(
-            () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
         m_Drive.setDefaultCommand(tankDriveCommand);
     }
 }
