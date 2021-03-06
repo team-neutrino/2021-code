@@ -45,4 +45,10 @@ public class BounceTrajectory {
         List.of(new Pose2d(6.28, 0.6, Rotation2d.fromDegrees(285)),
         new Pose2d(7.28, 0.20, Rotation2d.fromDegrees(-180))), 
         NeutrinoTrajectoryConfigs.m_SlowReverseConfig);
+
+    public static final Trajectory bounce5 = TrajectoryGenerator.generateTrajectory(
+        new Pose2d(5.8, 1.20, Rotation2d.fromDegrees(285)),
+        List.of(new Translation2d(6.1, 0.90)),
+        new Pose2d(6.4, 0.80, Rotation2d.fromDegrees(180)), 
+        NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
 }
