@@ -78,6 +78,8 @@ public class RobotContainer
     private EightBallAuton m_EightBallAuto;
     private BounceAuton m_BounceAuton;
 
+    private RamseteGenCommand m_RamseteGen;
+
     AnalogInput input = new AnalogInput(1);
     AnalogPotentiometer analogPot = new AnalogPotentiometer(input, 511.77);
     /**
