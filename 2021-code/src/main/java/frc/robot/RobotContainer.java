@@ -16,10 +16,12 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.Constants.*;
+
 import static edu.wpi.first.wpilibj.XboxController.Button;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -73,10 +75,13 @@ public class RobotContainer
     private POVButton m_DownPovButton = new POVButton(m_OperatorController, 180);
 
     private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
-    private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive, m_Intake);
+    private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
+        m_Intake, m_climber);
 
-    private EightBallAuton m_EightBallAuto;
+    private SixBallAuton m_SixBallAuton;
+    private EightBallAuton m_EightBallAuton;
     private BounceAuton m_BounceAuton;
+    private TenBallAuton m_TenBallAuton;
 
     private RamseteGenCommand m_RamseteGen;
 
@@ -98,9 +103,11 @@ public class RobotContainer
         else{
             m_RamseteGen = new RamseteGenCommand(m_Drive, Constants.PathConstants.GALACTIC_BLUE_A_PATH);
         }
+        m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
         m_BounceAuton = new BounceAuton(m_Drive);
-
+        m_SixBallAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
+        m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
     }
 
     /**
@@ -121,10 +128,9 @@ public class RobotContainer
 
         m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
             m_climber);
-        
-        m_A.whenHeld( new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
-        m_Y.whenHeld( new ShooterSetSpeedCommand(m_Shooter, 95000));
-        m_B.whenActive(new InstantCommand(m_Drive::initAuton));
+
+        m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
+        m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 95000));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
@@ -156,15 +162,16 @@ public class RobotContainer
      
     public Command getAutonomousCommand()
     {
-        return m_EightBallAuto;    
+        m_Drive.initAuton();
+        return m_BounceAuton;
     }
 
     public void teleopInit()
     {
+        m_Intake.setIntakeOff();
         configureButtonBindings();
         final Command tankDriveCommand = new RunCommand(
             () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
         m_Drive.setDefaultCommand(tankDriveCommand);
-
     }
 }

@@ -19,7 +19,6 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import com.kauailabs.navx.frc.AHRS;
- 
 
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -113,12 +112,12 @@ public class DriveSubsystem extends SubsystemBase
         return m_odometry.getPoseMeters();
     }
 
-    public double getTranslationX() 
+    public double getTranslationX()
     {
         return m_odometry.getPoseMeters().getX();
     }
 
-    public double getTranslationY() 
+    public double getTranslationY()
     {
         return m_odometry.getPoseMeters().getY();
     }
@@ -159,7 +158,6 @@ public class DriveSubsystem extends SubsystemBase
         }
     }
 
-    //get navX information: yaw, pitch, roll
     public float getNavxYaw()
     {
         return m_navX.getYaw();
@@ -179,7 +177,7 @@ public class DriveSubsystem extends SubsystemBase
     {
         return m_rEncoder.getPosition();
     }
-    
+
     public double getRightEncoderPosition()
     {
         return m_lEncoder.getPosition();

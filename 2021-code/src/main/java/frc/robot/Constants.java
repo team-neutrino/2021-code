@@ -33,6 +33,8 @@ public final class Constants
             K_TRACK_WIDTH_METERS);
 
         public static final double K_MAX_SPEED_METERS_PER_SECOND = .96;
+        public static final double K_MAAX_SPEED_METERS_PER_SECOND = 1.25;
+        public static final double K_MAAAX_SPEED_METERS_PER_SECOND = 2.0;
         public static final double K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 6.8;
         public static final double K_RAMSETE_B = 2;
         public static final double K_RAMSETE_ZETA = 0.7;
@@ -45,9 +47,9 @@ public final class Constants
 
     public static final class IntakeConstants
     {
-        public static final double INTAKE_MOTOR_POWER = -0.8;
+        public static final double INTAKE_MOTOR_POWER = -1;
         public static final double OUTTAKE_MOTOR_POWER = 1;
-        public static final double ARM_UP_ANGLE = -55;
+        public static final double ARM_UP_ANGLE = 39;
         public static final int ENCODER_PORT = 8;
 
         public static final double KP = 0.02;
@@ -78,6 +80,7 @@ public final class Constants
         public static final double WHEEL_I = 0;
         public static final double WHEEL_D = 2;
         public static final double WHEEL_F = 0.008;
+        public static final double SHOOTER_CONVERSION = 0;
     }
 
     public static final class CanId
@@ -101,8 +104,11 @@ public final class Constants
 
     public static final class ClimberConstants
     {
-        public static final double CLIMBER_MOTOR_POWER = 0.3;
+        public static final double CLIMBER_MOTOR_POWER_UP = .2;
+        public static final double CLIMBER_MOTOR_POWER_DOWN = .2;
         public static final double CLIMBER_MOTOR_WINCHPOWER = 1;
+        public static final double CLIMBER_BAR_HEIGHT = 0;
+        public static final double CLIMBER_FULL_EXTEND = 40000;
     }
     public static final class HopperConstants
     {
@@ -129,7 +135,7 @@ public final class Constants
         public static final double TURRET_OFFSET_ANGLE = -128;
         public static final double DEGREE_BOUNDS = 180.0;
         public static final double ANGLE_SCALE = (7.0 * 360.0) / (27.0 * 1024.0);
-        public static final double kP = 0.04;
+        public static final double kP = 0.12;
     }
 
     public static final class PathConstants

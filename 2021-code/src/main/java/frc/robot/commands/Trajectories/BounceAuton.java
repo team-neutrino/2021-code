@@ -18,7 +18,8 @@ import frc.robot.Constants;
 import frc.robot.Trajectories.BounceTrajectory;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class BounceAuton extends SequentialCommandGroup {
+public class BounceAuton extends SequentialCommandGroup
+{
 
   private DriveSubsystem m_Drive;
   public BounceAuton(DriveSubsystem p_Drive) {
@@ -27,7 +28,7 @@ public class BounceAuton extends SequentialCommandGroup {
     Trajectory m_bounce1 = BounceTrajectory.bounce1;
     Trajectory m_bounce2 = BounceTrajectory.bounce2;
     Trajectory m_bounce3 = BounceTrajectory.bounce3;
-    Trajectory m_bounce4 = BounceTrajectory.bounce4;
+
   
     RamseteCommand bounce0Command = new RamseteCommand(
         m_bounce0,
@@ -40,7 +41,6 @@ public class BounceAuton extends SequentialCommandGroup {
         m_Drive::getWheelSpeeds,
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-  
         m_Drive::tankDriveVolts,
         m_Drive
     );
@@ -55,7 +55,6 @@ public class BounceAuton extends SequentialCommandGroup {
         m_Drive::getWheelSpeeds,
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-  
         m_Drive::tankDriveVolts,
         m_Drive
     );
@@ -70,7 +69,6 @@ public class BounceAuton extends SequentialCommandGroup {
         m_Drive::getWheelSpeeds,
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-  
         m_Drive::tankDriveVolts,
         m_Drive
     );
@@ -85,25 +83,17 @@ public class BounceAuton extends SequentialCommandGroup {
         m_Drive::getWheelSpeeds,
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-  
         m_Drive::tankDriveVolts,
         m_Drive
     );
-    RamseteCommand bounce4Command = new RamseteCommand(
-        m_bounce4,
-        m_Drive::getPose,
-        new RamseteController(Constants.DriveConstants.K_RAMSETE_B, Constants.DriveConstants.K_RAMSETE_ZETA),
-        new SimpleMotorFeedforward(Constants.DriveConstants.KS_VOLTS,
-                                Constants.DriveConstants.KV_VOLT_SECONDS_PER_METER,
-                                Constants.DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER),
-        Constants.DriveConstants.K_DRIVE_KINEMATICS,
-        m_Drive::getWheelSpeeds,
-        new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-        new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
-  
-        m_Drive::tankDriveVolts,
-        m_Drive
-    );
-    addCommands(bounce0Command, bounce1Command, bounce2Command, bounce3Command, bounce4Command, new InstantCommand(() -> m_Drive.tankDriveVolts(0, 0)));
+
+    
+    addCommands(
+        bounce0Command, 
+        bounce1Command, 
+        bounce2Command,
+         bounce3Command,
+         
+        new InstantCommand(() -> m_Drive.tankDriveVolts(0, 0)));
   }
 }
