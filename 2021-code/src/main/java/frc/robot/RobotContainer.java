@@ -77,6 +77,7 @@ public class RobotContainer
     private EightBallAuton m_EightBallAuton;
     private BounceAuton m_BounceAuton;
     private TenBallAuton m_TenBallAuton;
+    private GalRedA m_GalRedA;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -89,6 +90,7 @@ public class RobotContainer
         m_BounceAuton = new BounceAuton(m_Drive);
         m_SixBallAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
+        m_GalRedA = new GalRedA(m_Drive, m_Intake);
     }
 
     /**
@@ -142,7 +144,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_BounceAuton;
+        return m_GalRedA;
     }
 
     public void teleopInit()
