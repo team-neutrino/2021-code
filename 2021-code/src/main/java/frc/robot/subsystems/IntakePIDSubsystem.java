@@ -88,10 +88,13 @@ public class IntakePIDSubsystem extends PIDSubsystem
 
     public void setArmDown()
     {
+        disable();
         m_arm_timer.start();
-        if(m_arm_timer.get() < .5)
+
+        if (m_arm_timer.get() < .5)
         {
             m_IntakeArmMotor.set(ControlMode.PercentOutput, 0.3);
+
         }
         else
         {

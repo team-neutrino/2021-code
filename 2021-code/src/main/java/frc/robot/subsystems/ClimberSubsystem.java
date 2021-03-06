@@ -10,6 +10,8 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanId;
@@ -18,7 +20,7 @@ import frc.robot.Constants.ClimberConstants;
 public class ClimberSubsystem extends SubsystemBase
 {
     private TalonSRX m_ClimbElevator = new TalonSRX(CanId.MOTOR_CONTROLLER_CLIMBER);
-    //private CANSparkMax m_ClimbWinch = new CANSparkMax(CanId.MOTOR_CONTROLLER_CLIMBERWINCH, MotorType.kBrushless);
+    private CANSparkMax m_ClimbWinch = new CANSparkMax(CanId.MOTOR_CONTROLLER_CLIMBERWINCH, MotorType.kBrushless);
 
     /**
      * Creates a new ClimberSubsystem.
@@ -32,21 +34,25 @@ public class ClimberSubsystem extends SubsystemBase
     public void periodic()
     {
         // This method will be called once per scheduler run
+        if (getHeight() < 0)
+        {
+            m_ClimbElevator.setSelectedSensorPosition(0);
+        }
     }
 
     public void elevatorUp()
     {
-        m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER);
+        m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
     }
 
     public void elevatorDown()
     {
-        m_ClimbElevator.set(ControlMode.PercentOutput, -ClimberConstants.CLIMBER_MOTOR_POWER);
+        m_ClimbElevator.set(ControlMode.PercentOutput, -ClimberConstants.CLIMBER_MOTOR_POWER_DOWN);
     }
 
     public void winchClimb()
     {
-        //m_ClimbWinch.set(ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
+        m_ClimbWinch.set(ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
     }
 
     public void elevatorStop()
@@ -56,11 +62,16 @@ public class ClimberSubsystem extends SubsystemBase
 
     public void winchStop()
     {
-        //m_ClimbWinch.set(0);
+        m_ClimbWinch.set(0);
     }
 
     public void winchReverse()
     {
-        //m_ClimbWinch.set(-ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
+        m_ClimbWinch.set(-ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
+    }
+
+    public double getHeight()
+    {
+        return m_ClimbElevator.getSelectedSensorPosition();
     }
 }

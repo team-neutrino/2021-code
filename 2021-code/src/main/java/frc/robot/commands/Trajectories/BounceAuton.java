@@ -18,7 +18,8 @@ import frc.robot.Constants;
 import frc.robot.Trajectories.BounceTrajectory;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class BounceAuton extends SequentialCommandGroup {
+public class BounceAuton extends SequentialCommandGroup
+{
 
   private DriveSubsystem m_Drive;
   public BounceAuton(DriveSubsystem p_Drive) {
