@@ -109,7 +109,7 @@ public class DriveSubsystem extends SubsystemBase
     }
 
     public boolean change = true;
-    public void stick() 
+    public void stick()
     {
         change = !change;
     }

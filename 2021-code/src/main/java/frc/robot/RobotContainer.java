@@ -43,13 +43,13 @@ public class RobotContainer
     // The robot's subsystems and commands are defined here...
     private final IntakePIDSubsystem m_Intake = new IntakePIDSubsystem();
     private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
-    private final DriveSubsystem m_Drive = new DriveSubsystem();
+    public final DriveSubsystem m_Drive = new DriveSubsystem();
     private final ClimberSubsystem m_climber = new ClimberSubsystem();
     private final HopperSubsystem m_Hopper = new HopperSubsystem(m_Shooter);
     private final TurretSubsystem m_Turret = new TurretSubsystem();
 
-    private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_PORT);
-    private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK__PORT);
+    public Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_PORT);
+    public Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK__PORT);
     private XboxController m_OperatorController = new XboxController(ControllerPorts.XBOX_CONTROLLER_PORT);
     private JoystickButton m_back = new JoystickButton(m_OperatorController, Button.kBack.value);
     private JoystickButton m_start = new JoystickButton(m_OperatorController, Button.kStart.value);
@@ -73,11 +73,12 @@ public class RobotContainer
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
         m_Intake, m_climber);
 
-
     private SixBallAuton m_SixBallAuton;
     private EightBallAuton m_EightBallAuton;
     private BounceAuton m_BounceAuton;
     private TenBallAuton m_TenBallAuton;
+    private Command m_tankDriveCommand;
+    private boolean isSingleJoystick;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -149,15 +150,40 @@ public class RobotContainer
 
         m_Intake.setIntakeOff();
         configureButtonBindings();
-        if(m_rightJoystick.getRawAxis(2) > 0) {
-            final Command tankDriveCommand = new RunCommand(
-                () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
-            m_Drive.setDefaultCommand(tankDriveCommand);
-        }
-        else {
-            final Command tankDriveCommand = new RunCommand(
-                () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
-            m_Drive.setDefaultCommand(tankDriveCommand);
-        }
+        isSingleJoystick = false;
+        m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),
+            m_Drive);
+        m_Drive.setDefaultCommand(m_tankDriveCommand);
+
     }
+
+    public void teleopPeriodic()
+    {
+        if (m_rightJoystick.getRawAxis(2) > 0) 
+        {
+            if (isSingleJoystick == false)
+            {
+                m_tankDriveCommand.cancel();
+                isSingleJoystick = true;
+                m_tankDriveCommand = new RunCommand(
+                    () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            }
+
+            System.out.println("single");
+        }
+        else
+        {
+            if (isSingleJoystick == true)
+            {
+                m_tankDriveCommand.cancel();
+                isSingleJoystick = false;
+                m_tankDriveCommand = new RunCommand(
+                    () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            }
+
+            System.out.println("both");
+        }
+        m_Drive.setDefaultCommand(m_tankDriveCommand);
+    }
+
 }
