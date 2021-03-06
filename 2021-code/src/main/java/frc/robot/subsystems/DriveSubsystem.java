@@ -107,6 +107,12 @@ public class DriveSubsystem extends SubsystemBase
         return m_navX.getYaw() * -1;
     }
 
+    public boolean change = true;
+    public void stick() 
+    {
+        change = !change;
+    }
+
     public Pose2d getPose()
     {
         return m_odometry.getPoseMeters();
