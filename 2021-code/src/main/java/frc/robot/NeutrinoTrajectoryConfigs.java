@@ -12,9 +12,6 @@ import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
 import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import frc.robot.Constants.DriveConstants;
 
-/**
- * Add your docs here.
- */
 public class NeutrinoTrajectoryConfigs
 {
     private static final DifferentialDriveVoltageConstraint m_autoVoltageConstraint = new DifferentialDriveVoltageConstraint(
@@ -32,10 +29,9 @@ public class NeutrinoTrajectoryConfigs
         DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
             DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint).setReversed(true);
     
-    public static final TrajectoryConfig m_SlowForwardConfig = new TrajectoryConfig(1.25, 6.8).setKinematics(
+    public static final TrajectoryConfig m_SlowForwardConfig = new TrajectoryConfig(2.0, 6.8).setKinematics(
         DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
 
-    public static final TrajectoryConfig m_SlowReverseConfig = new TrajectoryConfig(1.25, 6.8).setKinematics(
-        DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
-
+    public static final TrajectoryConfig m_SlowReverseConfig = new TrajectoryConfig(2.0, 6.8).setKinematics(
+        DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint).setReversed(true);
 }
