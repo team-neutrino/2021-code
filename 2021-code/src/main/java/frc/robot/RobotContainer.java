@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants.*;
 
 import static edu.wpi.first.wpilibj.XboxController.Button;
@@ -114,7 +115,7 @@ public class RobotContainer
 
         m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 95000));
-        m_B.whenPressed(new InstantCommand(m_Drive::stick, m_Drive));
+        m_B.toggleWhenPressed(new TeleopCombine(m_Drive));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
@@ -147,7 +148,6 @@ public class RobotContainer
 
     public void teleopInit()
     {
-
         m_Intake.setIntakeOff();
         configureButtonBindings();
         isSingleJoystick = false;
