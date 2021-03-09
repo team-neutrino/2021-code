@@ -50,7 +50,7 @@ public class DriverViewSubsystem extends SubsystemBase
         HttpCamera limelightFeed = new HttpCamera("limelight", "http://limelight.local:5800/stream.mjpg",
             HttpCameraKind.kMJPGStreamer);
         CameraServer.getInstance().startAutomaticCapture(limelightFeed);
-        m_driver_view_tab.add(limelightFeed).withPosition(1, 0).withSize(3,2).withWidget(BuiltInWidgets.kCameraStream);
+        m_driver_view_tab.add(limelightFeed).withPosition(1, 0).withSize(3, 2).withWidget(BuiltInWidgets.kCameraStream);
     }
 
     @Override
