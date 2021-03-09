@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import frc.robot.subsystems.*;
+import frc.robot.util.ShooterButtons;
 import frc.robot.util.TriggerToBoolean;
 import frc.robot.commands.*;
 import frc.robot.commands.Trajectories.*;
@@ -77,6 +78,7 @@ public class RobotContainer
     private EightBallAuton m_EightBallAuton;
     private BounceAuton m_BounceAuton;
     private TenBallAuton m_TenBallAuton;
+    private ShooterButtons m_ShooterButtons = new ShooterButtons();
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -153,5 +155,10 @@ public class RobotContainer
         final Command tankDriveCommand = new RunCommand(
             () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
         m_Drive.setDefaultCommand(tankDriveCommand);
+    }
+    
+    public void teleopPeriodic(){
+        m_ShooterButtons.Periodic();
+
     }
 }
