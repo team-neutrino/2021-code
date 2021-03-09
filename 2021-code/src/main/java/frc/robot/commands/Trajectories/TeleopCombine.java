@@ -49,6 +49,8 @@ public class TeleopCombine extends CommandBase {
         new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
 
         m_Drive::tankDriveVolts, m_Drive);
+
+    TeleopTrajectory.calibrate_count++;
     
     m_commandFromPort = new SequentialCommandGroup(fromPortCommand, new InstantCommand(() -> m_Drive.tankDriveVolts(0, 0)));
     m_commandFromPort.schedule();

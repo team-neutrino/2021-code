@@ -116,6 +116,7 @@ public class RobotContainer
         m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 95000));
         m_B.toggleWhenPressed(new TeleopCombine(m_Drive));
+        //m_B.whenPressed(new TeleopCombine(m_Drive));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
