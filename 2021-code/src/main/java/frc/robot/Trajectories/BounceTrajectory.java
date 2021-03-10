@@ -24,7 +24,7 @@ public class BounceTrajectory
 
     public static final Trajectory bounce1 = TrajectoryGenerator.generateTrajectory(
         new Pose2d(1.28, 0.9, Rotation2d.fromDegrees(90)),
-        List.of(new Translation2d(1.6, 0.2), new Translation2d(2.1, -0.8), new Translation2d(2.9, -1.6),
+        List.of(new Translation2d(1.8, 0.2), new Translation2d(2.1, -0.8), new Translation2d(2.9, -1.6),
             new Translation2d(3.7, -0.9)),
         new Pose2d(3.8, 0.95, Rotation2d.fromDegrees(270)), NeutrinoTrajectoryConfigs.m_BounceReverseConfig);
 
