@@ -14,16 +14,16 @@ public class TeleopTrajectory {
 
     public static int calibrate_count = 0;
 
-    public static double distance_calibrate() 
+    public static double angle_calibrate() 
     {
-        return (double)calibrate_count/10;
+        return 2*(double)calibrate_count;
     }
 
     public static final Trajectory toPort = TrajectoryGenerator.generateTrajectory(
-        List.of(new Pose2d(p_drive_distance, 0, new Rotation2d(0)), new Pose2d(distance_calibrate(), 0, Rotation2d.fromDegrees(0))),
-        NeutrinoTrajectoryConfigs.m_FastReverseConfig);
+        List.of(new Pose2d(p_drive_distance, 0, new Rotation2d(-angle_calibrate())), new Pose2d(0, 0, Rotation2d.fromDegrees(angle_calibrate()))),
+        NeutrinoTrajectoryConfigs.m_TwixtReverseConfig);
 
     public static final Trajectory fromPort = TrajectoryGenerator.generateTrajectory(
-        List.of(new Pose2d(0, 0, new Rotation2d(0)), new Pose2d(p_drive_distance, 0, Rotation2d.fromDegrees(0))),
-        NeutrinoTrajectoryConfigs.m_FastForwardConfig);
+        List.of(new Pose2d(0, 0, new Rotation2d(angle_calibrate())), new Pose2d(p_drive_distance, 0, Rotation2d.fromDegrees(-angle_calibrate()))),
+        NeutrinoTrajectoryConfigs.m_TwixtForwardConfig);
 }

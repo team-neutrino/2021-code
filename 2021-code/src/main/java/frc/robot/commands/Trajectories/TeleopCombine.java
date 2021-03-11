@@ -75,6 +75,8 @@ public class TeleopCombine extends CommandBase {
         m_Drive::tankDriveVolts, m_Drive);
     m_commandToPort = new SequentialCommandGroup(toPortCommand, new InstantCommand(() -> m_Drive.tankDriveVolts(0, 0)));
     m_commandToPort.schedule();
+
+    TeleopTrajectory.calibrate_count++;
   }
 
   // Returns true when the command should end.
