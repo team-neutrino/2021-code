@@ -24,13 +24,13 @@ public class BounceTrajectory
 
     public static final Trajectory bounce1 = TrajectoryGenerator.generateTrajectory(
         new Pose2d(1.28, 0.9, Rotation2d.fromDegrees(90)),
-        List.of(new Translation2d(1.6, 0.2), new Translation2d(2.1, -0.8), new Translation2d(2.9, -1.6),
+        List.of(new Translation2d(1.8, 0.2), new Translation2d(2.1, -1), new Translation2d(2.9, -1.8),
             new Translation2d(3.7, -0.9)),
         new Pose2d(3.8, 0.95, Rotation2d.fromDegrees(270)), NeutrinoTrajectoryConfigs.m_TwixtReverseConfig);
 
     public static final Trajectory bounce2 = TrajectoryGenerator.generateTrajectory(
         new Pose2d(3.8, 0.95, Rotation2d.fromDegrees(270)),
-        List.of(new Translation2d(3.7, -0.9), new Translation2d(5.3, -1.8), new Translation2d(6.3, -1.1)),
+        List.of(new Translation2d(3.9, -1.1), new Translation2d(5.3, -2), new Translation2d(6.3, -1.3)),
         new Pose2d(6.5, 0.55, Rotation2d.fromDegrees(90)), NeutrinoTrajectoryConfigs.m_TwixtForwardConfig);
 
     public static final Trajectory bounce3 = TrajectoryGenerator.generateTrajectory(
