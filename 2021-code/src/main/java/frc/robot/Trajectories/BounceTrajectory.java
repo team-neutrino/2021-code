@@ -17,24 +17,24 @@ import frc.robot.NeutrinoTrajectoryConfigs;
 
 public class BounceTrajectory
 {
+    //I added 2.48 to every x value because the robot went backwards by 19 inches
     public static final Trajectory bounce0 = TrajectoryGenerator.generateTrajectory(new Pose2d(0, 0, new Rotation2d(0)),
-        List.of(new Translation2d(0.8, 0.1)), new Pose2d(0.80, 1.0, Rotation2d.fromDegrees(90)),
-        NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
+        List.of(new Translation2d(1.28, 0.1)), new Pose2d(1.28, 0.9, Rotation2d.fromDegrees(90)),
+        NeutrinoTrajectoryConfigs.m_TwixtForwardConfig);
 
     public static final Trajectory bounce1 = TrajectoryGenerator.generateTrajectory(
-        List.of(new Pose2d(0.80, 1.0, Rotation2d.fromDegrees(90)), new Pose2d(2.8, -1.62, Rotation2d.fromDegrees(180)),
-            new Pose2d(3.4, 1.0, Rotation2d.fromDegrees(270))),
-        NeutrinoTrajectoryConfigs.m_SlowReverseConfig);
+        new Pose2d(1.28, 0.9, Rotation2d.fromDegrees(90)),
+        List.of(new Translation2d(1.6, 0.2), new Translation2d(2.1, -0.8), new Translation2d(2.9, -1.6),
+            new Translation2d(3.7, -0.9)),
+        new Pose2d(3.8, 0.95, Rotation2d.fromDegrees(270)), NeutrinoTrajectoryConfigs.m_TwixtReverseConfig);
 
     public static final Trajectory bounce2 = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(3.4, 1.0, Rotation2d.fromDegrees(270)), List.of(new Translation2d(3.5, -0.11)),
-        new Pose2d(3.6, -1.62, Rotation2d.fromDegrees(285)), NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
+        new Pose2d(3.8, 0.95, Rotation2d.fromDegrees(270)),
+        List.of(new Translation2d(3.7, -0.9), new Translation2d(5.3, -1.8), new Translation2d(6.3, -1.1)),
+        new Pose2d(6.5, 0.55, Rotation2d.fromDegrees(90)), NeutrinoTrajectoryConfigs.m_TwixtForwardConfig);
 
     public static final Trajectory bounce3 = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(3.6, -1.62, Rotation2d.fromDegrees(285)), List.of(new Translation2d(5.6, -1.62)),
-        new Pose2d(5.8, 0.6, Rotation2d.fromDegrees(285)), NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
+        new Pose2d(6.5, 0.55, Rotation2d.fromDegrees(90)), List.of(new Translation2d(6.5, -0.6)),
+        new Pose2d(8, -0.85, Rotation2d.fromDegrees(180)), NeutrinoTrajectoryConfigs.m_TwixtReverseConfig);
 
-    public static final Trajectory bounce4 = TrajectoryGenerator.generateTrajectory(
-        List.of(new Pose2d(5.8, 0.6, Rotation2d.fromDegrees(285)), new Pose2d(6.8, 0.20, Rotation2d.fromDegrees(-180))),
-        NeutrinoTrajectoryConfigs.m_SlowReverseConfig);
 }

@@ -44,13 +44,13 @@ public class RobotContainer
     // The robot's subsystems and commands are defined here...
     private final IntakePIDSubsystem m_Intake = new IntakePIDSubsystem();
     private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
-    public final DriveSubsystem m_Drive = new DriveSubsystem();
+    private final DriveSubsystem m_Drive = new DriveSubsystem();
     private final ClimberSubsystem m_climber = new ClimberSubsystem();
     private final HopperSubsystem m_Hopper = new HopperSubsystem(m_Shooter);
     private final TurretSubsystem m_Turret = new TurretSubsystem();
 
-    public Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_PORT);
-    public Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK__PORT);
+    private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_PORT);
+    private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK__PORT);
     private XboxController m_OperatorController = new XboxController(ControllerPorts.XBOX_CONTROLLER_PORT);
     private JoystickButton m_back = new JoystickButton(m_OperatorController, Button.kBack.value);
     private JoystickButton m_start = new JoystickButton(m_OperatorController, Button.kStart.value);
@@ -80,6 +80,8 @@ public class RobotContainer
     private TenBallAuton m_TenBallAuton;
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
+    private GalBlueA m_GalBlueA;
+    private GalRedA m_GalRedA;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -92,6 +94,8 @@ public class RobotContainer
         m_BounceAuton = new BounceAuton(m_Drive);
         m_SixBallAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
+        m_GalBlueA = new GalBlueA(m_Drive, m_Intake);
+        m_GalRedA = new GalRedA(m_Drive, m_Intake);
     }
 
     /**
@@ -144,7 +148,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_TenBallAuton;
+        return m_GalBlueA;
     }
 
     public void teleopInit()
@@ -159,31 +163,23 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
-        if (m_rightJoystick.getRawAxis(2) > 0) 
+        if (!isSingleJoystick && m_rightJoystick.getRawAxis(2) > 0)
         {
-            if (!isSingleJoystick)
-            {
-                m_tankDriveCommand.cancel();
-                isSingleJoystick = !isSingleJoystick;
-                m_tankDriveCommand = new RunCommand(
-                    () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
-            }
-
+            m_tankDriveCommand.cancel();
+            isSingleJoystick = !isSingleJoystick;
+            m_tankDriveCommand = new RunCommand(
+                () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("single");
         }
-        else
+        else if (isSingleJoystick && m_rightJoystick.getRawAxis(2) < 0)
         {
-            if (isSingleJoystick)
-            {
-                m_tankDriveCommand.cancel();
-                isSingleJoystick = !isSingleJoystick;
-                m_tankDriveCommand = new RunCommand(
-                    () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
-            }
-
+            m_tankDriveCommand.cancel();
+            isSingleJoystick = !isSingleJoystick;
+            m_tankDriveCommand = new RunCommand(
+                () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("both");
         }
-        m_Drive.setDefaultCommand(m_tankDriveCommand);
     }
-
 }
