@@ -162,31 +162,25 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
-        if (m_rightJoystick.getRawAxis(2) > 0) 
+        if (!isSingleJoystick && m_rightJoystick.getRawAxis(2) > 0)
         {
-            if (!isSingleJoystick)
-            {
-                m_tankDriveCommand.cancel();
-                isSingleJoystick = !isSingleJoystick;
-                m_tankDriveCommand = new RunCommand(
-                    () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
-            }
-
+            m_tankDriveCommand.cancel();
+            isSingleJoystick = !isSingleJoystick;
+            m_tankDriveCommand = new RunCommand(
+                () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("single");
         }
-        else
+        else if (isSingleJoystick && m_rightJoystick.getRawAxis(2) < 0)
         {
-            if (isSingleJoystick)
-            {
-                m_tankDriveCommand.cancel();
-                isSingleJoystick = !isSingleJoystick;
-                m_tankDriveCommand = new RunCommand(
-                    () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
-            }
-
+            m_tankDriveCommand.cancel();
+            isSingleJoystick = !isSingleJoystick;
+            m_tankDriveCommand = new RunCommand(
+                () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("both");
         }
-        m_Drive.setDefaultCommand(m_tankDriveCommand);
+        
     }
 
 }
