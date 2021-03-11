@@ -88,7 +88,6 @@ public class DriveSubsystem extends SubsystemBase
     {
         m_leftMotors.set(-deadzone(leftPower));
         m_rightMotors.set(-deadzone(rightPower));
-
     }
 
     public void tankDriveVolts(double leftVolts, double rightVolts)
@@ -106,12 +105,6 @@ public class DriveSubsystem extends SubsystemBase
     public double getHeading()
     {
         return m_navX.getYaw() * -1;
-    }
-
-    public boolean change = true;
-    public void stick()
-    {
-        change = !change;
     }
 
     public Pose2d getPose()
