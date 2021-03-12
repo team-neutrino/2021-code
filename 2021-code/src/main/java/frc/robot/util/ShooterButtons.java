@@ -25,7 +25,7 @@ public class ShooterButtons
     private double getTY;
     private XboxController m_OperatorController = new XboxController(ControllerPorts.XBOX_CONTROLLER_PORT);
 
-    private JoystickButton m_A = new JoystickButton(m_OperatorController, Button.kA.value);
+    private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
 
     private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
 
@@ -42,19 +42,19 @@ public class ShooterButtons
         double distance = finalHeight / tan;
         if (distance < 90)
         {
-            m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.green));
+            m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.green));
         }
         else if (distance > 90 && distance < 150)
         {
-            m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.yellow));
+            m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.yellow));
         }
         else if (distance > 150 && distance < 210)
         {
-            m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.blue));
+            m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.blue));
         }
         else if (distance > 210 && distance < 270)
         {
-            m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.red));
+            m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.red));
         }
 
         //System.out.println("Distance " + distance + " " + tan + " " + finalAngle );
