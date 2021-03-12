@@ -81,6 +81,7 @@ public class RobotContainer
     private boolean isSingleJoystick;
     private GalBlueA m_GalBlueA;
     private GalRedA m_GalRedA;
+    private GalBlueB m_GalBlueB;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -95,6 +96,7 @@ public class RobotContainer
         m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
         m_GalBlueA = new GalBlueA(m_Drive, m_Intake);
         m_GalRedA = new GalRedA(m_Drive, m_Intake);
+        m_GalBlueB = new GalBlueB(m_Drive, m_Intake);
     }
 
     /**
@@ -145,7 +147,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_BounceAuton;
+        return m_GalBlueB;
     }
 
     public void teleopInit()
@@ -164,8 +166,8 @@ public class RobotContainer
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
-            m_tankDriveCommand = new RunCommand(
-                () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()),
+                m_Drive);
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("single");
         }
@@ -173,8 +175,8 @@ public class RobotContainer
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
-            m_tankDriveCommand = new RunCommand(
-                () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),
+                m_Drive);
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("both");
         }
