@@ -60,4 +60,3 @@ public class NeutrinoTrajectoryConfigs
             DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint).setReversed(true);
 
 }
-

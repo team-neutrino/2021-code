@@ -118,7 +118,7 @@ public class RobotContainer
         m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
             m_climber);
 
-            m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 62500));
+        m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 62500));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
@@ -166,8 +166,8 @@ public class RobotContainer
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
-            m_tankDriveCommand = new RunCommand(
-                () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()),
+                m_Drive);
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("single");
         }
@@ -175,8 +175,8 @@ public class RobotContainer
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
-            m_tankDriveCommand = new RunCommand(
-                () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),
+                m_Drive);
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("both");
         }

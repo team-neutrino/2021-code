@@ -1,3 +1,4 @@
+
 package frc.robot.util;
 
 import static java.lang.Math.*;
@@ -11,7 +12,8 @@ import frc.robot.subsystems.ShooterSubsystem;
 import static edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.Constants.*;
 
-public class ShooterButtons {
+public class ShooterButtons
+{
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 
     private int green = 62500;
@@ -32,30 +34,33 @@ public class ShooterButtons {
     private JoystickButton m_Y = new JoystickButton(m_OperatorController, Button.kY.value);
     private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
 
+    public void ShooterButtons()
+    {
 
-
-    public void ShooterButtons(){
-        
     }
-    
-    public void Periodic(){
+
+    public void Periodic()
+    {
         getTY = angle_tY.getDouble(0.0);
         double finalAngle = getTY + angle2;
         double tan = Math.tan(Math.toRadians(finalAngle));
         double distance = finalHeight / tan;
-        if(distance < 90){
+        if (distance < 90)
+        {
             m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, green));
         }
-        else if(distance > 90 && distance <150){
+        else if (distance > 90 && distance < 150)
+        {
             m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, yellow));
         }
-        else if(distance >150 && distance <210){
+        else if (distance > 150 && distance < 210)
+        {
             m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, blue));
         }
-        else if(distance > 210 && distance < 270){
+        else if (distance > 210 && distance < 270)
+        {
             m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, red));
         }
-
 
         //System.out.println("Distance " + distance + " " + tan + " " + finalAngle );
     }
