@@ -79,6 +79,10 @@ public class RobotContainer
     private BounceAuton m_BounceAuton;
     private TenBallAuton m_TenBallAuton;
     private ShooterButtons m_ShooterButtons = new ShooterButtons();
+    private Command m_tankDriveCommand;
+    private boolean isSingleJoystick;
+    private GalBlueA m_GalBlueA;
+    private GalRedA m_GalRedA;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -91,6 +95,8 @@ public class RobotContainer
         m_BounceAuton = new BounceAuton(m_Drive);
         m_SixBallAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
+        m_GalBlueA = new GalBlueA(m_Drive, m_Intake);
+        m_GalRedA = new GalRedA(m_Drive, m_Intake);
     }
 
     /**
@@ -121,10 +127,8 @@ public class RobotContainer
         m_rightJoystickButton.toggleWhenActive(
             new TurretOverrideCommand(m_Turret, () -> m_OperatorController.getX(Hand.kRight)));
 
-        m_TriggerLeft.whenActive(
-            new InstantCommand(m_Intake::setIntakeOn, m_Intake).alongWith(new InstantCommand(m_Intake::setArmDown)));
-        m_TriggerLeft.whenInactive(new InstantCommand(m_Intake::setIntakeOff, m_Intake).alongWith(
-            new InstantCommand(() -> m_Intake.setAngle(Constants.IntakeConstants.ARM_UP_ANGLE))));
+        m_TriggerLeft.whenActive(new InstantCommand(m_Intake::setIntakeOn, m_Intake));
+        m_TriggerLeft.whenInactive(new InstantCommand(m_Intake::setIntakeOff, m_Intake));
 
         m_UpPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(-90), m_Turret)).whenReleased(
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
@@ -132,7 +136,6 @@ public class RobotContainer
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
         m_DownPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(90), m_Turret)).whenReleased(
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
-
     }
 
     /**
@@ -150,13 +153,32 @@ public class RobotContainer
     {
         m_Intake.setIntakeOff();
         configureButtonBindings();
-        final Command tankDriveCommand = new RunCommand(
-            () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
-        m_Drive.setDefaultCommand(tankDriveCommand);
+        isSingleJoystick = false;
+        m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),
+            m_Drive);
+        m_Drive.setDefaultCommand(m_tankDriveCommand);
     }
-    
-    public void teleopPeriodic(){
-        m_ShooterButtons.Periodic();
 
+    public void teleopPeriodic()
+    {
+        m_ShooterButtons.Periodic();
+        if (!isSingleJoystick && m_rightJoystick.getRawAxis(2) > 0)
+        {
+            m_tankDriveCommand.cancel();
+            isSingleJoystick = !isSingleJoystick;
+            m_tankDriveCommand = new RunCommand(
+                () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_Drive.setDefaultCommand(m_tankDriveCommand);
+            System.out.println("single");
+        }
+        else if (isSingleJoystick && m_rightJoystick.getRawAxis(2) < 0)
+        {
+            m_tankDriveCommand.cancel();
+            isSingleJoystick = !isSingleJoystick;
+            m_tankDriveCommand = new RunCommand(
+                () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_Drive.setDefaultCommand(m_tankDriveCommand);
+            System.out.println("both");
+        }
     }
 }
