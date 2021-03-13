@@ -161,7 +161,7 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
-        m_ShooterButtons.Periodic();
+        m_ShooterButtons.Periodic(m_B);
         if (!isSingleJoystick && m_rightJoystick.getRawAxis(2) > 0)
         {
             m_tankDriveCommand.cancel();

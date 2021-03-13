@@ -11,6 +11,7 @@ import frc.robot.subsystems.ShooterSubsystem;
 import static edu.wpi.first.wpilibj.XboxController.Button;
 
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.Constants.*;
 
 public class ShooterButtons
@@ -23,9 +24,6 @@ public class ShooterButtons
     private final double powerPortHeight = 89.75;
     private final double finalHeight = powerPortHeight - limeLightHeight;
     private double getTY;
-    private XboxController m_OperatorController = new XboxController(ControllerPorts.XBOX_CONTROLLER_PORT);
-
-    private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
 
     private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
 
@@ -34,7 +32,7 @@ public class ShooterButtons
 
     }
 
-    public void Periodic()
+    public void Periodic(JoystickButton m_B)
     {
         getTY = angle_tY.getDouble(0.0);
         double finalAngle = getTY + angle2;
