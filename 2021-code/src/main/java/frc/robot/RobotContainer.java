@@ -79,6 +79,7 @@ public class RobotContainer
     private TenBallAuton m_TenBallAuton;
     private GalBlueA m_GalBlueA;
     private GalRedA m_GalRedA;
+    private BarrelRaceAuton m_BarrelRace;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -93,6 +94,7 @@ public class RobotContainer
         m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
         m_GalBlueA = new GalBlueA(m_Drive, m_Intake);
         m_GalRedA = new GalRedA(m_Drive, m_Intake);
+        m_BarrelRace = new BarrelRaceAuton(m_Drive);
     }
 
     /**
@@ -135,7 +137,6 @@ public class RobotContainer
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
         m_DownPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(90), m_Turret)).whenReleased(
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
-
     }
 
     /**
@@ -146,7 +147,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_GalBlueA;
+        return m_BarrelRace;
     }
 
     public void teleopInit()
