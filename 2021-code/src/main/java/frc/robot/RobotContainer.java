@@ -120,6 +120,8 @@ public class RobotContainer
 
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 62500));
 
+        m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_ShooterButtons.getShooterSpeed(m_B)));
+
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
         m_BumperRight.whileHeld(new InstantCommand(m_Hopper::reverse, m_Hopper), false).whenReleased(
@@ -161,7 +163,7 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
-        m_ShooterButtons.Periodic(m_B);
+        
         if (!isSingleJoystick && m_rightJoystick.getRawAxis(2) > 0)
         {
             m_tankDriveCommand.cancel();
