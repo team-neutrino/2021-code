@@ -90,7 +90,7 @@ public class RobotContainer
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
         m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
-        m_BounceAuton = new BounceAuton(m_Drive);
+        m_BounceAuton = new BounceAuton(m_Drive, m_Intake);
         m_SixBallAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
         m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
         m_GalBlueA = new GalBlueA(m_Drive, m_Intake);
@@ -164,8 +164,8 @@ public class RobotContainer
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
-            m_tankDriveCommand = new RunCommand(
-                () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()),
+                m_Drive);
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("single");
         }
@@ -173,8 +173,8 @@ public class RobotContainer
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
-            m_tankDriveCommand = new RunCommand(
-                () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),
+                m_Drive);
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("both");
         }
