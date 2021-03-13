@@ -147,7 +147,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_BarrelRace;
+        return m_GalRedA;
     }
 
     public void teleopInit()
@@ -166,8 +166,8 @@ public class RobotContainer
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
-            m_tankDriveCommand = new RunCommand(
-                () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()),
+                m_Drive);
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("single");
         }
@@ -175,8 +175,8 @@ public class RobotContainer
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
-            m_tankDriveCommand = new RunCommand(
-                () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),
+                m_Drive);
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("both");
         }

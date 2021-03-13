@@ -14,7 +14,7 @@ public class GalacticARedTrajectory
 {
     public static final Trajectory galRedA = TrajectoryGenerator.generateTrajectory(
         new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
-        List.of(new Translation2d(1.25, 0), new Translation2d(3.22, -0.80), new Translation2d(4.30, 1.15)),
-        new Pose2d(8.20, 1.15, Rotation2d.fromDegrees(0)), NeutrinoTrajectoryConfigs.m_FastForwardConfig);
+        List.of(new Translation2d(1.25, 0), new Translation2d(3.22, -0.80), new Translation2d(3.4, 1.15)),
+        new Pose2d(8.20, 1.15, Rotation2d.fromDegrees(0)), NeutrinoTrajectoryConfigs.m_GalacticRedAForwardConfig);
 
 }

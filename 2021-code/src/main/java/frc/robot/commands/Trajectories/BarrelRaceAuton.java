@@ -1,3 +1,4 @@
+
 package frc.robot.commands.Trajectories;
 
 import edu.wpi.first.wpilibj.controller.PIDController;
@@ -12,13 +13,15 @@ import frc.robot.Trajectories.BarrelRaceTrajectory;
 import frc.robot.Trajectories.BounceTrajectory;
 import frc.robot.subsystems.DriveSubsystem;
 
-public class BarrelRaceAuton extends SequentialCommandGroup {
+public class BarrelRaceAuton extends SequentialCommandGroup
+{
     private DriveSubsystem m_Drive;
 
-    public BarrelRaceAuton(DriveSubsystem p_Drive) {
+    public BarrelRaceAuton(DriveSubsystem p_Drive)
+    {
         m_Drive = p_Drive;
         Trajectory m_barrelRace0 = BarrelRaceTrajectory.barrelRace0;
-        
+
         RamseteCommand barrelRace0 = new RamseteCommand(m_barrelRace0, p_Drive::getPose,
             new RamseteController(Constants.DriveConstants.K_RAMSETE_B, Constants.DriveConstants.K_RAMSETE_ZETA),
             new SimpleMotorFeedforward(Constants.DriveConstants.KS_VOLTS,
@@ -30,9 +33,6 @@ public class BarrelRaceAuton extends SequentialCommandGroup {
 
             p_Drive::tankDriveVolts, p_Drive);
 
-            addCommands(
-                new SequentialCommandGroup(
-                    barrelRace0,
-                    new InstantCommand(() -> m_Drive.tankDriveVolts(0, 0))));
+        addCommands(new SequentialCommandGroup(barrelRace0, new InstantCommand(() -> m_Drive.tankDriveVolts(0, 0))));
     }
 }
