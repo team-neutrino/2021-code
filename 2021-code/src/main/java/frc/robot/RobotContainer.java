@@ -48,9 +48,11 @@ public class RobotContainer
     private final ClimberSubsystem m_climber = new ClimberSubsystem();
     private final HopperSubsystem m_Hopper = new HopperSubsystem(m_Shooter);
     private final TurretSubsystem m_Turret = new TurretSubsystem();
+    private final HoodSubsystem m_Hood = new HoodSubsystem();
 
     private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_PORT);
     private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK__PORT);
+    private JoystickButton m_top = new JoystickButton(m_rightJoystick, Constants.JoystickConstants.RIGHT_JOYSTICK_TOP_PORT);
     private XboxController m_OperatorController = new XboxController(ControllerPorts.XBOX_CONTROLLER_PORT);
     private JoystickButton m_back = new JoystickButton(m_OperatorController, Button.kBack.value);
     private JoystickButton m_start = new JoystickButton(m_OperatorController, Button.kStart.value);
@@ -120,6 +122,8 @@ public class RobotContainer
         m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 95000));
         m_B.toggleWhenPressed(new TeleopCombine(m_Drive));
+
+        m_top.toggleWhenPressed(new HoodCommand(m_Hood));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
