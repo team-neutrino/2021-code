@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import frc.robot.subsystems.*;
+import frc.robot.util.DistanceCalculator;
+import frc.robot.util.ShooterButtons;
 import frc.robot.util.TriggerToBoolean;
 import frc.robot.commands.*;
 import frc.robot.commands.Trajectories.*;
@@ -77,6 +79,7 @@ public class RobotContainer
     private EightBallAuton m_EightBallAuton;
     private BounceAuton m_BounceAuton;
     private TenBallAuton m_TenBallAuton;
+    private DistanceCalculator m_DistanceCalculator = new DistanceCalculator();
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
     private GalBlueA m_GalBlueA;
@@ -118,8 +121,9 @@ public class RobotContainer
         m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
             m_climber);
 
-        m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
-        m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 95000));
+        m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 62500));
+
+        m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_DistanceCalculator.getShooterSpeed()));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
@@ -162,6 +166,7 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
+        
         if (!isSingleJoystick && m_rightJoystick.getRawAxis(2) > 0)
         {
             m_tankDriveCommand.cancel();
