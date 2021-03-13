@@ -12,16 +12,16 @@ public class HoodSubsystem extends SubsystemBase {
   private Servo m_servo;
   /** Creates a new HoddSubsystem. */
   public HoodSubsystem() {
-    m_servo = new Servo(0);
+    //m_servo = new Servo(0);
   }
 
   public void hoodDown() {
-    m_servo.setAngle(Constants.HoodConstants.HOOD_ANGLE_DOWN);
+    //m_servo.setAngle(Constants.HoodConstants.HOOD_ANGLE_DOWN);
     System.out.println("hoodDown()");
   }
 
   public void hoodUp() {
-    m_servo.setAngle(Constants.HoodConstants.HOOD_ANGLE_UP);
+    //m_servo.setAngle(Constants.HoodConstants.HOOD_ANGLE_UP);
     System.out.println("hoodUp()");
   }
 
