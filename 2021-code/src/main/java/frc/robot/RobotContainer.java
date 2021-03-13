@@ -81,6 +81,7 @@ public class RobotContainer
     private boolean isSingleJoystick;
     private GalBlueA m_GalBlueA;
     private GalRedA m_GalRedA;
+    private SlalomAuton m_SlalomAuton;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -145,7 +146,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_BounceAuton;
+        return m_SlalomAuton;
     }
 
     public void teleopInit()
