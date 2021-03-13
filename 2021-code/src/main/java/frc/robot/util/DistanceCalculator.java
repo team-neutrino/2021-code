@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.Constants;
 
-public class ShooterButtons
+public class DistanceCalculator
 {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
 
@@ -19,12 +19,12 @@ public class ShooterButtons
     private final double finalHeight = powerPortHeight - limeLightHeight;
     private double getTY;
 
-    public void ShooterButtons()
+    public void DistanceCalculator()
     {
     
     }
 
-    public int getDistance(JoystickButton m_B)
+    public int getShooterSpeed(JoystickButton m_B)
     {
         getTY = angle_tY.getDouble(0.0);
         double finalAngle = getTY + angle2;

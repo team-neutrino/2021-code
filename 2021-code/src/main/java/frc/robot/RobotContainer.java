@@ -120,7 +120,7 @@ public class RobotContainer
 
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 62500));
 
-        m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_ShooterButtons.getDistance(m_B)));
+        m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_ShooterButtons.getShooterSpeed(m_B)));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
