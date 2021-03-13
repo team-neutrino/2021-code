@@ -11,16 +11,15 @@ import frc.robot.NeutrinoTrajectoryConfigs;
 
 public class BarrelRaceTrajectory {
     public static final Trajectory barrelRace0 = TrajectoryGenerator.generateTrajectory(new Pose2d(0, 0, new Rotation2d(0)),
-    List.of(new Translation2d(3.5, -0.8), new Translation2d(3.4, -1.5), new Translation2d(2.3, 1.7)), 
-    new Pose2d(3.9, 0.04, Rotation2d.fromDegrees(-60)),
-    NeutrinoTrajectoryConfigs.m_TwixtForwardConfig);
-
-    public static final Trajectory barrelRace1 = TrajectoryGenerator.generateTrajectory(new Pose2d(3.9, 0.04, new Rotation2d(-60)),
-    List.of(new Translation2d(6, 0.8), new Translation2d(3.1, 1.2), new Translation2d(4.9, 0.1)), 
-    new Pose2d(7.5, -.4, Rotation2d.fromDegrees(0)),
-    NeutrinoTrajectoryConfigs.m_TwixtForwardConfig);
-
-    public static final Trajectory barrelRace2 = TrajectoryGenerator.generateTrajectory(new Pose2d(7.4, -0.4, new Rotation2d(0)),
-    List.of(new Translation2d(7.3, -1.8), new Translation2d(6, 1.5)), new Pose2d(0, 0, Rotation2d.fromDegrees(-180)),
+    List.of(new Translation2d(3, 0), new Translation2d(3.4, -1.5), new Translation2d(2.3, -1.3), new Translation2d(2.2, -.3),
+    new Translation2d(4.5, 0), new Translation2d(6, 0), 
+    //2nd curve
+    new Translation2d(6.1, 1.4), new Translation2d(4.8, 1.5), 
+    new Translation2d(4.7, 0), new Translation2d(5.2, 0), 
+    //3rd curve
+    new Translation2d(7.8, 1), new Translation2d(7.9, 0), new Translation2d(7.2, -1.4), 
+    new Translation2d(3.3, 0), new Translation2d(1, -.5)),
+    //endpoint
+    new Pose2d(.8, -.5, Rotation2d.fromDegrees(180)),
     NeutrinoTrajectoryConfigs.m_TwixtForwardConfig);
 }
