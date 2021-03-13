@@ -59,5 +59,8 @@ public class NeutrinoTrajectoryConfigs
         DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
             DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint).setReversed(true);
 
+    public static final TrajectoryConfig m_GalacticRedAForwardConfig = new TrajectoryConfig(
+        DriveConstants.K_GALACTICREDA_SPEED_METERS_PER_SECOND,
+        DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
+            DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
 }
-
