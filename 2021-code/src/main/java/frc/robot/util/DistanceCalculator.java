@@ -17,14 +17,14 @@ public class DistanceCalculator
     private final double limeLightHeight = 38;
     private final double powerPortHeight = 89.75;
     private final double finalHeight = powerPortHeight - limeLightHeight;
-    private double getTY;
+    private double getTY; 
 
     public void DistanceCalculator()
     {
     
     }
 
-    public int getShooterSpeed(JoystickButton m_B)
+    public int getShooterSpeed()
     {
         getTY = angle_tY.getDouble(0.0);
         double finalAngle = getTY + angle2;

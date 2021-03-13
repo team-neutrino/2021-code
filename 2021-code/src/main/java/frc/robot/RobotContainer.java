@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import frc.robot.subsystems.*;
+import frc.robot.util.DistanceCalculator;
 import frc.robot.util.ShooterButtons;
 import frc.robot.util.TriggerToBoolean;
 import frc.robot.commands.*;
@@ -78,7 +79,7 @@ public class RobotContainer
     private EightBallAuton m_EightBallAuton;
     private BounceAuton m_BounceAuton;
     private TenBallAuton m_TenBallAuton;
-    private ShooterButtons m_ShooterButtons = new ShooterButtons();
+    private DistanceCalculator m_DistanceCalculator = new DistanceCalculator();
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
     private GalBlueA m_GalBlueA;
@@ -120,7 +121,7 @@ public class RobotContainer
 
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 62500));
 
-        m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_ShooterButtons.getShooterSpeed(m_B)));
+        m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_DistanceCalculator.getShooterSpeed()));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
