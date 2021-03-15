@@ -121,7 +121,7 @@ public class RobotContainer
             m_climber);
 
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 62500));
-
+        m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_DistanceCalculator.getShooterSpeed()));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
