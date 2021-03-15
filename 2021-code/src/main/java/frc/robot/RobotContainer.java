@@ -52,7 +52,8 @@ public class RobotContainer
 
     private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_PORT);
     private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK__PORT);
-    private JoystickButton m_top = new JoystickButton(m_rightJoystick, 1);
+    private JoystickButton m_trigger = new JoystickButton(m_rightJoystick, 1);
+    private JoystickButton m_top3 = new JoystickButton(m_rightJoystick, 3);
 
     private XboxController m_OperatorController = new XboxController(ControllerPorts.XBOX_CONTROLLER_PORT);
     private JoystickButton m_back = new JoystickButton(m_OperatorController, Button.kBack.value);
@@ -122,9 +123,9 @@ public class RobotContainer
 
         m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 95000));
-        m_B.toggleWhenPressed(new TeleopCombine(m_Drive));
+        m_trigger.toggleWhenPressed(new TeleopCombine(m_Drive));
 
-        m_top.toggleWhenPressed(new HoodCommand(m_Hood));
+        m_top3.toggleWhenPressed(new HoodCommand(m_Hood));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
