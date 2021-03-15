@@ -49,7 +49,7 @@ public class HopperSubsystem extends SubsystemBase
     //used when shooting
     public void towerShoot()
     {
-        if (m_Shooter.getVelocity() > m_Shooter.getTargetVelocity() - 15000 && m_Shooter.getTargetVelocity() != 0)
+        if (m_Shooter.getTargetVelocity() - m_Shooter.getVelocity() < 12000 && m_Shooter.getTargetVelocity() != 0)
         {
             m_towerMotor.set(ControlMode.PercentOutput, 1);
         }

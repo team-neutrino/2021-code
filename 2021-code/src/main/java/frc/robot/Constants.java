@@ -32,9 +32,11 @@ public final class Constants
         public static final DifferentialDriveKinematics K_DRIVE_KINEMATICS = new DifferentialDriveKinematics(
             K_TRACK_WIDTH_METERS);
 
-        public static final double K_MAX_SPEED_METERS_PER_SECOND = .96;
-        public static final double K_MAAX_SPEED_METERS_PER_SECOND = 1.25;
+        public static final double K_MAX_SPEED_METERS_PER_SECOND = 1;
+        public static final double K_MAAX_SPEED_METERS_PER_SECOND = 1.5;
         public static final double K_MAAAX_SPEED_METERS_PER_SECOND = 2.0;
+        public static final double K_BOUNCE_SPEED_METERS_PER_SECOND = 1.25;
+        public static final double K_GALACTICREDA_SPEED_METERS_PER_SECOND = 3.5;
         public static final double K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 6.8;
         public static final double K_RAMSETE_B = 2;
         public static final double K_RAMSETE_ZETA = 0.7;
@@ -69,6 +71,7 @@ public final class Constants
     {
         public static final int LEFT_JOYSTICK_PORT = 0;
         public static final int RIGHT_JOYSTICK__PORT = 1;
+        public static final int RIGHT_Z_PORT = 2;
         public static final double DEADZONE_SIZE = 0.1;
         public static final double JOYSTICK_CURVE = 1.0;
     }
@@ -81,6 +84,10 @@ public final class Constants
         public static final double WHEEL_D = 2;
         public static final double WHEEL_F = 0.008;
         public static final double SHOOTER_CONVERSION = 0;
+        public static final int green = 68000;
+        public static final int blue = 65000;
+        public static final int red = 69000;
+        public static final int yellow = 61000;
     }
 
     public static final class CanId
