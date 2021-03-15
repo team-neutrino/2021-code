@@ -28,10 +28,12 @@ public class TurretSubsystem extends SubsystemBase
     private Timer m_Timer1 = new Timer();
 
     private NetworkTableEntry tX;
+    private NetworkTableEntry tY;
     private NetworkTableEntry tV;
     private NetworkTableEntry ledMode;
     private NetworkTableEntry camMode;
     private double m_turretAngle;
+    private double m_limeLightAngle;
     private double m_headingError;
     private double m_getValidTarget;
     private double m_dynamicOffset;
@@ -43,6 +45,7 @@ public class TurretSubsystem extends SubsystemBase
     {
         NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
         tX = table.getEntry("tx");
+        tY = table.getEntry("ty");
         tV = table.getEntry("tv");
         ledMode = table.getEntry("ledMode");
         camMode = table.getEntry("camMode");
@@ -57,8 +60,10 @@ public class TurretSubsystem extends SubsystemBase
     {
         m_turretAngle = m_turretMotor.getSelectedSensorPosition() - m_dynamicOffset;
         m_headingError = tX.getDouble(0.0);
+        m_limeLightAngle = tY.getDouble(0.0);
         m_getValidTarget = tV.getDouble(0.0);
         SmartDashboard.putNumber("tX", tX.getDouble(0.0));
+        SmartDashboard.putNumber("tY", tY.getDouble(0.0));
         SmartDashboard.putNumber("getTurretAngle()", getTurretAngle());
         SmartDashboard.putNumber("getHeadingError()", getHeadingError());
         SmartDashboard.putNumber("limited sum", turretLimit(getTurretAngle() + getHeadingError()));

@@ -82,6 +82,7 @@ jar {
 spotless {
     java {
         targetExclude '**/*Auton.java'
+        targetExclude '**/*Trajectory.java'
         eclipse().configFile('formatter.xml')
         trimTrailingWhitespace()
     }

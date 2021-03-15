@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import frc.robot.subsystems.*;
+import frc.robot.util.DistanceCalculator;
 import frc.robot.util.TriggerToBoolean;
 import frc.robot.commands.*;
 import frc.robot.commands.Trajectories.*;
@@ -82,10 +83,12 @@ public class RobotContainer
     private EightBallAuton m_EightBallAuton;
     private BounceAuton m_BounceAuton;
     private TenBallAuton m_TenBallAuton;
+    private DistanceCalculator m_DistanceCalculator = new DistanceCalculator();
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
     private GalBlueA m_GalBlueA;
     private GalRedA m_GalRedA;
+    private BarrelRaceAuton m_BarrelRace;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -100,6 +103,7 @@ public class RobotContainer
         m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
         m_GalBlueA = new GalBlueA(m_Drive, m_Intake);
         m_GalRedA = new GalRedA(m_Drive, m_Intake);
+        m_BarrelRace = new BarrelRaceAuton(m_Drive);
     }
 
     /**
@@ -153,7 +157,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_BounceAuton;
+        return m_GalRedA;
     }
 
     public void teleopInit()
@@ -168,12 +172,13 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
+        
         if (!isSingleJoystick && m_rightJoystick.getRawAxis(2) > 0)
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
-            m_tankDriveCommand = new RunCommand(
-                () -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_rightJoystick.getY(), m_rightJoystick.getY()),
+                m_Drive);
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("single");
         }
@@ -181,8 +186,8 @@ public class RobotContainer
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
-            m_tankDriveCommand = new RunCommand(
-                () -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()), m_Drive);
+            m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),
+                m_Drive);
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("both");
         }
