@@ -29,7 +29,6 @@ import java.nio.file.Path;
 
 import frc.robot.subsystems.*;
 import frc.robot.util.DistanceCalculator;
-import frc.robot.util.ShooterButtons;
 import frc.robot.util.TriggerToBoolean;
 import frc.robot.commands.*;
 import frc.robot.commands.Trajectories.*;
