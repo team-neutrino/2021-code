@@ -7,35 +7,41 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.HoodSubsystem;
 
-public class HoodCommand extends CommandBase {
-  /** Creates a new SetHopperCommand. */
-  HoodSubsystem m_hood;
-  public HoodCommand(HoodSubsystem p_hood) {
-    m_hood = p_hood;
-    addRequirements(m_hood);
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
+public class HoodCommand extends CommandBase
+{
+    /** Creates a new SetHopperCommand. */
+    HoodSubsystem m_hood;
+    public HoodCommand(HoodSubsystem p_hood)
+    {
+        m_hood = p_hood;
+        addRequirements(m_hood);
+        // Use addRequirements() here to declare subsystem dependencies.
+    }
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    m_hood.hoodDown();
-  }
+    // Called when the command is initially scheduled.
+    @Override
+    public void initialize()
+    {
+        m_hood.hoodDown();
+    }
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute()
+    {
+    }
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    m_hood.hoodUp();
-  }
+    // Called once the command ends or is interrupted.
+    @Override
+    public void end(boolean interrupted)
+    {
+        m_hood.hoodUp();
+    }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+    // Returns true when the command should end.
+    @Override
+    public boolean isFinished()
+    {
+        return false;
+    }
 }

@@ -49,7 +49,7 @@ public class RobotContainer
     private final ClimberSubsystem m_climber = new ClimberSubsystem();
     private final HopperSubsystem m_Hopper = new HopperSubsystem(m_Shooter);
     private final TurretSubsystem m_Turret = new TurretSubsystem();
-    private final HoodSubsystem m_Hood = new HoodSubsystem();
+    private final HoodSubsystem m_hood = new HoodSubsystem();
 
     private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_PORT);
     private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK__PORT);
@@ -83,7 +83,7 @@ public class RobotContainer
     private EightBallAuton m_EightBallAuton;
     private BounceAuton m_BounceAuton;
     private TenBallAuton m_TenBallAuton;
-    private DistanceCalculator m_DistanceCalculator = new DistanceCalculator();
+    private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
     private GalBlueA m_GalBlueA;
@@ -129,7 +129,7 @@ public class RobotContainer
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 95000));
         m_trigger.toggleWhenPressed(new TeleopCombine(m_Drive));
 
-        m_top3.toggleWhenPressed(new HoodCommand(m_Hood));
+        m_top3.toggleWhenPressed(new HoodCommand(m_hood));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
@@ -172,7 +172,7 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
-        
+
         if (!isSingleJoystick && m_rightJoystick.getRawAxis(2) > 0)
         {
             m_tankDriveCommand.cancel();

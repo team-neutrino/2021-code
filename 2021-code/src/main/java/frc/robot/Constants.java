@@ -74,7 +74,7 @@ public final class Constants
         public static final int RIGHT_Z_PORT = 2;
         public static final double DEADZONE_SIZE = 0.1;
         public static final double JOYSTICK_CURVE = 1.0;
-        public static final int RIGHT_JOYSTICK_TOP_PORT = 1;
+        public static final int RIGHT_JOYSTICK_TOP_PORT = 3;
     }
 
     public static final class ShooterConstants
