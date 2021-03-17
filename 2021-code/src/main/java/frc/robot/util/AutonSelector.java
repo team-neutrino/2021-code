@@ -27,38 +27,29 @@ public class AutonSelector
     private GalRedA m_RedA;
     public AutonSelector(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
     {
-        /*
-         * m_SixBallAuto = new SixBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret); m_DumpAuton = new
-         * DumpAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret); m_ThreeAuton = new ThreeAuton(m_Shooter,
-         * m_Hopper, m_Drive, 10); m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive,
-         * m_Turret);
-         */
         m_Drive = p_Drive;
         m_Intake = p_Intake;
         m_BlueA = new GalBlueA(m_Drive, m_Intake);
         m_RedA = new GalRedA(m_Drive, m_Intake);
-        System.out.println(analogPot.get());
-        
+        System.out.println(analogPot.get());  
     }
 
     public Command getAutonCommand() {
         double dist = analogPot.get();
-        if (35 < dist && dist < 42)
+        
+        if (0 < dist && dist < 50)
         {
-            System.out.println("**** redA " + dist);
             return m_RedA;
         }
         else
         {
-            System.out.println("**** blueA " + dist);
             return m_BlueA;
-        }
+        }   
     }
 
     public void Periodic()
     {
         System.out.println(analogPot.get());
-
     }
 
 }
