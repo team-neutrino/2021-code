@@ -89,6 +89,7 @@ public class RobotContainer
     private GalBlueA m_GalBlueA;
     private GalRedA m_GalRedA;
     private BarrelRaceAuton m_BarrelRace;
+    private int counter = 0;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -127,7 +128,7 @@ public class RobotContainer
 
         m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 95000));
-        m_trigger.toggleWhenPressed(new TeleopCombine(m_Drive));
+        m_trigger.whenPressed(new InstantCommand(() -> counter++));
 
         m_top3.toggleWhenPressed(new HoodCommand(m_hood));
 
@@ -172,8 +173,7 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
-
-        if (!isSingleJoystick && m_rightJoystick.getRawAxis(2) > 0)
+        if (!isSingleJoystick && counter%2 == 0)
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
@@ -182,7 +182,7 @@ public class RobotContainer
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("single");
         }
-        else if (isSingleJoystick && m_rightJoystick.getRawAxis(2) < 0)
+        else if (isSingleJoystick && counter%2 == 1)
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
