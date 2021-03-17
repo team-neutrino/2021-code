@@ -7,7 +7,12 @@
 
 package frc.robot;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+import edu.wpi.first.wpilibj.util.Units;
+import edu.wpi.first.wpiutil.math.Pair;
 
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean constants. This
@@ -157,5 +162,22 @@ public final class Constants
         public static final String SLOLAM_PATH = "paths/BetterSlolam.wpilib.json";
         public static final String GALACTIC_RED_A_PATH = "paths/GalacticARed.wpilib.json";
         public static final String GALACTIC_BLUE_A_PATH = "paths/blueone.wpilib.json";
+    }
+
+    public static final class FieldConstants 
+    {
+        private static final double X_DIF = 30;
+        private static final double Y_DIF = 30;
+        private static final double FIELD_TOP = 180;
+        public static double getX(double x) {
+            double x_co = X_DIF*x;
+            return Units.inchesToMeters(x_co);
+        }
+        public static double getY(char y, boolean isHalf) {
+            double y_co = FIELD_TOP - Y_DIF*(Character.getNumericValue(y)-9);
+            return isHalf ? Units.inchesToMeters(y_co)+15
+                          : Units.inchesToMeters(y_co);
+        }
+
     }
 }
