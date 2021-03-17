@@ -20,8 +20,6 @@ public class TroubleshootingSubsystem extends SubsystemBase
     private double m_speed;
     private NetworkTableEntry m_shooter_velocity_two;
     private NetworkTableEntry m_navx_yaw;
-    private NetworkTableEntry m_navx_pitch;
-    private NetworkTableEntry m_navx_roll;
     private NetworkTableEntry m_left_encoder;
     private NetworkTableEntry m_right_encoder;
     private NetworkTableEntry m_arm_angle;
@@ -44,10 +42,6 @@ public class TroubleshootingSubsystem extends SubsystemBase
 
         m_navx_yaw = m_troubleshooting_tab.add("NavX Yaw", 0).withPosition(1, 3).withSize(1, 1).withProperties(
             Map.of("min", -180, "max", 180)).getEntry();
-        m_navx_pitch = m_troubleshooting_tab.add("NavX Pitch", 0).withPosition(2, 3).withSize(1, 1).withProperties(
-            Map.of("min", -180, "max", 180)).getEntry();
-        m_navx_roll = m_troubleshooting_tab.add("NavX Roll", 0).withPosition(3, 3).withSize(1, 1).withProperties(
-            Map.of("min", -180, "max", 180)).getEntry();
         m_left_encoder = m_troubleshooting_tab.add("Left encoder", 0).withPosition(0, 2).withSize(1, 1).getEntry();
         m_right_encoder = m_troubleshooting_tab.add("Right encoder", 0).withPosition(1, 2).withSize(1, 1).getEntry();
         m_arm_angle = m_troubleshooting_tab.add("Arm angle", 0).withPosition(0, 3).withSize(1, 1).getEntry();
@@ -57,8 +51,6 @@ public class TroubleshootingSubsystem extends SubsystemBase
     public void periodic()
     {
         m_navx_yaw.setDouble(m_Drive.getNavxYaw());
-        // m_navx_pitch.setDouble(m_Drive.getNavxPitch());
-        // m_navx_roll.setDouble(m_Drive.getNavxRoll());
         m_left_encoder.setDouble(m_Drive.getLeftEncoderPosition());
         m_right_encoder.setDouble(m_Drive.getRightEncoderPosition());
         m_arm_angle.setDouble(m_Intake.getMeasurement());

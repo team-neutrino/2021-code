@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import frc.robot.subsystems.*;
+import frc.robot.util.AutonSelector;
 import frc.robot.util.DistanceCalculator;
 import frc.robot.util.TriggerToBoolean;
 import frc.robot.commands.*;
@@ -85,6 +86,9 @@ public class RobotContainer
     private GalRedA m_GalRedA;
     private BarrelRaceAuton m_BarrelRace;
 
+    private RamseteGenCommand m_RamseteGen;
+    private AutonSelector m_AutonSelector = new AutonSelector(m_Drive, m_Intake);
+
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
      */
@@ -94,10 +98,6 @@ public class RobotContainer
         m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
         m_BounceAuton = new BounceAuton(m_Drive);
-        m_SixBallAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
-        m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
-        m_GalBlueA = new GalBlueA(m_Drive, m_Intake);
-        m_GalRedA = new GalRedA(m_Drive, m_Intake);
         m_BarrelRace = new BarrelRaceAuton(m_Drive);
     }
 
@@ -147,10 +147,11 @@ public class RobotContainer
      *
      * @return the command to run in autonomous
      */
+
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_GalRedA;
+        return m_AutonSelector.getAutonCommand();
     }
 
     public void teleopInit()
@@ -164,8 +165,7 @@ public class RobotContainer
     }
 
     public void teleopPeriodic()
-    {
-        
+    {   
         if (!isSingleJoystick && m_rightJoystick.getRawAxis(2) > 0)
         {
             m_tankDriveCommand.cancel();
