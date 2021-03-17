@@ -83,6 +83,7 @@ public class RobotContainer
     private boolean isSingleJoystick;
     private GalBlueA m_GalBlueA;
     private GalRedA m_GalRedA;
+    private GalacticBBlueAuton m_GalBlueB;
     private BarrelRaceAuton m_BarrelRace;
 
     /**
@@ -98,6 +99,7 @@ public class RobotContainer
         m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
         m_GalBlueA = new GalBlueA(m_Drive, m_Intake);
         m_GalRedA = new GalRedA(m_Drive, m_Intake);
+        m_GalBlueB = new GalacticBBlueAuton(m_Drive, m_Intake);
         m_BarrelRace = new BarrelRaceAuton(m_Drive);
     }
 
@@ -150,7 +152,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_GalRedA;
+        return m_GalBlueB;
     }
 
     public void teleopInit()
@@ -165,7 +167,7 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
-        
+
         if (!isSingleJoystick && m_rightJoystick.getRawAxis(2) > 0)
         {
             m_tankDriveCommand.cancel();
