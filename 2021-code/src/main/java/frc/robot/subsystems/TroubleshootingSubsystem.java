@@ -24,6 +24,7 @@ public class TroubleshootingSubsystem extends SubsystemBase
     private NetworkTableEntry m_right_encoder;
     private NetworkTableEntry m_arm_angle;
     private NetworkTableEntry m_climber_height;
+    public static NetworkTableEntry m_drive_distance;
 
     public TroubleshootingSubsystem(ShooterSubsystem p_Shooter, DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake,
             ClimberSubsystem p_Climber)
@@ -45,6 +46,8 @@ public class TroubleshootingSubsystem extends SubsystemBase
         m_left_encoder = m_troubleshooting_tab.add("Left encoder", 0).withPosition(0, 2).withSize(1, 1).getEntry();
         m_right_encoder = m_troubleshooting_tab.add("Right encoder", 0).withPosition(1, 2).withSize(1, 1).getEntry();
         m_arm_angle = m_troubleshooting_tab.add("Arm angle", 0).withPosition(0, 3).withSize(1, 1).getEntry();
+
+        m_drive_distance = m_troubleshooting_tab.add("Drive distance", 0).withPosition(4, 4).withSize(2, 2).getEntry();
     }
 
     @Override
