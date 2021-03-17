@@ -24,8 +24,6 @@ import frc.robot.Constants.*;
 
 import static edu.wpi.first.wpilibj.XboxController.Button;
 
-import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import java.io.IOException;
 import java.nio.file.Path;
 
@@ -44,7 +42,6 @@ import edu.wpi.first.wpilibj.GenericHID.Hand;
  */
 public class RobotContainer
 {
-    //private static final AnalogInput AnalogInput = null;
     // The robot's subsystems and commands are defined here...
     private final IntakePIDSubsystem m_Intake = new IntakePIDSubsystem();
     private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
@@ -98,7 +95,6 @@ public class RobotContainer
     public RobotContainer()
     {
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
-        //m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
         m_BounceAuton = new BounceAuton(m_Drive);
@@ -169,9 +165,7 @@ public class RobotContainer
     }
 
     public void teleopPeriodic()
-    {
-        m_AutonSelector.Periodic();
-        
+    {   
         if (!isSingleJoystick && m_rightJoystick.getRawAxis(2) > 0)
         {
             m_tankDriveCommand.cancel();
