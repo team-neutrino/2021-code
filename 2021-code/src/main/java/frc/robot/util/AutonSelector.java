@@ -20,13 +20,12 @@ public class AutonSelector
 {
     private AnalogInput input = new AnalogInput(1);
     private AnalogPotentiometer analogPot = new AnalogPotentiometer(input, 511.77);
-    private final DriveSubsystem m_Drive = new DriveSubsystem();
     private RamseteGenCommand m_RamseteGen;
-    private DriveSubsystem p_Drive;
-    private IntakePIDSubsystem p_Intake; 
-    private GalBlueA m_BlueA = new GalBlueA(p_Drive, p_Intake);
-    private GalRedA m_RedA = new GalRedA(p_Drive, p_Intake);
-    public AutonSelector()
+    private DriveSubsystem m_Drive;
+    private IntakePIDSubsystem m_Intake; 
+    private GalBlueA m_BlueA;
+    private GalRedA m_RedA;
+    public AutonSelector(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
     {
         /*
          * m_SixBallAuto = new SixBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret); m_DumpAuton = new
@@ -34,17 +33,24 @@ public class AutonSelector
          * m_Hopper, m_Drive, 10); m_EightBallAuto = new EightBallAuto(m_Shooter, m_Hopper, m_Intake, m_Drive,
          * m_Turret);
          */
+        m_Drive = p_Drive;
+        m_Intake = p_Intake;
+        m_BlueA = new GalBlueA(m_Drive, m_Intake);
+        m_RedA = new GalRedA(m_Drive, m_Intake);
         System.out.println(analogPot.get());
         
     }
 
     public Command getAutonCommand() {
-        if (140 < analogPot.get() && analogPot.get() < 160)
+        double dist = analogPot.get();
+        if (35 < dist && dist < 42)
         {
+            System.out.println("**** redA " + dist);
             return m_RedA;
         }
         else
         {
+            System.out.println("**** blueA " + dist);
             return m_BlueA;
         }
     }

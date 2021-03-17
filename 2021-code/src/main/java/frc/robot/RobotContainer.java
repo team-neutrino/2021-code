@@ -90,7 +90,7 @@ public class RobotContainer
     private BarrelRaceAuton m_BarrelRace;
 
     private RamseteGenCommand m_RamseteGen;
-    private AutonSelector m_AutonSelector = new AutonSelector();
+    private AutonSelector m_AutonSelector = new AutonSelector(m_Drive, m_Intake);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -160,7 +160,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_GalRedA;
+        return m_AutonSelector.getAutonCommand();
     }
 
     public void teleopInit()

@@ -36,7 +36,8 @@ public class GalRedA extends SequentialCommandGroup
 
             p_Drive::tankDriveVolts, p_Drive);
 
-        addCommands(new InstantCommand(p_Intake::setIntakeOn), redA,
+        addCommands(new InstantCommand(p_Intake::setIntakeOn),
+            redA,
             new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)));
     }
 }
