@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.util.AutonSelector;
 import edu.wpi.first.networktables.NetworkTableEntry;
 
 public class TroubleshootingSubsystem extends SubsystemBase
@@ -14,6 +15,7 @@ public class TroubleshootingSubsystem extends SubsystemBase
     private DriveSubsystem m_Drive;
     private IntakePIDSubsystem m_Intake;
     private ClimberSubsystem m_Climber;
+    private AutonSelector m_AutonSelector;
 
     private ShuffleboardTab m_troubleshooting_tab;
     private NetworkTableEntry m_input_shooter_Speed;
@@ -25,14 +27,16 @@ public class TroubleshootingSubsystem extends SubsystemBase
     private NetworkTableEntry m_arm_angle;
     private NetworkTableEntry m_climber_height;
     public static NetworkTableEntry m_drive_distance;
+    private NetworkTableEntry m_ultrasonic_distance;
 
     public TroubleshootingSubsystem(ShooterSubsystem p_Shooter, DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake,
-            ClimberSubsystem p_Climber)
+            ClimberSubsystem p_Climber, AutonSelector p_AutonSelector)
     {
         m_Shooter = p_Shooter;
         m_Drive = p_Drive;
         m_Intake = p_Intake;
         m_Climber = p_Climber;
+        m_AutonSelector = p_AutonSelector;
 
         m_troubleshooting_tab = Shuffleboard.getTab("Troubleshooting Tab");
         m_shooter_velocity_two = m_troubleshooting_tab.add("Shooter Velocity Two", 0).withPosition(2, 0).withSize(2,
@@ -47,7 +51,8 @@ public class TroubleshootingSubsystem extends SubsystemBase
         m_right_encoder = m_troubleshooting_tab.add("Right encoder", 0).withPosition(1, 2).withSize(1, 1).getEntry();
         m_arm_angle = m_troubleshooting_tab.add("Arm angle", 0).withPosition(0, 3).withSize(1, 1).getEntry();
 
-        m_drive_distance = m_troubleshooting_tab.add("Drive distance", 0).withPosition(4, 4).withSize(2, 2).getEntry();
+        m_ultrasonic_distance = m_troubleshooting_tab.add("Ultrasonic Sensor:", 0).withPosition(5, 0).withSize(1, 1).getEntry();
+        m_drive_distance = m_troubleshooting_tab.add("Drive distance", 4).withPosition(4, 4).withSize(2, 2).getEntry();
     }
 
     @Override
@@ -60,6 +65,7 @@ public class TroubleshootingSubsystem extends SubsystemBase
         m_climber_height.setDouble(m_Climber.getHeight());
         m_shooter_velocity_two.setDouble(m_Shooter.getVelocity());
         m_speed = m_input_shooter_Speed.getNumber(0).doubleValue();
+        m_ultrasonic_distance.setDouble(m_AutonSelector.getUltrasonic());
     }
 
     public double getVelocity()

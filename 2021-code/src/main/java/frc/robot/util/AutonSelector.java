@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants;
 import frc.robot.commands.RamseteGenCommand;
-import frc.robot.commands.Trajectories.BounceAuton;
 import frc.robot.commands.Trajectories.GalBlueA;
 import frc.robot.commands.Trajectories.GalRedA;
 import frc.robot.subsystems.DriveSubsystem;
@@ -19,8 +18,7 @@ import frc.robot.subsystems.IntakePIDSubsystem;
 public class AutonSelector
 {
     private AnalogInput input = new AnalogInput(1);
-    private AnalogPotentiometer analogPot = new AnalogPotentiometer(input, 511.77);
-    private RamseteGenCommand m_RamseteGen;
+    private AnalogPotentiometer analogPot;
     private DriveSubsystem m_Drive;
     private IntakePIDSubsystem m_Intake; 
     private GalBlueA m_BlueA;
@@ -29,13 +27,19 @@ public class AutonSelector
     {
         m_Drive = p_Drive;
         m_Intake = p_Intake;
+        analogPot = new AnalogPotentiometer(input, 511.77);
         m_BlueA = new GalBlueA(m_Drive, m_Intake);
         m_RedA = new GalRedA(m_Drive, m_Intake);
         System.out.println(analogPot.get());  
     }
 
+    public double getUltrasonic()
+    {
+        return  analogPot.get();
+    }
+
     public Command getAutonCommand() {
-        double dist = analogPot.get();
+        double dist = getUltrasonic();
         
         if (0 < dist && dist < 50)
         {
@@ -51,5 +55,4 @@ public class AutonSelector
     {
         System.out.println(analogPot.get());
     }
-
 }
