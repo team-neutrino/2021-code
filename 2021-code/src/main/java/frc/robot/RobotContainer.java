@@ -158,7 +158,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_AutonSelector.getAutonCommand();
+        return m_BarrelRace;
     }
 
     public void teleopInit()
