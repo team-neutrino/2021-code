@@ -21,16 +21,17 @@ public class SlalomTrajectory
     public static final Trajectory slalom0 = TrajectoryGenerator.generateTrajectory(
         new Pose2d(0, 0, new Rotation2d(0)),
         List.of(
-            new Translation2d(1.25, 0.93), //first intersection
-            new Translation2d(2.38, 1.9), // top 1st
-            new Translation2d(5.1, 1.6), // top 2nd
-            //new Translation2d(6.3, 0.7), // second intersection, 1st time
-            new Translation2d(6.9, -0.2), // circle bottom 
-            new Translation2d(7.9, 0.8), // circle right
-            new Translation2d(7.3, 1.5), // circle top
-            new Translation2d(5.5, -0.3), // second intersection, 2nd time
-            new Translation2d(2.1, -0.4)
+            new Translation2d(1.2, 0.93), // first intersection
+            new Translation2d(2.35, 1.9), // top 1st
+            new Translation2d(4.5, 1.9), // top 2nd
+            new Translation2d(6.4, 0.57), // 2nd intersection, 1st time
+            new Translation2d(7.0, 0.25), // circle bottom 
+            new Translation2d(7.7, 0.5), // circle right
+            new Translation2d(7.2, 1.6), // circle top
+            new Translation2d(6.2, 0.6), //2nd intersection, 2nd time
+            new Translation2d(5.2, -0.4), //bottom 2nd
+            new Translation2d(2.5, 0.11)
             ), 
-        new Pose2d(0.6, 0.7, Rotation2d.fromDegrees(180)),
+        new Pose2d(0.6, 1.7, Rotation2d.fromDegrees(180)),
         NeutrinoTrajectoryConfigs.m_FastForwardConfig);
 }

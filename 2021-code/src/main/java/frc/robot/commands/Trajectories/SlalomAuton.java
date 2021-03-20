@@ -18,14 +18,17 @@ import frc.robot.Constants;
 import frc.robot.Trajectories.BounceTrajectory;
 import frc.robot.Trajectories.SlalomTrajectory;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakePIDSubsystem;
 
 public class SlalomAuton extends SequentialCommandGroup
 {
     private DriveSubsystem m_Drive;
+    private IntakePIDSubsystem m_Intake;
 
-    public SlalomAuton(DriveSubsystem p_Drive)
+    public SlalomAuton(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
     {
         m_Drive = p_Drive;
+        m_Intake = p_Intake;
         Trajectory m_slalom0 = SlalomTrajectory.slalom0;
 
         RamseteCommand slalom0Command = new RamseteCommand(m_slalom0, m_Drive::getPose,
@@ -37,7 +40,9 @@ public class SlalomAuton extends SequentialCommandGroup
             new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
             new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0), m_Drive::tankDriveVolts, m_Drive);
 
-        addCommands(slalom0Command,
+        addCommands(
+            new InstantCommand(() -> p_Intake.setAngle(39)).alongWith(
+            slalom0Command),
             new InstantCommand(() -> m_Drive.tankDriveVolts(0, 0)));
     }
 }

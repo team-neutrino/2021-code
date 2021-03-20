@@ -106,6 +106,7 @@ public class RobotContainer
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
         m_BounceAuton = new BounceAuton(m_Drive);
         m_BarrelRace = new BarrelRaceAuton(m_Drive);
+        m_Slalom = new SlalomAuton(m_Drive, m_Intake);
     }
 
     /**
@@ -139,8 +140,10 @@ public class RobotContainer
         m_rightJoystickButton.toggleWhenActive(
             new TurretOverrideCommand(m_Turret, () -> m_OperatorController.getX(Hand.kRight)));
 
-        m_TriggerLeft.whenActive(new InstantCommand(m_Intake::setIntakeOn, m_Intake));
-        m_TriggerLeft.whenInactive(new InstantCommand(m_Intake::setIntakeOff, m_Intake));
+        m_TriggerLeft.whenActive(new InstantCommand(m_Intake::setIntakeOn, m_Intake).alongWith(
+            new InstantCommand(m_Intake::setArmDown)));
+        m_TriggerLeft.whenInactive(new InstantCommand(m_Intake::setIntakeOff, m_Intake).alongWith(
+            new InstantCommand(() -> m_Intake.setAngle(39))));
 
         m_UpPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(-90), m_Turret)).whenReleased(
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
@@ -164,7 +167,7 @@ public class RobotContainer
 
     public void teleopInit()
     {
-        m_Intake.setIntakeOff();
+        m_Intake.setAngle(39);
         configureButtonBindings();
         isSingleJoystick = false;
         m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),
