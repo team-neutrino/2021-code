@@ -23,14 +23,15 @@ public class SlalomTrajectory
         List.of(
             new Translation2d(1.2, 0.93), // first intersection
             new Translation2d(2.35, 1.9), // top 1st
-            new Translation2d(4.5, 1.9), // top 2nd
+            new Translation2d(4.7, 1.9), // top 2nd
             new Translation2d(6.4, 0.57), // 2nd intersection, 1st time
-            new Translation2d(7.0, 0.25), // circle bottom 
+            new Translation2d(6.7, -.18), // circle bottom 
             new Translation2d(7.7, 0.5), // circle right
             new Translation2d(7.2, 1.6), // circle top
             new Translation2d(6.2, 0.6), //2nd intersection, 2nd time
-            new Translation2d(5.2, -0.4), //bottom 2nd
-            new Translation2d(2.5, 0.11)
+            // new Translation2d(5.2, -0.4), //bottom 2nd
+            new Translation2d(2.7, 0), //new bottom 2nd
+            new Translation2d(2, 0.8)
             ), 
         new Pose2d(0.6, 1.7, Rotation2d.fromDegrees(180)),
         NeutrinoTrajectoryConfigs.m_FastForwardConfig);
