@@ -2,24 +2,30 @@
 package frc.robot.commands.Trajectories;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.IntakePIDSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
+import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.Constants;
-import frc.robot.Trajectories.GalacticABlueTrajectory;
-import frc.robot.Trajectories.GalacticBRedTrajectory;
+import frc.robot.Trajectories.GalacticARedTrajectory;
+import frc.robot.Trajectories.TenBallTrajectory;
+import frc.robot.commands.TurretSetAngleCommand;
 
-public class GalRedB extends SequentialCommandGroup
+public class GalRedAAuton extends SequentialCommandGroup
 {
-    Trajectory m_galRedB = GalacticBRedTrajectory.galRedB;
-    public GalRedB(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
+    Trajectory m_galRedA = GalacticARedTrajectory.galRedA;
+    public GalRedAAuton(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
     {
-        RamseteCommand redB = new RamseteCommand(m_galRedB, p_Drive::getPose,
+        RamseteCommand redA = new RamseteCommand(m_galRedA, p_Drive::getPose,
             new RamseteController(Constants.DriveConstants.K_RAMSETE_B, Constants.DriveConstants.K_RAMSETE_ZETA),
             new SimpleMotorFeedforward(Constants.DriveConstants.KS_VOLTS,
                 Constants.DriveConstants.KV_VOLT_SECONDS_PER_METER,
@@ -30,7 +36,8 @@ public class GalRedB extends SequentialCommandGroup
 
             p_Drive::tankDriveVolts, p_Drive);
 
-        addCommands(new InstantCommand(p_Intake::setIntakeOn), redB,
+        addCommands(new InstantCommand(p_Intake::setIntakeOn),
+            redA,
             new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)));
     }
 }

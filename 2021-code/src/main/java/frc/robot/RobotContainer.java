@@ -87,8 +87,8 @@ public class RobotContainer
     private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
-    private GalBlueA m_GalBlueA;
-    private GalRedA m_GalRedA;
+    private GalBlueAAuton m_GalBlueA;
+    private GalRedAAuton m_GalRedA;
     private BarrelRaceAuton m_BarrelRace;
     private SlalomAuton m_Slalom;
     private int counter = 0;
