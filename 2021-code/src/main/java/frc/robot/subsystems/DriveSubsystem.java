@@ -67,6 +67,8 @@ public class DriveSubsystem extends SubsystemBase
         m_rEncoder.setPosition(0);
 
         m_odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
+
+        tankDriveVolts(0, 0);
     }
 
     NetworkTableEntry m_xEntry = NetworkTableInstance.getDefault().getTable("troubleshooting").getEntry("X");

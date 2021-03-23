@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Timer;
 import frc.robot.Constants.*;
 
 import static edu.wpi.first.wpilibj.XboxController.Button;
@@ -28,6 +29,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import frc.robot.subsystems.*;
+import frc.robot.util.AutonSelector;
+import frc.robot.util.DistanceCalculator;
 import frc.robot.util.TriggerToBoolean;
 import frc.robot.commands.*;
 import frc.robot.commands.Trajectories.*;
@@ -47,9 +50,13 @@ public class RobotContainer
     private final ClimberSubsystem m_climber = new ClimberSubsystem();
     private final HopperSubsystem m_Hopper = new HopperSubsystem(m_Shooter);
     private final TurretSubsystem m_Turret = new TurretSubsystem();
+    private final HoodSubsystem m_hood = new HoodSubsystem();
 
     private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_PORT);
     private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK__PORT);
+    private JoystickButton m_trigger = new JoystickButton(m_rightJoystick, 1);
+    private JoystickButton m_top3 = new JoystickButton(m_rightJoystick, 3);
+
     private XboxController m_OperatorController = new XboxController(ControllerPorts.XBOX_CONTROLLER_PORT);
     private JoystickButton m_back = new JoystickButton(m_OperatorController, Button.kBack.value);
     private JoystickButton m_start = new JoystickButton(m_OperatorController, Button.kStart.value);
@@ -77,10 +84,17 @@ public class RobotContainer
     private EightBallAuton m_EightBallAuton;
     private BounceAuton m_BounceAuton;
     private TenBallAuton m_TenBallAuton;
+    private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
-    private GalBlueA m_GalBlueA;
-    private GalRedA m_GalRedA;
+    private GalBlueAAuton m_GalBlueA;
+    private GalRedAAuton m_GalRedA;
+    private BarrelRaceAuton m_BarrelRace;
+    private SlalomAuton m_Slalom;
+    private int counter = 0;
+
+    private RamseteGenCommand m_RamseteGen;
+    private AutonSelector m_AutonSelector = new AutonSelector(m_Drive, m_Intake);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -91,10 +105,8 @@ public class RobotContainer
         m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
         m_BounceAuton = new BounceAuton(m_Drive, m_Intake);
-        m_SixBallAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
-        m_TenBallAuton = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
-        m_GalBlueA = new GalBlueA(m_Drive, m_Intake);
-        m_GalRedA = new GalRedA(m_Drive, m_Intake);
+        m_BarrelRace = new BarrelRaceAuton(m_Drive);
+        m_Slalom = new SlalomAuton(m_Drive, m_Intake);
     }
 
     /**
@@ -117,7 +129,9 @@ public class RobotContainer
             m_climber);
 
         m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
-        m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 95000));
+        m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_DistanceCalculator.getShooterSpeed()));
+        m_trigger.whenPressed(new InstantCommand(() -> counter++));
+        m_top3.toggleWhenPressed(new HoodCommand(m_hood));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
@@ -126,8 +140,10 @@ public class RobotContainer
         m_rightJoystickButton.toggleWhenActive(
             new TurretOverrideCommand(m_Turret, () -> m_OperatorController.getX(Hand.kRight)));
 
-        m_TriggerLeft.whenActive(new InstantCommand(m_Intake::setIntakeOn, m_Intake));
-        m_TriggerLeft.whenInactive(new InstantCommand(m_Intake::setIntakeOff, m_Intake));
+        m_TriggerLeft.whenActive(new InstantCommand(m_Intake::setIntakeOn, m_Intake).alongWith(
+            new InstantCommand(m_Intake::setArmDown)));
+        m_TriggerLeft.whenInactive(new InstantCommand(m_Intake::setIntakeOff, m_Intake).alongWith(
+            new InstantCommand(() -> m_Intake.setAngle(39))));
 
         m_UpPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(-90), m_Turret)).whenReleased(
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
@@ -142,6 +158,7 @@ public class RobotContainer
      *
      * @return the command to run in autonomous
      */
+
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
@@ -150,7 +167,7 @@ public class RobotContainer
 
     public void teleopInit()
     {
-        m_Intake.setIntakeOff();
+        m_Intake.setAngle(39);
         configureButtonBindings();
         isSingleJoystick = false;
         m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),
@@ -160,7 +177,7 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
-        if (!isSingleJoystick && m_rightJoystick.getRawAxis(2) > 0)
+        if (!isSingleJoystick && counter%2 == 1)
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
@@ -169,7 +186,7 @@ public class RobotContainer
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("single");
         }
-        else if (isSingleJoystick && m_rightJoystick.getRawAxis(2) < 0)
+        else if (isSingleJoystick && counter%2 == 0)
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
