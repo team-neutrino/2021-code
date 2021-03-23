@@ -21,6 +21,6 @@ public class BarrelRaceTrajectory {
     new Translation2d(1, -.2)),
     //endpoint
     new Pose2d(.8, -.2, Rotation2d.fromDegrees(180)),
-    NeutrinoTrajectoryConfigs.m_TwixtForwardConfig);
+    NeutrinoTrajectoryConfigs.m_FastForwardConfig);
     //new Translation2d(5.2, 0),
 }
