@@ -63,4 +63,9 @@ public class NeutrinoTrajectoryConfigs
         DriveConstants.K_GALACTICREDA_SPEED_METERS_PER_SECOND,
         DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
             DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
+
+    public static final TrajectoryConfig m_BarrelRaceConfig = new TrajectoryConfig(
+        DriveConstants.K_BARREL_RACE_SPEED_METERS_PER_SECOND,
+        DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
+            DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
 }
