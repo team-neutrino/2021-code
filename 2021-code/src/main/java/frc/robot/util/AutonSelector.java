@@ -34,9 +34,10 @@ public class AutonSelector
         System.out.println(analogPot.get());  
     }
 
-    public Command getAutonCommand() {
+    public Command getAutonCommand()
+    {
         double dist = analogPot.get();
-        
+
         if (0 < dist && dist < 50)
         {
             return m_RedA;
@@ -44,7 +45,7 @@ public class AutonSelector
         else
         {
             return m_BlueA;
-        }   
+        }
     }
 
     public void Periodic()
