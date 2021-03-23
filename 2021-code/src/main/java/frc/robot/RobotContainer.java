@@ -87,8 +87,8 @@ public class RobotContainer
     private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
-    private GalBlueA m_GalBlueA;
-    private GalRedA m_GalRedA;
+    private GalBlueAAuton m_GalBlueA;
+    private GalRedAAuton m_GalRedA;
     private BarrelRaceAuton m_BarrelRace;
     private int counter = 0;
 
@@ -158,7 +158,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_AutonSelector.getAutonCommand();
+        return m_BarrelRace;
     }
 
     public void teleopInit()
@@ -173,7 +173,7 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
-        if (!isSingleJoystick && counter%2 == 0)
+        if (!isSingleJoystick && counter % 2 == 0)
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
@@ -182,7 +182,7 @@ public class RobotContainer
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("single");
         }
-        else if (isSingleJoystick && counter%2 == 1)
+        else if (isSingleJoystick && counter % 2 == 1)
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
