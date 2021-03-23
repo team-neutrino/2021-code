@@ -104,7 +104,7 @@ public class RobotContainer
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
         m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
-        m_BounceAuton = new BounceAuton(m_Drive);
+        m_BounceAuton = new BounceAuton(m_Drive, m_Intake);
         m_BarrelRace = new BarrelRaceAuton(m_Drive);
         m_Slalom = new SlalomAuton(m_Drive, m_Intake);
     }
@@ -162,7 +162,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_Slalom;
+        return m_BounceAuton;
     }
 
     public void teleopInit()

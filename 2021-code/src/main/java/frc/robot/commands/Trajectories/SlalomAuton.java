@@ -41,7 +41,7 @@ public class SlalomAuton extends SequentialCommandGroup
             new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0), m_Drive::tankDriveVolts, m_Drive);
 
         addCommands(
-            new InstantCommand(() -> p_Intake.setAngle(39)).alongWith(
+            new InstantCommand(() -> m_Intake.setAngle(39)).alongWith(
             slalom0Command),
             new InstantCommand(() -> m_Drive.tankDriveVolts(0, 0)));
     }
