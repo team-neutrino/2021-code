@@ -80,17 +80,12 @@ public class RobotContainer
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
         m_Intake, m_climber);
 
-    private SixBallAuton m_SixBallAuton;
-    private EightBallAuton m_EightBallAuton;
-    private BounceAuton m_BounceAuton;
-    private TenBallAuton m_TenBallAuton;
     private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
-    private GalBlueAAuton m_GalBlueA;
-    private GalRedAAuton m_GalRedA;
     private BarrelRaceAuton m_BarrelRace;
     private SlalomAuton m_Slalom;
+    private BounceAuton m_BounceAuton;
     private int counter = 0;
 
     private RamseteGenCommand m_RamseteGen;
@@ -140,8 +135,8 @@ public class RobotContainer
         m_rightJoystickButton.toggleWhenActive(
             new TurretOverrideCommand(m_Turret, () -> m_OperatorController.getX(Hand.kRight)));
 
-        m_TriggerLeft.whenActive(new InstantCommand(m_Intake::setIntakeOn, m_Intake).alongWith(
-            new InstantCommand(m_Intake::setArmDown)));
+        m_TriggerLeft.whenActive(
+            new InstantCommand(m_Intake::setIntakeOn, m_Intake).alongWith(new InstantCommand(m_Intake::setArmDown)));
         m_TriggerLeft.whenInactive(new InstantCommand(m_Intake::setIntakeOff, m_Intake).alongWith(
             new InstantCommand(() -> m_Intake.setAngle(39))));
 
@@ -162,7 +157,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_BounceAuton;
+        return m_AutonSelector.getAutonCommand();
     }
 
     public void teleopInit()
@@ -177,7 +172,7 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
-        if (!isSingleJoystick && counter%2 == 1)
+        if (!isSingleJoystick && counter % 2 == 1)
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
@@ -186,7 +181,7 @@ public class RobotContainer
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("single");
         }
-        else if (isSingleJoystick && counter%2 == 0)
+        else if (isSingleJoystick && counter % 2 == 0)
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;

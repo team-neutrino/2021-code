@@ -151,4 +151,21 @@ public final class Constants
         public static final double ANGLE_SCALE = (7.0 * 360.0) / (27.0 * 1024.0);
         public static final double kP = 0.10;
     }
+
+    public static final class DistanceCalculatorConstant
+    {
+        public static final double ANGLE_TWO = 23;
+        public static final double ANGLE_ = 23;
+        public static final double LIMELIGHT_HEIGHT = 38;
+        public static final double POWER_PORT_HEIGHT = 89.75;
+        public static final double FINAL_HEIGHT = POWER_PORT_HEIGHT - LIMELIGHT_HEIGHT;
+    }
+    public static final class AutonSelectorConstant
+    {
+        //Underestimations to create a range
+        public static final double RED_A = 0.0;
+        public static final double RED_B = 0.0;
+        public static final double BLUE_A = 0.0;
+        public static final double BLUE_B = 0.0;
+    }
 }
