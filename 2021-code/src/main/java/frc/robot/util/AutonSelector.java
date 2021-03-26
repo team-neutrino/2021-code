@@ -45,19 +45,23 @@ public class AutonSelector
 
     public Command getAutonCommand()
     {
-        if (getTX > AutonSelectorConstant.RED_A)
+        if (getTX > AutonSelectorConstant.BLUE_A)
         {
-            return m_RedA;
+            System.out.println("Blue A");
+            return m_BlueA;
+        }
+        else if (getTX > AutonSelectorConstant.BLUE_B)
+        {
+            System.out.println("Blue B");
+            return m_BlueA; //change to BlueB
         }
         else if (getTX > AutonSelectorConstant.RED_B)
         {
+            System.out.println("Red B");
             return m_RedB;
         }
-        else if (getTX > AutonSelectorConstant.BLUE_A)
-        {
-            return m_BlueA;
-        }
-        return m_BlueA;
+        System.out.println("Red A");
+        return m_RedA;
     }
 
     public void Periodic()
