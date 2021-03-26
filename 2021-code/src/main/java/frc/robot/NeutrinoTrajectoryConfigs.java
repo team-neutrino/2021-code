@@ -68,4 +68,11 @@ public class NeutrinoTrajectoryConfigs
         DriveConstants.K_BARREL_RACE_SPEED_METERS_PER_SECOND,
         DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
             DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
+
+     public static final TrajectoryConfig m_SlalomConfig = new TrajectoryConfig(
+        DriveConstants.K_SLALOM_SPEED_METERS_PER_SECOND,
+        DriveConstants.K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED).setKinematics(
+            DriveConstants.K_DRIVE_KINEMATICS).addConstraint(m_autoVoltageConstraint);
+
+    
 }

@@ -39,6 +39,7 @@ public final class Constants
         public static final double K_GALACTICREDA_SPEED_METERS_PER_SECOND = 3.5;
         public static final double K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 6.8;
         public static final double K_BARREL_RACE_SPEED_METERS_PER_SECOND = 3.0;
+        public static final double K_SLALOM_SPEED_METERS_PER_SECOND = 3.5;
         public static final double K_RAMSETE_B = 2;
         public static final double K_RAMSETE_ZETA = 0.7;
 
