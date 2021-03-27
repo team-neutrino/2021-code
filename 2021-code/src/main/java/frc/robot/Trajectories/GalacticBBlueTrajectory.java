@@ -27,5 +27,5 @@ public class GalacticBBlueTrajectory
         // End 3 meters straight ahead of where we started, facing forward
         new Pose2d(7.43 , -0.7, new Rotation2d(0)),
         // Pass config
-        NeutrinoTrajectoryConfigs.m_FastForwardConfig);
+        NeutrinoTrajectoryConfigs.m_GalacticRedAForwardConfig);
 }

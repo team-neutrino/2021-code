@@ -106,6 +106,7 @@ public class RobotContainer
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
         m_BounceAuton = new BounceAuton(m_Drive);
         m_BarrelRace = new BarrelRaceAuton(m_Drive);
+        m_GalBlueB = new GalacticBBlueAuton(m_Drive, m_Intake);
     }
 
     /**
@@ -175,7 +176,7 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
-        if (!isSingleJoystick && counter%2 == 0)
+        if (!isSingleJoystick && counter % 2 == 0)
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
@@ -184,7 +185,7 @@ public class RobotContainer
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("single");
         }
-        else if (isSingleJoystick && counter%2 == 1)
+        else if (isSingleJoystick && counter % 2 == 1)
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
