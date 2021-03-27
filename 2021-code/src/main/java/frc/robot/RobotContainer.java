@@ -162,7 +162,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_Slalom;
+        return m_BounceAuton;
     }
 
     public void teleopInit()
