@@ -22,7 +22,7 @@ public class AutonSelector
     private AnalogPotentiometer analogPot = new AnalogPotentiometer(input, 511.77);
     private RamseteGenCommand m_RamseteGen;
     private DriveSubsystem m_Drive;
-    private IntakePIDSubsystem m_Intake; 
+    private IntakePIDSubsystem m_Intake;
     private GalBlueAAuton m_BlueA;
     private GalRedAAuton m_RedA;
     public AutonSelector(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
@@ -31,7 +31,7 @@ public class AutonSelector
         m_Intake = p_Intake;
         m_BlueA = new GalBlueAAuton(m_Drive, m_Intake);
         m_RedA = new GalRedAAuton(m_Drive, m_Intake);
-        System.out.println(analogPot.get());  
+        System.out.println(analogPot.get());
     }
 
     public Command getAutonCommand()
