@@ -53,7 +53,7 @@ public final class Constants
     {
         public static final double INTAKE_MOTOR_POWER = -1;
         public static final double OUTTAKE_MOTOR_POWER = 1;
-        public static final double ARM_UP_ANGLE = 39;
+        public static final double ARM_UP_ANGLE = 35;
         public static final int ENCODER_PORT = 8;
 
         public static final double KP = 0.02;

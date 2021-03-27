@@ -69,8 +69,7 @@ public class BounceAuton extends SequentialCommandGroup
             new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0),
             new PIDController(Constants.DriveConstants.KP_DRIVE_VEL, 0, 0), m_Drive::tankDriveVolts, m_Drive);
 
-        addCommands(
-            bounce0Command, bounce1Command, bounce2Command, bounce3Command,
+        addCommands(bounce0Command, bounce1Command, bounce2Command, bounce3Command,
             new InstantCommand(() -> m_Drive.tankDriveVolts(0, 0)));
     }
 }
