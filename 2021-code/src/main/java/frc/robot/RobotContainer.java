@@ -140,8 +140,8 @@ public class RobotContainer
         m_rightJoystickButton.toggleWhenActive(
             new TurretOverrideCommand(m_Turret, () -> m_OperatorController.getX(Hand.kRight)));
 
-        m_TriggerLeft.whenActive(new InstantCommand(m_Intake::setIntakeOn, m_Intake).alongWith(
-            new InstantCommand(m_Intake::setArmDown)));
+        m_TriggerLeft.whenActive(
+            new InstantCommand(m_Intake::setIntakeOn, m_Intake).alongWith(new InstantCommand(m_Intake::setArmDown)));
         m_TriggerLeft.whenInactive(new InstantCommand(m_Intake::setIntakeOff, m_Intake).alongWith(
             new InstantCommand(() -> m_Intake.setAngle(39))));
 
@@ -162,7 +162,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_Slalom;
+        return m_BounceAuton;
     }
 
     public void teleopInit()
@@ -177,7 +177,7 @@ public class RobotContainer
 
     public void teleopPeriodic()
     {
-        if (!isSingleJoystick && counter%2 == 1)
+        if (!isSingleJoystick && counter % 2 == 1)
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;
@@ -186,7 +186,7 @@ public class RobotContainer
             m_Drive.setDefaultCommand(m_tankDriveCommand);
             System.out.println("single");
         }
-        else if (isSingleJoystick && counter%2 == 0)
+        else if (isSingleJoystick && counter % 2 == 0)
         {
             m_tankDriveCommand.cancel();
             isSingleJoystick = !isSingleJoystick;

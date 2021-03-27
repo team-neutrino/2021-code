@@ -30,10 +30,10 @@ public class BounceTrajectory
 
     public static final Trajectory bounce2 = TrajectoryGenerator.generateTrajectory(
         new Pose2d(3.25, 1.3, Rotation2d.fromDegrees(270)),
-        List.of(new Translation2d(3.7, -0.9), new Translation2d(5.3, -1.8), new Translation2d(6, -1.1)),
-        new Pose2d(6, 0.75, Rotation2d.fromDegrees(90)), NeutrinoTrajectoryConfigs.m_BounceForwardConfig);
+        List.of(new Translation2d(3.5, -0.9), new Translation2d(5.0, -1.8), new Translation2d(6, -1.1)),
+        new Pose2d(5.75, 0.75, Rotation2d.fromDegrees(90)), NeutrinoTrajectoryConfigs.m_BounceForwardConfig);
 
     public static final Trajectory bounce3 = TrajectoryGenerator.generateTrajectory(
-        new Pose2d(6, 0.75, Rotation2d.fromDegrees(90)), List.of(new Translation2d(6.5, -0.6)),
+        new Pose2d(5.75, 0.75, Rotation2d.fromDegrees(90)), List.of(new Translation2d(6.3, -0.6)),
         new Pose2d(8, -0.85, Rotation2d.fromDegrees(180)), NeutrinoTrajectoryConfigs.m_BounceReverseConfig);
 }
