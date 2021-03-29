@@ -82,15 +82,15 @@ public final class Constants
     public static final class ShooterConstants
     {
 
-        public static final double WHEEL_P = 0.04;
+        public static final double WHEEL_P = 0.6;
         public static final double WHEEL_I = 0;
         public static final double WHEEL_D = 2;
         public static final double WHEEL_F = 0.008;
         public static final double SHOOTER_CONVERSION = 0;
-        public static final int green = 68000;
-        public static final int blue = 65000;
-        public static final int red = 69000;
-        public static final int yellow = 61000;
+        public static final int green = 67750;
+        public static final int blue = 69000;
+        public static final int red = 67750;
+        public static final int yellow = 60500;
     }
 
     public static final class HoodConstants
@@ -151,6 +151,6 @@ public final class Constants
         public static final double TURRET_OFFSET_ANGLE = -128;
         public static final double DEGREE_BOUNDS = 180.0;
         public static final double ANGLE_SCALE = (7.0 * 360.0) / (27.0 * 1024.0);
-        public static final double kP = 0.10;
+        public static final double kP = 0.08;
     }
 }
