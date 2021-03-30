@@ -11,36 +11,21 @@ import frc.robot.Constants;
 public class HoodSubsystem extends SubsystemBase
 {
     private Servo m_servo = new Servo(0);
-    private boolean m_up = false;
 
     /** Creates a new HoodSubsystem. */
     public HoodSubsystem()
     {
     }
 
-    public void toggle()
-    {
-        if (m_up)
-        {
-            hoodDown();
-        }
-        else
-        {
-            hoodUp();
-        }
-    }
-
     public void hoodDown()
     {
         m_servo.setAngle(Constants.HoodConstants.HOOD_ANGLE_DOWN);
-        m_up = false;
         System.out.println("hoodDown()");
     }
 
     public void hoodUp()
     {
         m_servo.setAngle(Constants.HoodConstants.HOOD_ANGLE_UP);
-        m_up = true;
         System.out.println("hoodUp()");
     }
 

@@ -138,7 +138,6 @@ public class RobotContainer
         // m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         // m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_DistanceCalculator.getShooterSpeed()));
         m_trigger.whenPressed(new InstantCommand(() -> counter++));
-        // m_top3.toggleWhenPressed(new HoodCommand(m_hood));
         m_top3.whenPressed(new InstantCommand(() -> m_hood.hoodUp(), m_hood));
         m_top2.whenPressed(new InstantCommand(() -> m_hood.hoodDown(), m_hood));
 
