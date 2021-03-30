@@ -56,6 +56,7 @@ public class RobotContainer
     private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK__PORT);
     private JoystickButton m_trigger = new JoystickButton(m_rightJoystick, 1);
     private JoystickButton m_top3 = new JoystickButton(m_rightJoystick, 3);
+    private JoystickButton m_top2 = new JoystickButton(m_rightJoystick, 2);
 
     private XboxController m_OperatorController = new XboxController(ControllerPorts.XBOX_CONTROLLER_PORT);
     private JoystickButton m_back = new JoystickButton(m_OperatorController, Button.kBack.value);
@@ -84,7 +85,7 @@ public class RobotContainer
     private EightBallAuton m_EightBallAuton;
     private BounceAuton m_BounceAuton;
     private TenBallAuton m_TenBallAuton;
-    private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
+    // private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
     private GalBlueAAuton m_GalBlueA;
@@ -116,11 +117,11 @@ public class RobotContainer
      */
     private void configureButtonBindings()
     {
-        
-        m_A.whenHeld( new ShooterSetSpeedCommand( m_Shooter, Constants.ShooterConstants.green ) );
-        m_B.whenHeld( new ShooterSetSpeedCommand( m_Shooter, Constants.ShooterConstants.red ) );
-        m_X.whenHeld( new ShooterSetSpeedCommand( m_Shooter, Constants.ShooterConstants.blue ) );
-        m_Y.whenHeld( new ShooterSetSpeedCommand( m_Shooter, Constants.ShooterConstants.yellow ) );
+
+        m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.green));
+        m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.red));
+        m_X.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.blue));
+        m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.yellow));
 
         m_start.whileHeld(new InstantCommand(m_climber::elevatorUp, m_climber), true).whenReleased(
             m_climber::elevatorStop, m_climber);
@@ -138,7 +139,8 @@ public class RobotContainer
         // m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_DistanceCalculator.getShooterSpeed()));
         m_trigger.whenPressed(new InstantCommand(() -> counter++));
         // m_top3.toggleWhenPressed(new HoodCommand(m_hood));
-        m_top3.whenPressed( new InstantCommand(() -> m_hood.toggle(), m_hood) );
+        m_top3.whenPressed(new InstantCommand(() -> m_hood.hoodUp(), m_hood));
+        m_top2.whenPressed(new InstantCommand(() -> m_hood.hoodDown(), m_hood));
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));

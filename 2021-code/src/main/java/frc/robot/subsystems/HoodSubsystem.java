@@ -20,7 +20,7 @@ public class HoodSubsystem extends SubsystemBase
 
     public void toggle()
     {
-        if( m_up )
+        if (m_up)
         {
             hoodDown();
         }
@@ -28,18 +28,19 @@ public class HoodSubsystem extends SubsystemBase
         {
             hoodUp();
         }
-        m_up = !m_up;
     }
 
     public void hoodDown()
     {
         m_servo.setAngle(Constants.HoodConstants.HOOD_ANGLE_DOWN);
+        m_up = false;
         System.out.println("hoodDown()");
     }
 
     public void hoodUp()
     {
         m_servo.setAngle(Constants.HoodConstants.HOOD_ANGLE_UP);
+        m_up = true;
         System.out.println("hoodUp()");
     }
 
