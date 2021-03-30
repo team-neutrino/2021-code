@@ -106,17 +106,21 @@ public class RobotContainer
      */
     private void configureButtonBindings()
     {
-
+        // Interstellar Accuracy
         m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.green));
         m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.red));
         m_X.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.blue));
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.yellow));
 
+        // Normal
+        // m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
+        // m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_DistanceCalculator.getShooterSpeed()));
+        // m_X.whileHeld(new InstantCommand(m_climber::elevatorDown, m_climber), true).whenReleased(
+        //     m_climber::elevatorStop, m_climber);
+
         m_start.whileHeld(new InstantCommand(m_climber::elevatorUp, m_climber), true).whenReleased(
             m_climber::elevatorStop, m_climber);
 
-        // m_X.whileHeld(new InstantCommand(m_climber::elevatorDown, m_climber), true).whenReleased(
-        //     m_climber::elevatorStop, m_climber);
 
         m_back.whileHeld(new ParallelCommandGroup(new InstantCommand(m_climber::winchClimb, m_climber))).whenReleased(
             new InstantCommand(m_climber::winchStop, m_climber));
@@ -124,8 +128,6 @@ public class RobotContainer
         m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
             m_climber);
 
-        // m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
-        // m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_DistanceCalculator.getShooterSpeed()));
         m_trigger.whenPressed(new InstantCommand(() -> counter++));
         m_top3.whenPressed(new InstantCommand(() -> m_hood.hoodUp(), m_hood));
         m_top2.whenPressed(new InstantCommand(() -> m_hood.hoodDown(), m_hood));
