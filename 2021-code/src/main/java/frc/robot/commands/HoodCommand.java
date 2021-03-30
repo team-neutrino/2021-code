@@ -29,7 +29,7 @@ public class HoodCommand extends CommandBase
     @Override
     public void execute()
     {
-        m_hood.hoodDown();
+        // m_hood.hoodDown();
     }
 
     // Called once the command ends or is interrupted.
