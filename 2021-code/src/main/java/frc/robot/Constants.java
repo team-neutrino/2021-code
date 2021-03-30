@@ -96,7 +96,7 @@ public final class Constants
     public static final class HoodConstants
     {
         public static final double HOOD_ANGLE_DOWN = 130;
-        public static final double HOOD_ANGLE_UP = 0;
+        public static final double HOOD_ANGLE_UP = 70;
     }
 
     public static final class CanId
