@@ -1,3 +1,5 @@
+* text=auto
+
 # sources
 *.java          text diff=java
 *.gradle        text diff=java
