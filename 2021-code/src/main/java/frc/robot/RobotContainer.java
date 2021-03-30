@@ -74,7 +74,7 @@ public class RobotContainer
     private EightBallAuton m_EightBallAuton;
     private BounceAuton m_BounceAuton;
     private TenBallAuton m_TenBallAuton;
-    // private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
+    private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
     private GalBlueAAuton m_GalBlueA;
@@ -120,7 +120,6 @@ public class RobotContainer
 
         m_start.whileHeld(new InstantCommand(m_climber::elevatorUp, m_climber), true).whenReleased(
             m_climber::elevatorStop, m_climber);
-
 
         m_back.whileHeld(new ParallelCommandGroup(new InstantCommand(m_climber::winchClimb, m_climber))).whenReleased(
             new InstantCommand(m_climber::winchStop, m_climber));
