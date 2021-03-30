@@ -137,7 +137,8 @@ public class RobotContainer
         // m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
         // m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_DistanceCalculator.getShooterSpeed()));
         m_trigger.whenPressed(new InstantCommand(() -> counter++));
-        m_top3.toggleWhenPressed(new HoodCommand(m_hood));
+        // m_top3.toggleWhenPressed(new HoodCommand(m_hood));
+        m_top3.whenPressed( new InstantCommand(() -> m_hood.toggle(), m_hood) );
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));

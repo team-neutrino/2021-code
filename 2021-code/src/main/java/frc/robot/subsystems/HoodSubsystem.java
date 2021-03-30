@@ -10,10 +10,25 @@ import frc.robot.Constants;
 
 public class HoodSubsystem extends SubsystemBase
 {
-    private Servo m_servo = new Servo(0);;
+    private Servo m_servo = new Servo(0);
+    private boolean m_up = false;
+
     /** Creates a new HoodSubsystem. */
     public HoodSubsystem()
     {
+    }
+
+    public void toggle()
+    {
+        if( m_up )
+        {
+            hoodDown();
+        }
+        else
+        {
+            hoodUp();
+        }
+        m_up = !m_up;
     }
 
     public void hoodDown()
