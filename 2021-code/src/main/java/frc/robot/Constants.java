@@ -87,10 +87,10 @@ public final class Constants
         public static final double WHEEL_D = 2;
         public static final double WHEEL_F = 0.008;
         public static final double SHOOTER_CONVERSION = 0;
-        public static final int green = 68000;
-        public static final int blue = 65000;
-        public static final int red = 69000;
-        public static final int yellow = 61000;
+        public static final int green = 69500;
+        public static final int blue = 66000;
+        public static final int red = 69100;
+        public static final int yellow = 60000;
     }
 
     public static final class HoodConstants
