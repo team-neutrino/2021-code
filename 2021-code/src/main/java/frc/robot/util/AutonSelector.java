@@ -29,7 +29,6 @@ public class AutonSelector
     private NetworkTableEntry angle_tX;
     private double getTX;
 
-
     public AutonSelector(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
     {
         m_Drive = p_Drive;

@@ -23,6 +23,7 @@ public class DistanceCalculator
     public DistanceCalculator(HoodSubsystem p_hood)
     {
         m_hood = p_hood;
+        table.getEntry("ledMode").setNumber(1);
     }
 
     public double getDistance()
