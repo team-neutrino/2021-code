@@ -9,7 +9,7 @@ import frc.robot.subsystems.IntakePIDSubsystem;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.AutonSelectorConstant;
 import frc.robot.commands.Trajectories.GalBlueAAuton;
@@ -49,19 +49,23 @@ public class AutonSelector
         if (getTX > AutonSelectorConstant.BLUE_A)
         {
             System.out.println("Blue A");
+            SmartDashboard.putString("Path", "Blue A");
             return m_BlueA;
         }
         else if (getTX > AutonSelectorConstant.BLUE_B)
         {
             System.out.println("Blue B");
+            SmartDashboard.putString("Path", "Blue B");
             return m_BlueA; //change to BlueB
         }
         else if (getTX > AutonSelectorConstant.RED_A)
         {
             System.out.println("Red A");
+            SmartDashboard.putString("Path", "Red A");
             return m_RedA;
         }
         System.out.println("Red B");
+        SmartDashboard.putString("Path", "Red B");
         return m_RedB;
     }
 
