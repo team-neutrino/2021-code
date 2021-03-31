@@ -163,7 +163,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_BounceAuton;
+        return m_BarrelRace;
     }
 
     public void teleopInit()
