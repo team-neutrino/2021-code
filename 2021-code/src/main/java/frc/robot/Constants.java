@@ -35,9 +35,11 @@ public final class Constants
         public static final double K_MAX_SPEED_METERS_PER_SECOND = 1;
         public static final double K_MAAX_SPEED_METERS_PER_SECOND = 1.5;
         public static final double K_MAAAX_SPEED_METERS_PER_SECOND = 2.0;
-        public static final double K_BOUNCE_SPEED_METERS_PER_SECOND = 1.25;
+        public static final double K_BOUNCE_SPEED_METERS_PER_SECOND = 3;
         public static final double K_GALACTICREDA_SPEED_METERS_PER_SECOND = 3.5;
         public static final double K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 6.8;
+        public static final double K_BARREL_RACE_SPEED_METERS_PER_SECOND = 3.0;
+        public static final double K_SLALOM_SPEED_METERS_PER_SECOND = 3.5;
         public static final double K_RAMSETE_B = 2;
         public static final double K_RAMSETE_ZETA = 0.7;
 
@@ -85,16 +87,16 @@ public final class Constants
         public static final double WHEEL_D = 2;
         public static final double WHEEL_F = 0.008;
         public static final double SHOOTER_CONVERSION = 0;
-        public static final int green = 68000;
-        public static final int blue = 65000;
-        public static final int red = 69000;
-        public static final int yellow = 61000;
+        public static final int green = 69500;
+        public static final int blue = 66000;
+        public static final int red = 69100;
+        public static final int yellow = 60000;
     }
 
     public static final class HoodConstants
     {
         public static final double HOOD_ANGLE_DOWN = 130;
-        public static final double HOOD_ANGLE_UP = 0;
+        public static final double HOOD_ANGLE_UP = 70;
     }
 
     public static final class CanId

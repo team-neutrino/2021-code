@@ -96,6 +96,7 @@ public class RobotContainer
      */
     public RobotContainer()
     {
+        configureButtonBindings();
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
         m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
@@ -163,7 +164,6 @@ public class RobotContainer
     public void teleopInit()
     {
         m_Intake.setAngle(39);
-        configureButtonBindings();
         isSingleJoystick = false;
         m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),
             m_Drive);
