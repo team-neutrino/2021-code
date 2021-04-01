@@ -163,6 +163,7 @@ public class RobotContainer
 
     public void teleopInit()
     {
+        m_Intake.setIntakeOff();   
         m_Intake.setAngle(39);
         isSingleJoystick = false;
         m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),

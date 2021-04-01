@@ -4,6 +4,9 @@ package frc.robot.commands.Trajectories;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.IntakePIDSubsystem;
+
+import java.time.Instant;
+
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj.controller.RamseteController;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
@@ -29,7 +32,11 @@ public class GalBlueAAuton extends SequentialCommandGroup
 
             p_Drive::tankDriveVolts, p_Drive);
 
-        addCommands(new InstantCommand(p_Intake::setIntakeOn), blueA,
-            new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)), new InstantCommand(() -> p_Intake.setIntakeOff()));
+        addCommands(
+            new InstantCommand(p_Intake::setIntakeOn).alongWith(
+            new InstantCommand(p_Intake::setArmDown),
+            blueA),
+            new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)), 
+            new InstantCommand(() -> p_Intake.setIntakeOff()));
     }
 }

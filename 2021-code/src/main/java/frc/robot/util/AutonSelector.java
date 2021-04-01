@@ -63,9 +63,15 @@ public class AutonSelector
             SmartDashboard.putString("Path", "Red A");
             return m_RedA;
         }
+        /*else if (getTX > AutonSelectorConstant.RED_B)
+        {
+            System.out.println("Red A");
+            SmartDashboard.putString("Path", "Red A");
+            return m_BlueA; //change to BlueB
+        }*/
         System.out.println("Red B");
         SmartDashboard.putString("Path", "Red B");
-        return m_RedB;
+        return m_RedB; //change to BlueB
     }
 
     public void Periodic()
