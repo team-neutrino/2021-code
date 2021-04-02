@@ -17,14 +17,17 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
 import frc.robot.Trajectories.BounceTrajectory;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.IntakePIDSubsystem;
 
 public class BounceAuton extends SequentialCommandGroup
 {
     private DriveSubsystem m_Drive;
+    private IntakePIDSubsystem m_Intake;
 
-    public BounceAuton(DriveSubsystem p_Drive)
+    public BounceAuton(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
     {
         m_Drive = p_Drive;
+        m_Intake = p_Intake;
         Trajectory m_bounce0 = BounceTrajectory.bounce0;
         Trajectory m_bounce1 = BounceTrajectory.bounce1;
         Trajectory m_bounce2 = BounceTrajectory.bounce2;

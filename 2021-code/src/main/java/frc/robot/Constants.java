@@ -35,9 +35,11 @@ public final class Constants
         public static final double K_MAX_SPEED_METERS_PER_SECOND = 1;
         public static final double K_MAAX_SPEED_METERS_PER_SECOND = 1.5;
         public static final double K_MAAAX_SPEED_METERS_PER_SECOND = 2.0;
-        public static final double K_BOUNCE_SPEED_METERS_PER_SECOND = 1.25;
+        public static final double K_BOUNCE_SPEED_METERS_PER_SECOND = 3;
         public static final double K_GALACTICREDA_SPEED_METERS_PER_SECOND = 3.5;
         public static final double K_MAX_ACCELERATION_METERS_PER_SECOND_SQUARED = 6.8;
+        public static final double K_BARREL_RACE_SPEED_METERS_PER_SECOND = 3.0;
+        public static final double K_SLALOM_SPEED_METERS_PER_SECOND = 3.5;
         public static final double K_RAMSETE_B = 2;
         public static final double K_RAMSETE_ZETA = 0.7;
 
@@ -85,16 +87,16 @@ public final class Constants
         public static final double WHEEL_D = 2;
         public static final double WHEEL_F = 0.008;
         public static final double SHOOTER_CONVERSION = 0;
-        public static final int green = 68000;
-        public static final int blue = 65000;
-        public static final int red = 69000;
-        public static final int yellow = 61000;
+        public static final int green = 69500;
+        public static final int blue = 66000;
+        public static final int red = 69100;
+        public static final int yellow = 60000;
     }
 
     public static final class HoodConstants
     {
         public static final double HOOD_ANGLE_DOWN = 130;
-        public static final double HOOD_ANGLE_UP = 0;
+        public static final double HOOD_ANGLE_UP = 70;
     }
 
     public static final class CanId
@@ -149,13 +151,6 @@ public final class Constants
         public static final double TURRET_OFFSET_ANGLE = -128;
         public static final double DEGREE_BOUNDS = 180.0;
         public static final double ANGLE_SCALE = (7.0 * 360.0) / (27.0 * 1024.0);
-        public static final double kP = 0.12;
-    }
-
-    public static final class PathConstants
-    {
-        public static final String SLOLAM_PATH = "paths/BetterSlolam.wpilib.json";
-        public static final String GALACTIC_RED_A_PATH = "paths/GalacticARed.wpilib.json";
-        public static final String GALACTIC_BLUE_A_PATH = "paths/blueone.wpilib.json";
+        public static final double kP = 0.10;
     }
 }
