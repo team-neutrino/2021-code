@@ -17,10 +17,10 @@ public class BarrelRaceTrajectory {
     new Translation2d(5.9, 1.55), new Translation2d(4.8, 1.55), 
     new Translation2d(4.7, 0),  
     //3rd curve
-    new Translation2d(6.9, -0.8), new Translation2d(6.9, 0.84),new Translation2d(6, -0.4), new Translation2d(4.5, -0.2),
-    new Translation2d(1, -.2)),
+    new Translation2d(6.9, .2), new Translation2d(7.5, 1),new Translation2d(6, -0.4), new Translation2d(4.5, -0.2)),
+
     //endpoint
-    new Pose2d(.8, -.2, Rotation2d.fromDegrees(180)),
+    new Pose2d(.9, 0.5, Rotation2d.fromDegrees(170)),
     NeutrinoTrajectoryConfigs.m_BarrelRaceConfig);
     //new Translation2d(5.2, 0),
 }
