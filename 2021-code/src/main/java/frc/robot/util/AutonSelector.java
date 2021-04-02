@@ -55,23 +55,17 @@ public class AutonSelector
         {
             System.out.println("Blue B");
             SmartDashboard.putString("Path", "Blue B");
-            return m_BlueA; //change to BlueB
+            return m_BlueA; //change to blue b
         }
-        else if (getTX > AutonSelectorConstant.RED_A)
+        else if (getTX > AutonSelectorConstant.RED_B)
         {
-            System.out.println("Red A");
-            SmartDashboard.putString("Path", "Red A");
-            return m_RedA;
+            System.out.println("Red B");
+            SmartDashboard.putString("Path", "Red B");
+            return m_RedB;
         }
-        /*else if (getTX > AutonSelectorConstant.RED_B)
-        {
-            System.out.println("Red A");
-            SmartDashboard.putString("Path", "Red A");
-            return m_BlueA; //change to BlueB
-        }*/
-        System.out.println("Red B");
-        SmartDashboard.putString("Path", "Red B");
-        return m_RedB; //change to BlueB
+        System.out.println("Red A");
+        SmartDashboard.putString("Path", "Red A");
+        return m_RedA; 
     }
 
     public void Periodic()

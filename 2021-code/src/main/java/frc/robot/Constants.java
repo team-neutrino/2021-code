@@ -165,9 +165,9 @@ public final class Constants
     public static final class AutonSelectorConstant
     {
         //Underestimations to create a range
-        public static final double RED_A = 0; //4.5
-        public static final double RED_B = -9; //-16.07
-        public static final double BLUE_A = 22; //23.37 to 23.43
-        public static final double BLUE_B = 10; //14.07
+        public static final double RED_A = -5; //-1
+        public static final double RED_B = 16; //18
+        public static final double BLUE_B = 19; //21
+        public static final double BLUE_A = 25; //27.6
     }
 }
