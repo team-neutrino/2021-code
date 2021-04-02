@@ -51,7 +51,7 @@ public class ShooterSubsystem extends SubsystemBase
         m_wheelMotor2.follow(m_wheelMotor);
         m_wheelMotor3.follow(m_wheelMotor);
 
-        m_wheelMotor.setInverted(false);
+        m_wheelMotor.setInverted(true);
         m_wheelMotor2.setInverted(true);
         m_wheelMotor3.setInverted(true);
 
