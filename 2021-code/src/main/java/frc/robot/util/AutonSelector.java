@@ -53,13 +53,13 @@ public class AutonSelector
         {
             return "Blue A";
         }
-        else if (getTx() > AutonSelectorConstant.BLUE_B)
-        {
-            return "Blue B";
-        }
         else if (getTx() > AutonSelectorConstant.RED_B)
         {
             return "Red B";
+        }
+        else if (getTx() > AutonSelectorConstant.BLUE_B)
+        {
+            return "Blue B";
         }
         else if(getTx() > AutonSelectorConstant.RED_A)
         {
@@ -74,13 +74,13 @@ public class AutonSelector
         {
             return m_BlueA;
         }
-        else if (getPath().equals("Blue B"))
-        {
-            return m_BlueB; 
-        }
         else if (getPath().equals("Red B"))
         {
             return m_RedB;
+        }
+        else if (getPath().equals("Blue B"))
+        {
+            return m_BlueB; 
         }
         else if (getPath().equals("Red A"))
         {

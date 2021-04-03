@@ -166,8 +166,8 @@ public final class Constants
     {
         //Underestimations to create a range
         public static final double RED_A = -5; //-1
-        public static final double RED_B = 16; //18
-        public static final double BLUE_B = 19; //21
-        public static final double BLUE_A = 25; //27.6
+        public static final double RED_B = 16; //17
+        public static final double BLUE_B = 11; //12.9
+        public static final double BLUE_A = 21; //23.7
     }
 }
