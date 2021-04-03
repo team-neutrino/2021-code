@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.util.AutonSelector;
 
 public class DriverViewSubsystem extends SubsystemBase
 {
@@ -25,18 +26,21 @@ public class DriverViewSubsystem extends SubsystemBase
     private ShooterSubsystem m_Shooter;
     private TurretSubsystem m_Turret;
     private HopperSubsystem m_Hopper;
+    private AutonSelector m_AutonSelector;
 
     private ShuffleboardTab m_driver_view_tab;
     private NetworkTableEntry m_shooter_velocity;
     private NetworkTableEntry m_turret_angle;
     private NetworkTableEntry m_beam_break_top;
     private NetworkTableEntry m_beam_break_bot;
+    private NetworkTableEntry m_path;
 
-    public DriverViewSubsystem(ShooterSubsystem p_Shooter, TurretSubsystem p_Turret, HopperSubsystem p_Hopper)
+    public DriverViewSubsystem(ShooterSubsystem p_Shooter, TurretSubsystem p_Turret, HopperSubsystem p_Hopper, AutonSelector p_AutonSelector)
     {
         m_Shooter = p_Shooter;
         m_Turret = p_Turret;
         m_Hopper = p_Hopper;
+        m_AutonSelector = p_AutonSelector;
 
         // setup driver view tab
         m_driver_view_tab = Shuffleboard.getTab("Driver View");
@@ -46,6 +50,7 @@ public class DriverViewSubsystem extends SubsystemBase
             2).withSize(2, 2).withProperties(Map.of("min", -180, "max", 180)).getEntry();
         m_beam_break_top = m_driver_view_tab.add("Top Beam Status", false).withPosition(0, 0).getEntry();
         m_beam_break_bot = m_driver_view_tab.add("Bottom Beam Status", false).withPosition(0, 1).getEntry();
+        m_path = m_driver_view_tab.add("Updating Path", "").withPosition(10, 0).getEntry();
 
         HttpCamera limelightFeed = new HttpCamera("limelight", "http://limelight.local:5800/stream.mjpg",
             HttpCameraKind.kMJPGStreamer);
@@ -60,5 +65,6 @@ public class DriverViewSubsystem extends SubsystemBase
         m_turret_angle.setDouble(m_Turret.getTurretAngle());
         m_beam_break_top.setBoolean(m_Hopper.topBeamStatus());
         m_beam_break_bot.setBoolean(m_Hopper.bottomBeamStatus());
+        m_path.setString(m_AutonSelector.getPath());
     }
 }

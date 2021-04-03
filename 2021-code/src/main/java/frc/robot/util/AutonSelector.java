@@ -27,18 +27,10 @@ public class AutonSelector
     private GalRedAAuton m_RedA;
     private GalBlueBAuton m_BlueB;
 
-    NetworkTable table;
-    private NetworkTableEntry angle_tX;
-    private double getTX;
-
     public AutonSelector(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
     {
         m_Drive = p_Drive;
         m_Intake = p_Intake;
-
-        table = NetworkTableInstance.getDefault().getTable("limelight");
-        angle_tX = table.getEntry("tx");
-        getTX = angle_tX.getDouble(0.0);
 
         m_BlueA = new GalBlueAAuton(m_Drive, m_Intake);
         m_RedA = new GalRedAAuton(m_Drive, m_Intake);
@@ -46,32 +38,54 @@ public class AutonSelector
         m_BlueB = new GalBlueBAuton(p_Drive, p_Intake);
     }
 
-    public Command getAutonCommand()
+    public double getTx()
     {
-        if (getTX > AutonSelectorConstant.BLUE_A)
-        {
-            System.out.println("Blue A");
-            SmartDashboard.putString("Path", "Blue A");
-            return m_BlueA;
-        }
-        else if (getTX > AutonSelectorConstant.BLUE_B)
-        {
-            System.out.println("Blue B");
-            SmartDashboard.putString("Path", "Blue B");
-            return m_BlueB; //change to blue b
-        }
-        else if (getTX > AutonSelectorConstant.RED_B)
-        {
-            System.out.println("Red B");
-            SmartDashboard.putString("Path", "Red B");
-            return m_RedB;
-        }
-        System.out.println("Red A");
-        SmartDashboard.putString("Path", "Red A");
-        return m_RedA; 
+        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+        NetworkTableEntry angle_tX = table.getEntry("tx");
+        double getTX = angle_tX.getDouble(0.0);
+
+        return getTX;
     }
 
-    public void Periodic()
+    public String getPath()
     {
+        if (getTx() > AutonSelectorConstant.BLUE_A)
+        {
+            return "Blue A";
+        }
+        else if (getTx() > AutonSelectorConstant.BLUE_B)
+        {
+            return "Blue B";
+        }
+        else if (getTx() > AutonSelectorConstant.RED_B)
+        {
+            return "Red B";
+        }
+        else if(getTx() > AutonSelectorConstant.RED_A)
+        {
+            return "Red A"; 
+        }
+        return "None";
+    }
+
+    public Command getAutonCommand()
+    {
+        if (getPath().equals("Blue A"))
+        {
+            return m_BlueA;
+        }
+        else if (getPath().equals("Blue B"))
+        {
+            return m_BlueB; 
+        }
+        else if (getPath().equals("Red B"))
+        {
+            return m_RedB;
+        }
+        else if (getPath().equals("Red A"))
+        {
+            return m_RedA; 
+        }
+        return m_RedA;
     }
 }
