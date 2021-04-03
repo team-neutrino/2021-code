@@ -2,6 +2,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
@@ -38,9 +39,12 @@ public class DriveSubsystem extends SubsystemBase
     private AHRS m_navX = new AHRS(SPI.Port.kMXP);
     private final DifferentialDriveOdometry m_odometry;
     private double velocity = 0;
+    //private Timer m_timer;
 
     public DriveSubsystem()
     {
+        //m_timer.start();
+
         m_leftMotor1.restoreFactoryDefaults();
         m_leftMotor2.restoreFactoryDefaults();
         m_rightMotor1.restoreFactoryDefaults();
@@ -81,6 +85,7 @@ public class DriveSubsystem extends SubsystemBase
         SmartDashboard.putNumber("getYaw()", getNavxYaw());
         SmartDashboard.putNumber("getX()", getTranslationX());
         SmartDashboard.putNumber("getY()", getTranslationY());
+        //SmartDashboard.putNumber("timer", ); find timer from another subsystem
         var translation = m_odometry.getPoseMeters().getTranslation();
         m_xEntry.setNumber(translation.getX());
         m_yEntry.setNumber(translation.getY());

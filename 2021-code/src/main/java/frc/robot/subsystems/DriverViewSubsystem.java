@@ -12,6 +12,7 @@ import edu.wpi.cscore.HttpCamera;
 import edu.wpi.cscore.HttpCamera.HttpCameraKind;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
@@ -31,12 +32,15 @@ public class DriverViewSubsystem extends SubsystemBase
     private NetworkTableEntry m_turret_angle;
     private NetworkTableEntry m_beam_break_top;
     private NetworkTableEntry m_beam_break_bot;
+    private NetworkTableEntry m_time;
+    //private Timer m_timer;
 
     public DriverViewSubsystem(ShooterSubsystem p_Shooter, TurretSubsystem p_Turret, HopperSubsystem p_Hopper)
     {
         m_Shooter = p_Shooter;
         m_Turret = p_Turret;
         m_Hopper = p_Hopper;
+        //m_timer.start();
 
         // setup driver view tab
         m_driver_view_tab = Shuffleboard.getTab("Driver View");
@@ -46,6 +50,7 @@ public class DriverViewSubsystem extends SubsystemBase
             2).withSize(2, 2).withProperties(Map.of("min", -180, "max", 180)).getEntry();
         m_beam_break_top = m_driver_view_tab.add("Top Beam Status", false).withPosition(0, 0).getEntry();
         m_beam_break_bot = m_driver_view_tab.add("Bottom Beam Status", false).withPosition(0, 1).getEntry();
+        //m_time = m_driver_view_tab.add("Timer", 0).withPosition(5, 3).withSize(2,2).getEntry();
 
         HttpCamera limelightFeed = new HttpCamera("limelight", "http://limelight.local:5800/stream.mjpg",
             HttpCameraKind.kMJPGStreamer);
@@ -60,5 +65,6 @@ public class DriverViewSubsystem extends SubsystemBase
         m_turret_angle.setDouble(m_Turret.getTurretAngle());
         m_beam_break_top.setBoolean(m_Hopper.topBeamStatus());
         m_beam_break_bot.setBoolean(m_Hopper.bottomBeamStatus());
+        //m_time.setDouble(m_timer.get());
     }
 }

@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Constants.HopperConstants;
@@ -113,7 +114,7 @@ public class HopperSubsystem extends SubsystemBase
 
     public void rollerTowardsIntake()
     {
-        m_intakeHopperMotor.set(ControlMode.PercentOutput, 0.3);
+        m_intakeHopperMotor.set(ControlMode.PercentOutput, 0.1);
     }
 
     public void rollerTowardsTower()
@@ -125,6 +126,7 @@ public class HopperSubsystem extends SubsystemBase
     public void periodic()
     {
         rollerTowardsIntake();
+        SmartDashboard.putNumber("timer", getTime());
     }
 
 }
