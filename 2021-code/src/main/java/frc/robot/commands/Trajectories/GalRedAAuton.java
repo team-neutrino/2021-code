@@ -49,11 +49,12 @@ public class GalRedAAuton extends SequentialCommandGroup
 
             p_Drive::tankDriveVolts, p_Drive);
 
-
         addCommands(
             new InstantCommand(p_Intake::autonIntakeOn).alongWith(
                 new SequentialCommandGroup
-                (redA, redA1)),
+                (redA,
+                redA1
+                 )),
             new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)), 
             new InstantCommand(() -> p_Intake.setIntakeOff()));    
     }
