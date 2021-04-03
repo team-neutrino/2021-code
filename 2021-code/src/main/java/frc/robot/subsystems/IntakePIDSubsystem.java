@@ -103,4 +103,10 @@ public class IntakePIDSubsystem extends PIDSubsystem
         disable();
         m_arm_timer.start();
     }
+
+    public void autonIntakeOn()
+    {
+        setArmDown();
+        setIntakeOn();
+    }
 }

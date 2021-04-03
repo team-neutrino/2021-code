@@ -15,6 +15,7 @@ import frc.robot.Constants.AutonSelectorConstant;
 import frc.robot.commands.Trajectories.GalBlueAAuton;
 import frc.robot.commands.Trajectories.GalRedAAuton;
 import frc.robot.commands.Trajectories.GalRedBAuton;
+import frc.robot.commands.Trajectories.GalBlueBAuton;
 
 /** Add your docs here. */
 public class AutonSelector
@@ -24,6 +25,7 @@ public class AutonSelector
     private GalBlueAAuton m_BlueA;
     private GalRedBAuton m_RedB;
     private GalRedAAuton m_RedA;
+    private GalBlueBAuton m_BlueB;
 
     NetworkTable table;
     private NetworkTableEntry angle_tX;
@@ -41,6 +43,7 @@ public class AutonSelector
         m_BlueA = new GalBlueAAuton(m_Drive, m_Intake);
         m_RedA = new GalRedAAuton(m_Drive, m_Intake);
         m_RedB = new GalRedBAuton(p_Drive, p_Intake);
+        m_BlueB = new GalBlueBAuton(p_Drive, p_Intake);
     }
 
     public Command getAutonCommand()
@@ -55,7 +58,7 @@ public class AutonSelector
         {
             System.out.println("Blue B");
             SmartDashboard.putString("Path", "Blue B");
-            return m_BlueA; //change to blue b
+            return m_BlueB; //change to blue b
         }
         else if (getTX > AutonSelectorConstant.RED_B)
         {
