@@ -4,7 +4,6 @@ package frc.robot.util;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.HoodSubsystem;
@@ -24,6 +23,7 @@ public class DistanceCalculator
     public DistanceCalculator(HoodSubsystem p_hood)
     {
         m_hood = p_hood;
+        table.getEntry("ledMode").setNumber(1);
     }
 
     public double getDistance()

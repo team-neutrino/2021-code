@@ -13,11 +13,11 @@ import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import frc.robot.Constants;
 import frc.robot.Trajectories.GalacticBBlueTrajectory;
 
-public class GalacticBBlueAuton extends SequentialCommandGroup
+public class GalBlueBAuton extends SequentialCommandGroup
 {
     Trajectory m_galBlueB = GalacticBBlueTrajectory.galBlueB;
 
-    public GalacticBBlueAuton(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
+    public GalBlueBAuton(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
     {
         RamseteCommand blueB = new RamseteCommand(m_galBlueB, p_Drive::getPose,
             new RamseteController(Constants.DriveConstants.K_RAMSETE_B, Constants.DriveConstants.K_RAMSETE_ZETA),

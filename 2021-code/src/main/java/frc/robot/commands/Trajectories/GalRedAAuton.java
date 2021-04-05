@@ -23,6 +23,7 @@ import frc.robot.commands.TurretSetAngleCommand;
 public class GalRedAAuton extends SequentialCommandGroup
 {
     Trajectory m_galRedA = GalacticARedTrajectory.galRedA;
+
     public GalRedAAuton(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
     {
         RamseteCommand redA = new RamseteCommand(m_galRedA, p_Drive::getPose,
@@ -36,7 +37,12 @@ public class GalRedAAuton extends SequentialCommandGroup
 
             p_Drive::tankDriveVolts, p_Drive);
 
-        addCommands(new InstantCommand(p_Intake::setIntakeOn), redA,
-            new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)));
+        addCommands(
+            new InstantCommand(p_Intake::setArmDown).alongWith(
+            new InstantCommand(p_Intake::setIntakeOn),
+                (redA
+                 )),
+            new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)), 
+            new InstantCommand(() -> p_Intake.setIntakeOff()));    
     }
 }

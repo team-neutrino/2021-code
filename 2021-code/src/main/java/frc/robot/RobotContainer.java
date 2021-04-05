@@ -76,25 +76,20 @@ public class RobotContainer
     private POVButton m_RightPovButton = new POVButton(m_OperatorController, 90);
     private POVButton m_DownPovButton = new POVButton(m_OperatorController, 180);
 
-    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
+    private RamseteGenCommand m_RamseteGen;
+    private AutonSelector m_AutonSelector = new AutonSelector(m_Drive, m_Intake);
+    
+    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper, m_AutonSelector);
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
         m_Intake, m_climber);
 
-    private SixBallAuton m_SixBallAuton;
-    private EightBallAuton m_EightBallAuton;
-    private BounceAuton m_BounceAuton;
-    private TenBallAuton m_TenBallAuton;
     private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
-    private GalBlueAAuton m_GalBlueA;
-    private GalRedAAuton m_GalRedA;
     private BarrelRaceAuton m_BarrelRace;
     private SlalomAuton m_Slalom;
+    private BounceAuton m_BounceAuton;
     private int counter = 0;
-
-    private RamseteGenCommand m_RamseteGen;
-    private AutonSelector m_AutonSelector = new AutonSelector(m_Drive, m_Intake);
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -144,7 +139,7 @@ public class RobotContainer
         m_TriggerLeft.whenActive(
             new InstantCommand(m_Intake::setIntakeOn, m_Intake).alongWith(new InstantCommand(m_Intake::setArmDown)));
         m_TriggerLeft.whenInactive(new InstantCommand(m_Intake::setIntakeOff, m_Intake).alongWith(
-            new InstantCommand(() -> m_Intake.setAngle(39))));
+            new InstantCommand(() -> m_Intake.setAngle(38))));
 
         m_UpPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(-90), m_Turret)).whenReleased(
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
@@ -163,11 +158,12 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_BarrelRace;
+        return m_AutonSelector.getAutonCommand();
     }
 
     public void teleopInit()
     {
+        m_Intake.setIntakeOff();   
         m_Intake.setAngle(39);
         isSingleJoystick = false;
         m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),
