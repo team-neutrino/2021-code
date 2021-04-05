@@ -54,7 +54,7 @@ public class AutonSelector
     {
         NetworkTableEntry angle_tX0 = table.getEntry("tx1");
         double getTX1 = angle_tX0.getDouble(0.0);
-        System.out.println(getTX1);
+        
         return getTX1;
     }
 
