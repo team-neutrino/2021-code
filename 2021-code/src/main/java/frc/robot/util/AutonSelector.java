@@ -50,16 +50,21 @@ public class AutonSelector
         return getTX;
     }
 
-    public double getTx0()
+    public double getTx1()
     {
-        NetworkTableEntry angle_tX0 = table.getEntry("tx0");
-        double getTX0 = angle_tX0.getDouble(0.0);
-
-        return getTX0;
+        NetworkTableEntry angle_tX0 = table.getEntry("tx1");
+        double getTX1 = angle_tX0.getDouble(0.0);
+        System.out.println(getTX1);
+        return getTX1;
     }
 
     public String getPath()
     {
+        if(getTx1() < AutonSelectorConstant.RED_A_TX1 && getTx() > AutonSelectorConstant.RED_A)
+        {
+            return "Red A"; 
+        }
+
         if (getTx() > AutonSelectorConstant.BLUE_A)
         {
             return "Blue A";
@@ -72,10 +77,7 @@ public class AutonSelector
         {
             return "Blue B";
         }
-        else if(getTx0() > AutonSelectorConstant.RED_A)
-        {
-            return "Red A"; 
-        }
+
         return "None";
     }
 
