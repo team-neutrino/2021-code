@@ -21,9 +21,9 @@ public class GalacticBBlueTrajectory
         new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
         // Pass through these two interior waypoints, making an 's' curve path
         List.of(
-            new Translation2d(3 , -0.7), 
-            new Translation2d(5.1 , 0.7),
-            new Translation2d(6.3 , -0.7)),
+            new Translation2d(3.15 , -0.56), 
+            new Translation2d(4.8 , 0.5),
+            new Translation2d(6.5 , -0.5)),
         // End 3 meters straight ahead of where we started, facing forward
         new Pose2d(7.43 , -0.7, new Rotation2d(0)),
         // Pass config
