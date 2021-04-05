@@ -27,6 +27,8 @@ public class AutonSelector
     private GalRedAAuton m_RedA;
     private GalBlueBAuton m_BlueB;
 
+    private NetworkTable table;
+
     public AutonSelector(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
     {
         m_Drive = p_Drive;
@@ -36,15 +38,24 @@ public class AutonSelector
         m_RedA = new GalRedAAuton(m_Drive, m_Intake);
         m_RedB = new GalRedBAuton(p_Drive, p_Intake);
         m_BlueB = new GalBlueBAuton(p_Drive, p_Intake);
+
+        table = NetworkTableInstance.getDefault().getTable("limelight");
     }
 
     public double getTx()
     {
-        NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
         NetworkTableEntry angle_tX = table.getEntry("tx");
         double getTX = angle_tX.getDouble(0.0);
 
         return getTX;
+    }
+
+    public double getTx0()
+    {
+        NetworkTableEntry angle_tX0 = table.getEntry("tx0");
+        double getTX0 = angle_tX0.getDouble(0.0);
+
+        return getTX0;
     }
 
     public String getPath()
@@ -61,7 +72,7 @@ public class AutonSelector
         {
             return "Blue B";
         }
-        else if(getTx() > AutonSelectorConstant.RED_A)
+        else if(getTx0() > AutonSelectorConstant.RED_A)
         {
             return "Red A"; 
         }
