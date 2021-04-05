@@ -72,8 +72,8 @@ public class IntakePIDSubsystem extends PIDSubsystem
 
     public void setAngle(double angle)
     {
-        setSetpoint(angle);
         enable();
+        setSetpoint(angle);
     }
 
     public void setIntakeOn()

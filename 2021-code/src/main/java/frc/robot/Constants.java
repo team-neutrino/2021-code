@@ -56,7 +56,7 @@ public final class Constants
         public static final double ARM_UP_ANGLE = 39;
         public static final int ENCODER_PORT = 8;
 
-        public static final double KP = 0.02;
+        public static final double KP = 0.2;
         public static final double KI = 0.0;
         public static final double KD = 0.0001;
         public static final double POSITION_MULTIPLIER = 360;
