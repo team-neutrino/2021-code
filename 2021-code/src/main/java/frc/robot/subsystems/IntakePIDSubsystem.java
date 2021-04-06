@@ -93,7 +93,7 @@ public class IntakePIDSubsystem extends PIDSubsystem
 
         if (m_arm_timer.get() < .5)
         {
-            m_IntakeArmMotor.set(ControlMode.PercentOutput, 0.3);
+            m_IntakeArmMotor.set(ControlMode.PercentOutput, 0.5);
 
         }
         else

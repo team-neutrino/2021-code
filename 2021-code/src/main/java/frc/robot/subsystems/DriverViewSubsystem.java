@@ -35,7 +35,8 @@ public class DriverViewSubsystem extends SubsystemBase
     private NetworkTableEntry m_beam_break_bot;
     private NetworkTableEntry m_path;
 
-    public DriverViewSubsystem(ShooterSubsystem p_Shooter, TurretSubsystem p_Turret, HopperSubsystem p_Hopper, AutonSelector p_AutonSelector)
+    public DriverViewSubsystem(ShooterSubsystem p_Shooter, TurretSubsystem p_Turret, HopperSubsystem p_Hopper,
+            AutonSelector p_AutonSelector)
     {
         m_Shooter = p_Shooter;
         m_Turret = p_Turret;
