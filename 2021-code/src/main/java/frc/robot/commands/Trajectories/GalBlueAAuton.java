@@ -30,10 +30,7 @@ public class GalBlueAAuton extends SequentialCommandGroup
             p_Drive::tankDriveVolts, p_Drive);
 
         addCommands(
-            new InstantCommand(p_Intake::setIntakeOn).alongWith(
-            new InstantCommand(p_Intake::setArmDown),
-            blueA),
-            new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)), 
-            new InstantCommand(() -> p_Intake.setIntakeOff()));
+            new InstantCommand(p_Intake::setIntakeOn).alongWith(new InstantCommand(p_Intake::setArmDown), blueA),
+            new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)), new InstantCommand(() -> p_Intake.setIntakeOff()));
     }
 }

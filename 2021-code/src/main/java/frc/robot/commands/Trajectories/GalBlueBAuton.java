@@ -30,9 +30,8 @@ public class GalBlueBAuton extends SequentialCommandGroup
 
             p_Drive::tankDriveVolts, p_Drive);
 
-        addCommands(new InstantCommand(p_Intake::setIntakeOn), new InstantCommand(p_Intake::setArmDown), 
-        blueB,
-        new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)));
+        addCommands(new InstantCommand(p_Intake::setIntakeOn), new InstantCommand(p_Intake::setArmDown), blueB,
+            new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)));
 
     }
 }
