@@ -78,8 +78,9 @@ public class RobotContainer
 
     private RamseteGenCommand m_RamseteGen;
     private AutonSelector m_AutonSelector = new AutonSelector(m_Drive, m_Intake);
-    
-    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper, m_AutonSelector);
+
+    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper,
+        m_AutonSelector);
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
         m_Intake, m_climber);
 
@@ -163,7 +164,7 @@ public class RobotContainer
 
     public void teleopInit()
     {
-        m_Intake.setIntakeOff();   
+        m_Intake.setIntakeOff();
         m_Intake.setAngle(39);
         isSingleJoystick = false;
         m_tankDriveCommand = new RunCommand(() -> m_Drive.tankDrive(m_leftJoystick.getY(), m_rightJoystick.getY()),
