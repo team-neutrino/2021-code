@@ -25,14 +25,14 @@ public class GalacticBRedTrajectory
 
     public static final Trajectory galRedB = TrajectoryGenerator.generateTrajectory(
         // Start at the origin facing the +X direction
-        new Pose2d(Units.inchesToMeters(30), Units.inchesToMeters(120), new Rotation2d(0)),
+        new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
         // Pass through these two interior waypoints, making an 's' curve path
         List.of(
-            new Translation2d(Units.inchesToMeters(90), Units.inchesToMeters(120)), 
-            new Translation2d(Units.inchesToMeters(150), Units.inchesToMeters(60)),
-            new Translation2d(Units.inchesToMeters(210), Units.inchesToMeters(120))),
+            new Translation2d(1,.6), 
+            new Translation2d(2.5,-1.1),
+            new Translation2d(4.6, 1.4)),
         // End 3 meters straight ahead of where we started, facing forward
-        new Pose2d(Units.inchesToMeters(300), Units.inchesToMeters(120), new Rotation2d(0)),
+        new Pose2d(7.5,1, new Rotation2d(0)),
         // Pass config
-        NeutrinoTrajectoryConfigs.m_FastForwardConfig);
+        NeutrinoTrajectoryConfigs.m_GalacticRedAForwardConfig);
 }
