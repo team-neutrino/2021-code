@@ -113,7 +113,7 @@ public class HopperSubsystem extends SubsystemBase
 
     public void rollerTowardsIntake()
     {
-        m_intakeHopperMotor.set(ControlMode.PercentOutput, 0.3);
+        m_intakeHopperMotor.set(ControlMode.PercentOutput, 0.1);
     }
 
     public void rollerTowardsTower()
