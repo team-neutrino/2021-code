@@ -83,13 +83,18 @@ public final class Constants
     {
         public static final double WHEEL_P = 0.04; //0.4 original, 0.7 with bad battery
         public static final double WHEEL_I = 0;
-        public static final  double WHEEL_D = 2;
+        public static final double WHEEL_D = 2;
         public static final double WHEEL_F = 0.008;
         public static final double SHOOTER_CONVERSION = 0;
+
+        // public static final int green = 69500;
+        // public static final int blue = 66000;
+        // public static final int red = 69100;
+        // public static final int yellow = 60000;
         public static final int green = 69500;
-        public static final int blue = 66000;
-        public static final int red = 69100;
-        public static final int yellow = 60000;
+        public static final int blue = 67100;
+        public static final int red = 71100;
+        public static final int yellow = 60250;
     }
 
     public static final class HoodConstants

@@ -52,7 +52,7 @@ public class ShooterSubsystem extends SubsystemBase
         m_wheelMotor3.follow(m_wheelMotor);
 
         m_wheelMotor.setInverted(true); //2 and 3 have the same physical configuration, but 3 is inverted by wire, so 1 and 3 should be the same in code
-        m_wheelMotor2.setInverted(true); 
+        m_wheelMotor2.setInverted(true);
         m_wheelMotor3.setInverted(true);
 
         m_wheelMotor.setNeutralMode(NeutralMode.Coast);

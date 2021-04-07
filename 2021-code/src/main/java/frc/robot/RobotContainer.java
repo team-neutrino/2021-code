@@ -54,6 +54,7 @@ public class RobotContainer
     private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
     private JoystickButton m_X = new JoystickButton(m_OperatorController, Button.kX.value);
     private JoystickButton m_rightJoystickButton = new JoystickButton(m_OperatorController, Button.kStickRight.value);
+    private JoystickButton m_leftJoystickButton = new JoystickButton(m_OperatorController, Button.kStickLeft.value);
     private JoystickButton m_Y = new JoystickButton(m_OperatorController, Button.kY.value);
     private JoystickButton m_BumperLeft = new JoystickButton(m_OperatorController, Button.kBumperLeft.value);
     private JoystickButton m_BumperRight = new JoystickButton(m_OperatorController, Button.kBumperRight.value);
@@ -112,6 +113,7 @@ public class RobotContainer
         m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.red));
         m_X.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.blue));
         m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, Constants.ShooterConstants.yellow));
+        m_start.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
 
         // Normal
         // m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
@@ -119,8 +121,8 @@ public class RobotContainer
         // m_X.whileHeld(new InstantCommand(m_climber::elevatorDown, m_climber), true).whenReleased(
         //     m_climber::elevatorStop, m_climber);
 
-        m_start.whileHeld(new InstantCommand(m_climber::elevatorUp, m_climber), true).whenReleased(
-            m_climber::elevatorStop, m_climber);
+        // m_start.whileHeld(new InstantCommand(m_climber::elevatorUp, m_climber), true).whenReleased(
+        //     m_climber::elevatorStop, m_climber);
 
         m_back.whileHeld(new ParallelCommandGroup(new InstantCommand(m_climber::winchClimb, m_climber))).whenReleased(
             new InstantCommand(m_climber::winchStop, m_climber));
