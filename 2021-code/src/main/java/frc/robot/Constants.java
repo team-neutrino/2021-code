@@ -88,13 +88,9 @@ public final class Constants
         public static final double WHEEL_F = 0.008;
         public static final double SHOOTER_CONVERSION = 0;
 
-        // public static final int green = 69500;
-        // public static final int blue = 66000;
-        // public static final int red = 69100;
-        // public static final int yellow = 60000;
         public static final int green = 69500;
         public static final int blue = 67100;
-        public static final int red = 71100;
+        public static final int red = 71200;
         public static final int yellow = 60250;
     }
 
