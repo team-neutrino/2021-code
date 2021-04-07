@@ -65,6 +65,11 @@ public class HopperSubsystem extends SubsystemBase
         m_towerMotor.set(ControlMode.PercentOutput, HopperConstants.HOPPER_MOTOR_POWER_REVERSE);
     }
 
+    public void up()
+    {
+        m_towerMotor.set(ControlMode.PercentOutput, HopperConstants.HOPPER_MOTOR_POWER);
+    }
+
     public void stop()
     {
         m_towerMotor.set(ControlMode.PercentOutput, 0);
