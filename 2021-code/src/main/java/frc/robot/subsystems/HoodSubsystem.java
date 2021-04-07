@@ -10,7 +10,7 @@ import frc.robot.Constants;
 
 public class HoodSubsystem extends SubsystemBase
 {
-    private Servo m_servo = new Servo(0);;
+    private Servo m_servo = new Servo(0);
     /** Creates a new HoodSubsystem. */
     public HoodSubsystem()
     {
