@@ -14,7 +14,7 @@ public class GalacticABlueTrajectory
 {
     public static final Trajectory galBlueA = TrajectoryGenerator.generateTrajectory(
         new Pose2d(0, 0, Rotation2d.fromDegrees(0)),
-        List.of(new Translation2d(3, -1.5), new Translation2d(3.2,0.85), new Translation2d(5.9,-0.4)),
+        List.of(new Translation2d(3, -1.5), new Translation2d(3.2,0.85), new Translation2d(5.9,-0.6)),
         new Pose2d(8, 0, Rotation2d.fromDegrees(0)), NeutrinoTrajectoryConfigs.m_GalacticRedAForwardConfig);
 
 }

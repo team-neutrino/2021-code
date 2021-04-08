@@ -30,7 +30,7 @@ public class SlalomTrajectory
             new Translation2d(6.9, 1.8), // circle top
             new Translation2d(6.5, -0.7), //2nd intersection, 2nd time
             //new Translation2d(5.2, -0.9), //bottom 1st pt
-            new Translation2d(4.6, -.7), //when it goes out of bounds, bottom middle
+            new Translation2d(4.6, -0.7), //when it goes out of bounds, bottom middle
             new Translation2d(2.2, 0), //bottom 2nd pt
             new Translation2d(1.75, 1.2) //1st interesection 2nd time
             ), 
