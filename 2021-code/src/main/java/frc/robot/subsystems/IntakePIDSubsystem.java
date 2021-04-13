@@ -56,12 +56,26 @@ public class IntakePIDSubsystem extends PIDSubsystem
         {
             m_DutyCycleEncoder.reset();
         }
+
+        if (m_arm_timer.get() > 0.1 && m_arm_timer.get() < .5)
+        {
+            m_IntakeArmMotor.set(ControlMode.PercentOutput, 0.5);
+            System.out.println("powering");
+        }
+        else
+        {
+            m_arm_timer.stop();
+            m_arm_timer.reset();
+            m_IntakeArmMotor.set(ControlMode.PercentOutput, 0);
+            System.out.println("not powering");
+        }
     }
 
     public void setAngle(double angle)
     {
-        setSetpoint(angle);
+        m_arm_timer.reset();
         enable();
+        setSetpoint(angle);
     }
 
     public void setIntakeOn()
@@ -76,8 +90,6 @@ public class IntakePIDSubsystem extends PIDSubsystem
 
     public void setIntakeOff()
     {
-        m_arm_timer.stop();
-        m_arm_timer.reset();
         m_IntakeFeedMotor.set(ControlMode.PercentOutput, 0);
     }
 
@@ -90,17 +102,5 @@ public class IntakePIDSubsystem extends PIDSubsystem
     {
         disable();
         m_arm_timer.start();
-
-        if (m_arm_timer.get() < .5)
-        {
-            m_IntakeArmMotor.set(ControlMode.PercentOutput, 0.5);
-
-        }
-        else
-        {
-            m_arm_timer.stop();
-            m_arm_timer.reset();
-            m_IntakeArmMotor.set(ControlMode.PercentOutput, 0);
-        }
     }
 }

@@ -83,8 +83,6 @@ public class RobotContainer
         m_AutonSelector);
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
         m_Intake, m_climber);
-
-    private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
     private BarrelRaceAuton m_BarrelRace;
@@ -113,20 +111,8 @@ public class RobotContainer
      */
     private void configureButtonBindings()
     {
-        m_start.whileHeld(new InstantCommand(m_climber::elevatorUp, m_climber), true).whenReleased(
-            m_climber::elevatorStop, m_climber);
-
-        m_X.whileHeld(new InstantCommand(m_climber::elevatorDown, m_climber), true).whenReleased(
-            m_climber::elevatorStop, m_climber);
-
-        m_back.whileHeld(new ParallelCommandGroup(new InstantCommand(m_climber::winchClimb, m_climber))).whenReleased(
-            new InstantCommand(m_climber::winchStop, m_climber));
-
-        m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
-            m_climber);
-
-        m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
-        m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_DistanceCalculator.getShooterSpeed()));
+        m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 110000));
+        m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, 40000));
         m_trigger.whenPressed(new InstantCommand(() -> counter++));
         m_top3.toggleWhenPressed(new HoodCommand(m_hood));
 
@@ -159,7 +145,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_AutonSelector.getAutonCommand();
+        return m_BarrelRace;
     }
 
     public void teleopInit()
