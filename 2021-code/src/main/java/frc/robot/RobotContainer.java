@@ -140,7 +140,7 @@ public class RobotContainer
         m_TriggerLeft.whenActive(
             new InstantCommand(m_Intake::setIntakeOn, m_Intake).alongWith(new InstantCommand(m_Intake::setArmDown)));
         m_TriggerLeft.whenInactive(new InstantCommand(m_Intake::setIntakeOff, m_Intake).alongWith(
-            new InstantCommand(() -> m_Intake.setAngle(38))));
+            new InstantCommand(() -> m_Intake.setAngle(Constants.IntakeConstants.ARM_UP_ANGLE))));
 
         m_UpPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(-90), m_Turret)).whenReleased(
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
