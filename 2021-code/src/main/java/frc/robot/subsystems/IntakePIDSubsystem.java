@@ -15,7 +15,6 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import frc.robot.Constants;
 import frc.robot.Constants.CanId;
-import edu.wpi.first.wpilibj.Timer;
 
 public class IntakePIDSubsystem extends PIDSubsystem
 {
@@ -23,7 +22,6 @@ public class IntakePIDSubsystem extends PIDSubsystem
     private TalonSRX m_IntakeFeedMotor = new TalonSRX(CanId.MOTOR_CONTROLLER_INTAKE_FEED);
     private TalonSRX m_IntakeArmMotor = new TalonSRX(CanId.MOTOR_CONTROLLER_INTAKE_POSITION);
     private DutyCycleEncoder m_DutyCycleEncoder = new DutyCycleEncoder(Constants.IntakeConstants.ENCODER_PORT);
-    private Timer m_arm_timer = new Timer();
     private int isArmUp = 0; //neutral state
     /**
      * Creates a new IntakePIDSubsystem.
@@ -84,8 +82,6 @@ public class IntakePIDSubsystem extends PIDSubsystem
 
     public void setIntakeOff()
     {
-        m_arm_timer.stop();
-        m_arm_timer.reset();
         m_IntakeFeedMotor.set(ControlMode.PercentOutput, 0);
     }
 
