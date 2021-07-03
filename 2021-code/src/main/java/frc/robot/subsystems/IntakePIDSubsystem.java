@@ -24,6 +24,7 @@ public class IntakePIDSubsystem extends PIDSubsystem
     private TalonSRX m_IntakeArmMotor = new TalonSRX(CanId.MOTOR_CONTROLLER_INTAKE_POSITION);
     private DutyCycleEncoder m_DutyCycleEncoder = new DutyCycleEncoder(Constants.IntakeConstants.ENCODER_PORT);
     private Timer m_arm_timer = new Timer();
+    private int isArmUp = 0; //neutral state
     /**
      * Creates a new IntakePIDSubsystem.
      */
@@ -56,10 +57,17 @@ public class IntakePIDSubsystem extends PIDSubsystem
         {
             m_DutyCycleEncoder.reset();
         }
+
+        if(isArmUp == 2) //if we want to arm down
+        {
+            setArmDown();
+        }
+        System.out.println(isArmUp);
     }
 
     public void setAngle(double angle)
     {
+        isArmUp = 1; //if we want the arm to be up
         setSetpoint(angle);
         enable();
     }
@@ -88,18 +96,14 @@ public class IntakePIDSubsystem extends PIDSubsystem
 
     public void setArmDown()
     {
+        isArmUp = 2; //the arm is down
         disable();
-        m_arm_timer.start();
-
-        if (m_arm_timer.get() < .5)
+        if(getMeasurement() < 90)
         {
-            m_IntakeArmMotor.set(ControlMode.PercentOutput, 0.5);
-
-        }
+            m_IntakeArmMotor.set(ControlMode.PercentOutput, 0.25);
+        } 
         else
         {
-            m_arm_timer.stop();
-            m_arm_timer.reset();
             m_IntakeArmMotor.set(ControlMode.PercentOutput, 0);
         }
     }
