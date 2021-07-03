@@ -60,7 +60,6 @@ public class IntakePIDSubsystem extends PIDSubsystem
         {
             setArmDown();
         }
-        System.out.println(isArmUp);
     }
 
     public void setAngle(double angle)
