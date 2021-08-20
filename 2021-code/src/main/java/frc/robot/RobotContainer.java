@@ -119,10 +119,10 @@ public class RobotContainer
         m_X.whileHeld(new InstantCommand(m_climber::elevatorDown, m_climber), true).whenReleased(
             m_climber::elevatorStop, m_climber);
 
-        m_back.whileHeld(new ParallelCommandGroup(new InstantCommand(m_climber::winchClimb, m_climber))).whenReleased(
+        m_back.whileHeld(new ParallelCommandGroup(new InstantCommand(m_climber::winchReverse, m_climber))).whenReleased(
             new InstantCommand(m_climber::winchStop, m_climber));
 
-        m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
+        m_LJoy8.whenHeld(new InstantCommand(m_climber::winchClimb, m_climber)).whenReleased(m_climber::winchStop,
             m_climber);
 
         m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
