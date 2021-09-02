@@ -56,7 +56,7 @@ public class IntakePIDSubsystem extends PIDSubsystem
             m_DutyCycleEncoder.reset();
         }
 
-        if(isArmUp == 2) //if we want to arm down
+        if (isArmUp == 2) //if we want to arm down
         {
             setArmDown();
         }
@@ -93,10 +93,10 @@ public class IntakePIDSubsystem extends PIDSubsystem
     {
         isArmUp = 2; //the arm is down
         disable();
-        if(getMeasurement() < 90)
+        if (getMeasurement() < 90)
         {
             m_IntakeArmMotor.set(ControlMode.PercentOutput, 0.25);
-        } 
+        }
         else
         {
             m_IntakeArmMotor.set(ControlMode.PercentOutput, 0);
