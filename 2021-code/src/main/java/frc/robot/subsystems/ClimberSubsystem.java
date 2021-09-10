@@ -43,6 +43,11 @@ public class ClimberSubsystem extends SubsystemBase
     public void elevatorUp()
     {
         m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
+        if (getHeight() >= 50)
+        {
+            m_ClimbElevator.setSelectedSensorPosition(0);
+        }
+
     }
 
     public void elevatorDown()
