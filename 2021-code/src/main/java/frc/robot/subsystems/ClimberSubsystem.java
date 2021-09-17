@@ -43,6 +43,12 @@ public class ClimberSubsystem extends SubsystemBase
     public void elevatorUp()
     {
         m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
+        System.out.println("right before the if loop :)");
+        if (getHeight() >= 300)
+        {
+            m_ClimbElevator.set(ControlMode.PercentOutput, 0);
+            System.out.println("inside if loop, it should've run I guess :3");
+        }
     }
 
     public void elevatorDown()
