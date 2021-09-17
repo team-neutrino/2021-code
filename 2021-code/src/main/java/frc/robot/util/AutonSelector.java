@@ -12,6 +12,7 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.AutonSelectorConstant;
+import frc.robot.commands.Trajectories.EMCCAuton;
 import frc.robot.commands.Trajectories.GalBlueAAuton;
 import frc.robot.commands.Trajectories.GalRedAAuton;
 import frc.robot.commands.Trajectories.GalRedBAuton;
@@ -26,6 +27,7 @@ public class AutonSelector
     private GalRedBAuton m_RedB;
     private GalRedAAuton m_RedA;
     private GalBlueBAuton m_BlueB;
+    public EMCCAuton m_EMCC;
 
     private NetworkTable table;
 
