@@ -26,6 +26,7 @@ public class ClimberSubsystem extends SubsystemBase
      * Creates a new ClimberSubsystem.
      */
     public ClimberSubsystem()
+    
     {
         m_ClimbElevator.setNeutralMode(NeutralMode.Brake);
     }
@@ -38,16 +39,16 @@ public class ClimberSubsystem extends SubsystemBase
         {
             m_ClimbElevator.setSelectedSensorPosition(0);
         }
+        // if (getHeight() >= 10000)
+        // {
+        //     m_ClimbElevator.set(ControlMode.PercentOutput, 0);
+        // }
     }
 
     public void elevatorUp()
     {
         m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
-        if (getHeight() >= 300)
-        {
-            m_ClimbElevator.set(ControlMode.PercentOutput, 0);
-        }
-
+        System.out.println(getHeight());
     }
 
     public void elevatorDown()

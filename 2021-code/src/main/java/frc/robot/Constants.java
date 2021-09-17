@@ -120,7 +120,7 @@ public final class Constants
 
     public static final class ClimberConstants
     {
-        public static final double CLIMBER_MOTOR_POWER_UP = .2;
+        public static final double CLIMBER_MOTOR_POWER_UP = .4;
         public static final double CLIMBER_MOTOR_POWER_DOWN = .2;
         public static final double CLIMBER_MOTOR_WINCHPOWER = 1;
         public static final double CLIMBER_BAR_HEIGHT = 0;
