@@ -31,7 +31,7 @@ public class AutonSelector
     private GalRedBAuton m_RedB;
     private GalRedAAuton m_RedA;
     private GalBlueBAuton m_BlueB;
-    public EMCCAuton m_EMCC;
+    private EMCCAuton m_EMCC;
 
     private NetworkTable table;
 
