@@ -5,7 +5,10 @@
 package frc.robot.util;
 
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.IntakePIDSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -31,7 +34,7 @@ public class AutonSelector
 
     private NetworkTable table;
 
-    public AutonSelector(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
+    public AutonSelector(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake, TurretSubsystem p_Turret, ShooterSubsystem p_Shooter, HopperSubsystem p_Hopper)
     {
         m_Drive = p_Drive;
         m_Intake = p_Intake;
@@ -40,6 +43,7 @@ public class AutonSelector
         m_RedA = new GalRedAAuton(m_Drive, m_Intake);
         m_RedB = new GalRedBAuton(p_Drive, p_Intake);
         m_BlueB = new GalBlueBAuton(p_Drive, p_Intake);
+        m_EMCC = new EMCCAuton(p_Drive, p_Intake, p_Turret, p_Shooter, p_Hopper);
 
         table = NetworkTableInstance.getDefault().getTable("limelight");
     }
@@ -85,27 +89,27 @@ public class AutonSelector
 
     public Command getAutonCommand()
     {
-        if (getPath().equals("Blue A"))
-        {
-            System.out.println("Blue A");
-            return m_BlueA;
-        }
-        else if (getPath().equals("Red B"))
-        {
-            System.out.println("Red B");
-            return m_RedB;
-        }
-        else if (getPath().equals("Blue B"))
-        {
-            System.out.println("Blue B");
-            return m_BlueB;
-        }
-        else if (getPath().equals("Red A"))
-        {
-            System.out.println("Red A");
-            return m_RedA;
-        }
+        // if (getPath().equals("Blue A"))
+        // {
+        //     System.out.println("Blue A");
+        //     return m_BlueA;
+        // }
+        // else if (getPath().equals("Red B"))
+        // {
+        //     System.out.println("Red B");
+        //     return m_RedB;
+        // }
+        // else if (getPath().equals("Blue B"))
+        // {
+        //     System.out.println("Blue B");
+        //     return m_BlueB;
+        // }
+        // else if (getPath().equals("Red A"))
+        // {
+        //     System.out.println("Red A");
+        //     return m_RedA;
+        // }
         System.out.println("None");
-        return m_RedA;
+        return m_EMCC;
     }
 }

@@ -77,7 +77,7 @@ public class RobotContainer
     private POVButton m_DownPovButton = new POVButton(m_OperatorController, 180);
 
     private RamseteGenCommand m_RamseteGen;
-    private AutonSelector m_AutonSelector = new AutonSelector(m_Drive, m_Intake);
+    private AutonSelector m_AutonSelector = new AutonSelector(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
 
     private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper,
         m_AutonSelector);
@@ -159,8 +159,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_AutonSelector.m_EMCC;
-        //return m_AutonSelector.getAutonCommand();
+        return m_AutonSelector.getAutonCommand();
     }
 
     public void teleopInit()
