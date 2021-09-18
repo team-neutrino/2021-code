@@ -19,6 +19,7 @@ import frc.robot.commands.Trajectories.EMCCAuton;
 import frc.robot.commands.Trajectories.GalBlueAAuton;
 import frc.robot.commands.Trajectories.GalRedAAuton;
 import frc.robot.commands.Trajectories.GalRedBAuton;
+import frc.robot.commands.Trajectories.SixBallAuton;
 import frc.robot.commands.Trajectories.GalBlueBAuton;
 
 /** Add your docs here. */
