@@ -5,7 +5,10 @@
 package frc.robot.util;
 
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.IntakePIDSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
@@ -27,11 +30,12 @@ public class AutonSelector
     private GalRedBAuton m_RedB;
     private GalRedAAuton m_RedA;
     private GalBlueBAuton m_BlueB;
-    public SixBallAuton m_Six;
+    private SixBallAuton m_Six;
 
     private NetworkTable table;
 
-    public AutonSelector(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake)
+    public AutonSelector(DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake, ShooterSubsystem p_Shooter,
+            TurretSubsystem p_Turret, HopperSubsystem p_Hopper)
     {
         m_Drive = p_Drive;
         m_Intake = p_Intake;
@@ -40,6 +44,7 @@ public class AutonSelector
         m_RedA = new GalRedAAuton(m_Drive, m_Intake);
         m_RedB = new GalRedBAuton(p_Drive, p_Intake);
         m_BlueB = new GalBlueBAuton(p_Drive, p_Intake);
+        m_Six = new SixBallAuton(p_Shooter, p_Hopper, p_Intake, p_Drive, p_Turret);
 
         table = NetworkTableInstance.getDefault().getTable("limelight");
     }
@@ -106,6 +111,6 @@ public class AutonSelector
             return m_RedA;
         }
         System.out.println("None");
-        return m_RedA;
+        return m_Six;
     }
 }
