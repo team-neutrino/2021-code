@@ -113,8 +113,8 @@ public class RobotContainer
      */
     private void configureButtonBindings()
     {
-        m_start.whileHeld(new InstantCommand(m_climber::elevatorUp, m_climber), true).whenReleased(
-            m_climber::elevatorStop, m_climber);
+        m_start.whileHeld((new InstantCommand(m_climber::elevatorUp, m_climber, true).alongWith(new InstantCommand(() -> m_Turret.setpointSetAngle(-21) )).whenReleased(
+            m_climber::elevatorStop, m_climber));
 
         m_X.whileHeld(new InstantCommand(m_climber::elevatorDown, m_climber), true).whenReleased(
             m_climber::elevatorStop, m_climber);
@@ -149,7 +149,7 @@ public class RobotContainer
         m_RightPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(0), m_Turret)).whenReleased(
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
         m_DownPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(90), m_Turret)).whenReleased(
-            new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
+            new InstantCommand(() -> m_Turret.setPower(0), m_Turret)); 
     }
 
     /**
