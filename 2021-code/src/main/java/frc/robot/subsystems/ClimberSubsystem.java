@@ -43,6 +43,7 @@ public class ClimberSubsystem extends SubsystemBase
     public void elevatorUp()
     {
         m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
+        System.out.println("the INDIVIDUAL");
     }
 
     public void elevatorDown()
@@ -58,6 +59,7 @@ public class ClimberSubsystem extends SubsystemBase
     public void elevatorStop()
     {
         m_ClimbElevator.set(ControlMode.PercentOutput, 0);
+        System.out.println("socoiety");
     }
 
     public void winchStop()
