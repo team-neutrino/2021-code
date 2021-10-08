@@ -107,7 +107,7 @@ public class RobotContainer
     }
 
     /**
-     * Use this method to define your button->command mappings. Buttons can be created by instantiating aDW
+     * Use this method to define your button->command mappings. Buttons can be created by instantiating 
      * {@link GenericHID} or one of its subclasses ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}),
      * and then passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
@@ -115,7 +115,7 @@ public class RobotContainer
     {
         //m_start.whileHeld(new InstantCommand(m_climber::elevatorUp, m_climber), true).whenReleased(m_climber::elevatorStop, m_climber);
         m_start.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(0), m_Turret).alongWith(new InstantCommand(m_climber::elevatorUp, m_climber)), true).whenReleased(
-            new InstantCommand(() -> m_Turret.setPower(0), m_Turret).alongWith(new InstantCommand(m_climber::elevatorStop, m_climber)), true);
+        new InstantCommand(() -> m_Turret.setPower(-90), m_Turret).alongWith(new InstantCommand(m_climber::elevatorStop, m_climber)), true);
         m_X.whileHeld(new InstantCommand(m_climber::elevatorDown, m_climber), true).whenReleased(
             m_climber::elevatorStop, m_climber);
 
