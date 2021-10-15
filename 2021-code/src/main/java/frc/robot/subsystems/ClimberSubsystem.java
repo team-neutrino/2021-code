@@ -58,7 +58,6 @@ public class ClimberSubsystem extends SubsystemBase
     public void elevatorStop()
     {
         m_ClimbElevator.set(ControlMode.PercentOutput, 0);
-        System.out.println("socoiety");
     }
 
     public void winchStop()
