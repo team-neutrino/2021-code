@@ -29,6 +29,10 @@ public class HopperSubsystem extends SubsystemBase
     private Timer m_rollerTimer = new Timer();
     private boolean m_prevBotBeam;
     private ShooterSubsystem m_Shooter;
+    private String def = "def";
+    private String a = "a";
+    private String b = "b";
+    private String c = "c";
 
     public HopperSubsystem(ShooterSubsystem p_Shooter)
     {
@@ -91,6 +95,17 @@ public class HopperSubsystem extends SubsystemBase
         m_timer.reset();
     }
 
+    /*
+    public void printTestDef()
+    {
+        System.out.println(def);
+    }
+
+    public void printTest()
+    {
+        System.out.println(a);
+    }
+    */
     public void setPrevBotBeam(boolean beamStatus)
     {
         m_prevBotBeam = beamStatus;

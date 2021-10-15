@@ -26,7 +26,7 @@ public class AutonSelector
     private GalBlueAAuton m_BlueA;
     private GalRedBAuton m_RedB;
     private GalRedAAuton m_RedA;
-    private GalBlueBAuton m_BlueB;
+    public GalBlueBAuton m_BlueB;
     public SixBallAuton m_Six;
 
     private NetworkTable table;

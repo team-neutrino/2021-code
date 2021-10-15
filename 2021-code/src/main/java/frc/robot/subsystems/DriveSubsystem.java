@@ -81,6 +81,7 @@ public class DriveSubsystem extends SubsystemBase
         SmartDashboard.putNumber("getYaw()", getNavxYaw());
         SmartDashboard.putNumber("getX()", getTranslationX());
         SmartDashboard.putNumber("getY()", getTranslationY());
+
         var translation = m_odometry.getPoseMeters().getTranslation();
         m_xEntry.setNumber(translation.getX());
         m_yEntry.setNumber(translation.getY());

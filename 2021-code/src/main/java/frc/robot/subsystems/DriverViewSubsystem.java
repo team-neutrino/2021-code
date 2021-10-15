@@ -15,6 +15,11 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.util.AutonSelector;
 
@@ -42,6 +47,7 @@ public class DriverViewSubsystem extends SubsystemBase
         m_Turret = p_Turret;
         m_Hopper = p_Hopper;
         m_AutonSelector = p_AutonSelector;
+        
 
         // setup driver view tab
         m_driver_view_tab = Shuffleboard.getTab("Driver View");
