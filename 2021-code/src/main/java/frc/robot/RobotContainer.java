@@ -132,8 +132,8 @@ public class RobotContainer
 
         m_BumperLeft.whileHeld(new InstantCommand(m_Hopper::towerShoot, m_Hopper), false).whenReleased(
             (new InstantCommand(m_Hopper::stop, m_Hopper)));
-        m_BumperRight.whileHeld(new InstantCommand(m_Hopper::reverse, m_Hopper), false).whenReleased(
-            (new InstantCommand(m_Hopper::stop, m_Hopper)));
+        m_BumperRight.whenActive(m_Intake::setIntakeReverse, m_Intake);
+        m_BumperRight.whenInactive(new InstantCommand(m_Intake::setIntakeOff, m_Intake));
         m_rightJoystickButton.toggleWhenActive(
             new TurretOverrideCommand(m_Turret, () -> m_OperatorController.getX(Hand.kRight)));
 
