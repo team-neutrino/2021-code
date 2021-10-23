@@ -16,6 +16,8 @@ import frc.robot.commands.Trajectories.GalBlueAAuton;
 import frc.robot.commands.Trajectories.GalRedAAuton;
 import frc.robot.commands.Trajectories.GalRedBAuton;
 import frc.robot.commands.Trajectories.SixBallAuton;
+import frc.robot.commands.Trajectories.TenBallAuton;
+import frc.robot.commands.Trajectories.ThreeAuton;
 import frc.robot.commands.Trajectories.GalBlueBAuton;
 
 /** Add your docs here. */
@@ -23,11 +25,20 @@ public class AutonSelector
 {
     private DriveSubsystem m_Drive;
     private IntakePIDSubsystem m_Intake;
+    private TurretSubsystem m_Turret;
+    private ShooterSubsystem m_Shooter;
+    private HopperSubsystem m_Hopper;
     private GalBlueAAuton m_BlueA;
     private GalRedBAuton m_RedB;
     private GalRedAAuton m_RedA;
     private GalBlueBAuton m_BlueB;
+<<<<<<< Updated upstream
     public SixBallAuton m_Six;
+=======
+    private SixBallAuton m_Six;
+    private TenBallAuton m_Ten;
+    private ThreeAuton m_Three;
+>>>>>>> Stashed changes
 
     private NetworkTable table;
 
@@ -40,7 +51,13 @@ public class AutonSelector
         m_RedA = new GalRedAAuton(m_Drive, m_Intake);
         m_RedB = new GalRedBAuton(p_Drive, p_Intake);
         m_BlueB = new GalBlueBAuton(p_Drive, p_Intake);
+<<<<<<< Updated upstream
 
+=======
+        m_Six = new SixBallAuton(p_Shooter, p_Hopper, p_Intake, p_Drive, p_Turret);
+        m_Ten = new TenBallAuton(p_Drive, p_Intake, p_Turret, p_Shooter, p_Hopper);
+        m_Three = new ThreeAuton(p_Shooter, p_Hopper, p_Drive, 15);
+>>>>>>> Stashed changes
         table = NetworkTableInstance.getDefault().getTable("limelight");
     }
 
@@ -106,6 +123,10 @@ public class AutonSelector
             return m_RedA;
         }
         System.out.println("None");
+<<<<<<< Updated upstream
         return m_RedA;
+=======
+        return m_Three;
+>>>>>>> Stashed changes
     }
 }

@@ -90,6 +90,7 @@ public class RobotContainer
     private BarrelRaceAuton m_BarrelRace;
     private SlalomAuton m_Slalom;
     private BounceAuton m_BounceAuton;
+    private TenBallAuton m_TenBall;
     private int counter = 0;
 
     /**
@@ -104,6 +105,7 @@ public class RobotContainer
         m_BounceAuton = new BounceAuton(m_Drive, m_Intake);
         m_BarrelRace = new BarrelRaceAuton(m_Drive);
         m_Slalom = new SlalomAuton(m_Drive, m_Intake);
+        m_TenBall = new TenBallAuton(m_Drive, m_Intake, m_Turret, m_Shooter, m_Hopper);
     }
 
     /**
