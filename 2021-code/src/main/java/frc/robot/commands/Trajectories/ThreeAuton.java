@@ -21,20 +21,17 @@ public class ThreeAuton extends CommandBase
     private ShooterSubsystem m_Shooter;
     private HopperSubsystem m_Hopper;
     private DriveSubsystem m_Drive;
-    private double m_Duration;
     private Timer m_Timer = new Timer();
 
     /**
      * Creates a new ShootAuton.
      */
-    public ThreeAuton(ShooterSubsystem p_Shooter, HopperSubsystem p_Hopper, DriveSubsystem p_Drive, double p_Duration)
+    public ThreeAuton(ShooterSubsystem p_Shooter, HopperSubsystem p_Hopper, DriveSubsystem p_Drive)
     {
         addRequirements(p_Shooter, p_Hopper, p_Drive);
         m_Shooter = p_Shooter;
         m_Hopper = p_Hopper;
         m_Drive = p_Drive;
-
-        m_Duration = p_Duration;
     }
 
     /**
@@ -57,7 +54,7 @@ public class ThreeAuton extends CommandBase
         {
             m_Hopper.towerShoot();
         }
-        if (m_Timer.get() >= 5)
+        if (m_Timer.get() >= 6)
         {
             m_Shooter.setPower(0);
             m_Drive.tankDrive(-0.25, -0.25);
@@ -80,6 +77,6 @@ public class ThreeAuton extends CommandBase
     @Override
     public boolean isFinished()
     {
-        return m_Timer.get() >= 6;
+        return m_Timer.get() >= 7;
     }
 }
