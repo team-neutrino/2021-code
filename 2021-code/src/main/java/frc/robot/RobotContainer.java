@@ -87,9 +87,11 @@ public class RobotContainer
     private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
+
     private BarrelRaceAuton m_BarrelRace;
     private SlalomAuton m_Slalom;
     private BounceAuton m_BounceAuton;
+    private ThreeAuton m_ThreeAuton;
     private int counter = 0;
 
     /**
@@ -104,18 +106,22 @@ public class RobotContainer
         m_BounceAuton = new BounceAuton(m_Drive, m_Intake);
         m_BarrelRace = new BarrelRaceAuton(m_Drive);
         m_Slalom = new SlalomAuton(m_Drive, m_Intake);
+        m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, m_Turret);
     }
 
     /**
-     * Use this method to define your button->command mappings. Buttons can be created by instantiating 
+     * Use this method to define your button->command mappings. Buttons can be created by instantiating
      * {@link GenericHID} or one of its subclasses ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}),
      * and then passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings()
     {
         //m_start.whileHeld(new InstantCommand(m_climber::elevatorUp, m_climber), true).whenReleased(m_climber::elevatorStop, m_climber);
-        m_start.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(0), m_Turret).alongWith(new InstantCommand(m_climber::elevatorUp, m_climber)), true).whenReleased(
-        new InstantCommand(() -> m_Turret.setPower(-90), m_Turret).alongWith(new InstantCommand(m_climber::elevatorStop, m_climber)), true);
+        m_start.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(0), m_Turret).alongWith(
+            new InstantCommand(m_climber::elevatorUp, m_climber)), true).whenReleased(
+                new InstantCommand(() -> m_Turret.setPower(-90), m_Turret).alongWith(
+                    new InstantCommand(m_climber::elevatorStop, m_climber)),
+                true);
         m_X.whileHeld(new InstantCommand(m_climber::elevatorDown, m_climber), true).whenReleased(
             m_climber::elevatorStop, m_climber);
 
@@ -149,7 +155,7 @@ public class RobotContainer
         m_RightPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(0), m_Turret)).whenReleased(
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
         m_DownPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(90), m_Turret)).whenReleased(
-            new InstantCommand(() -> m_Turret.setPower(0), m_Turret)); 
+            new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
     }
 
     /**
@@ -161,7 +167,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_AutonSelector.m_Six;
+        return m_ThreeAuton;
     }
 
     public void teleopInit()
