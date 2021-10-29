@@ -34,15 +34,22 @@ public class ClimberSubsystem extends SubsystemBase
     public void periodic()
     {
         // This method will be called once per scheduler run
-        if (getHeight() < 0)
-        {
-            m_ClimbElevator.setSelectedSensorPosition(0);
-        }
+        // if (getHeight() < 0)
+        // {
+        //     m_ClimbElevator.setSelectedSensorPosition(0);
+        // }
     }
 
     public void elevatorUp()
     {
-        m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
+        if (getHeight() > ClimberConstants.CLIMBER_FULL_EXTEND)
+        {
+            elevatorStop();
+        }
+        else
+        {
+            m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
+        }
     }
 
     public void elevatorDown()
