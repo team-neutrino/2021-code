@@ -88,6 +88,7 @@ public class RobotContainer
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
     private BarrelRaceAuton m_BarrelRace;
+    private JustShoot m_JustShoot;
     private SlalomAuton m_Slalom;
     private BounceAuton m_BounceAuton;
     private int counter = 0;
