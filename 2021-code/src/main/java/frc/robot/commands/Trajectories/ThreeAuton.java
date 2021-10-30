@@ -47,7 +47,7 @@ public class ThreeAuton extends CommandBase
         m_Timer.start();
         m_Turret.setLightOff();
         m_Shooter.setVelocity(78000);
-        m_Turret.setAngle(45);
+        m_Turret.setAngle(130);
     }
 
     /**
@@ -79,7 +79,7 @@ public class ThreeAuton extends CommandBase
     }
 
     /**
-     * @return true when command should
+     * @return true when command should 
      */
     @Override
     public boolean isFinished()
