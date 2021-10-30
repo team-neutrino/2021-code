@@ -21,13 +21,14 @@ public class ClimberSubsystem extends SubsystemBase
 {
     private TalonSRX m_ClimbElevator = new TalonSRX(CanId.MOTOR_CONTROLLER_CLIMBER);
     private CANSparkMax m_ClimbWinch = new CANSparkMax(CanId.MOTOR_CONTROLLER_CLIMBERWINCH, MotorType.kBrushless);
-
+    private static boolean elevatorPressed = false;
     /**
      * Creates a new ClimberSubsystem.
      */
     public ClimberSubsystem()
     {
         m_ClimbElevator.setNeutralMode(NeutralMode.Brake);
+        elevatorPressed = false;
     }
 
     @Override
@@ -43,6 +44,7 @@ public class ClimberSubsystem extends SubsystemBase
     public void elevatorUp()
     {
         m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
+        elevatorPressed = true;
     }
 
     public void elevatorDown()
@@ -52,7 +54,10 @@ public class ClimberSubsystem extends SubsystemBase
 
     public void winchClimb()
     {
-        m_ClimbWinch.set(ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
+        if (elevatorPressed)
+        {
+            m_ClimbWinch.set(ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
+        }
     }
 
     public void elevatorStop()
@@ -67,7 +72,10 @@ public class ClimberSubsystem extends SubsystemBase
 
     public void winchReverse()
     {
-        m_ClimbWinch.set(-ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
+        if (elevatorPressed)
+        {
+            m_ClimbWinch.set(-ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
+        }
     }
 
     public double getHeight()
