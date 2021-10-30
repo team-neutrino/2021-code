@@ -91,6 +91,8 @@ public class RobotContainer
     private JustShoot m_JustShoot;
     private SlalomAuton m_Slalom;
     private BounceAuton m_BounceAuton;
+    private JustShoot m_shootThree;
+    private double m_angle = m_Troubleshooting.getAutonAngle();
     private int counter = 0;
 
     /**
@@ -105,6 +107,11 @@ public class RobotContainer
         m_BounceAuton = new BounceAuton(m_Drive, m_Intake);
         m_BarrelRace = new BarrelRaceAuton(m_Drive);
         m_Slalom = new SlalomAuton(m_Drive, m_Intake);
+    }
+
+    public void initAuton() 
+    {
+        m_shootThree = new JustShoot(m_Turret, m_Shooter, m_Hopper, m_Drive, m_angle);
     }
 
     /**
@@ -162,7 +169,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_AutonSelector.m_Six;
+        return m_shootThree;
     }
 
     public void teleopInit()
