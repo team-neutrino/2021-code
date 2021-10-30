@@ -24,6 +24,8 @@ public class TroubleshootingSubsystem extends SubsystemBase
     private NetworkTableEntry m_right_encoder;
     private NetworkTableEntry m_arm_angle;
     private NetworkTableEntry m_climber_height;
+    private NetworkTableEntry m_just_shoot_angle;
+    private double m_angle;
     public static NetworkTableEntry m_drive_distance;
 
     public TroubleshootingSubsystem(ShooterSubsystem p_Shooter, DriveSubsystem p_Drive, IntakePIDSubsystem p_Intake,
@@ -48,6 +50,8 @@ public class TroubleshootingSubsystem extends SubsystemBase
         m_arm_angle = m_troubleshooting_tab.add("Arm angle", 0).withPosition(0, 3).withSize(1, 1).getEntry();
 
         m_drive_distance = m_troubleshooting_tab.add("Drive distance", 0).withPosition(4, 4).withSize(2, 2).getEntry();
+        m_just_shoot_angle = m_troubleshooting_tab.add("Just Shoot Angle", 70).withPosition(4, 4).withSize(2, 1).getEntry();
+        m_angle = m_just_shoot_angle.getNumber(70).doubleValue();
     }
 
     @Override
@@ -60,6 +64,10 @@ public class TroubleshootingSubsystem extends SubsystemBase
         m_climber_height.setDouble(m_Climber.getHeight());
         m_shooter_velocity_two.setDouble(m_Shooter.getVelocity());
         m_speed = m_input_shooter_Speed.getNumber(0).doubleValue();
+    }
+
+    public double getAutonAngle() {
+        return m_angle;
     }
 
     public double getVelocity()
