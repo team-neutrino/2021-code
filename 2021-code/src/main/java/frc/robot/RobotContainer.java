@@ -84,9 +84,10 @@ public class RobotContainer
     private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
-    private int counter = 0;
 
-    private ThreeAuton threeAuton;
+    private ThreeAuton m_ThreeAuton;
+    private SixBallAuton m_SixAuton;
+    private int counter = 0;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -97,7 +98,8 @@ public class RobotContainer
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
         m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
-        threeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 15);
+        m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, m_Turret);
+        m_SixAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
     }
 
     /**
@@ -158,7 +160,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return threeAuton;
+        return m_SixAuton;
     }
 
     public void teleopInit()
