@@ -108,6 +108,7 @@ public class RobotContainer
         m_BarrelRace = new BarrelRaceAuton(m_Drive);
         m_Slalom = new SlalomAuton(m_Drive, m_Intake);
         m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, m_Turret);
+        m_SixAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
     }
 
     /**
