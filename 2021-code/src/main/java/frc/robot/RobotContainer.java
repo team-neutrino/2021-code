@@ -92,6 +92,7 @@ public class RobotContainer
     private SlalomAuton m_Slalom;
     private BounceAuton m_BounceAuton;
     private ThreeAuton m_ThreeAuton;
+    private SixBallAuton m_SixAuton;
     private int counter = 0;
 
     /**
@@ -167,7 +168,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_ThreeAuton;
+        return m_SixAuton;
     }
 
     public void teleopInit()
