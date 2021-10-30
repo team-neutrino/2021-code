@@ -29,7 +29,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 
 import frc.robot.subsystems.*;
-import frc.robot.util.AutonSelector;
 import frc.robot.util.DistanceCalculator;
 import frc.robot.util.TriggerToBoolean;
 import frc.robot.commands.*;
@@ -77,20 +76,17 @@ public class RobotContainer
     private POVButton m_DownPovButton = new POVButton(m_OperatorController, 180);
 
     private RamseteGenCommand m_RamseteGen;
-    private AutonSelector m_AutonSelector = new AutonSelector(m_Drive, m_Intake);
 
-    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper,
-        m_AutonSelector);
+    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
         m_Intake, m_climber);
 
     private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
-    private BarrelRaceAuton m_BarrelRace;
-    private SlalomAuton m_Slalom;
-    private BounceAuton m_BounceAuton;
     private int counter = 0;
+
+    private ThreeAuton threeAuton;
 
     /**
      * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -101,21 +97,22 @@ public class RobotContainer
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
         m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
-        m_BounceAuton = new BounceAuton(m_Drive, m_Intake);
-        m_BarrelRace = new BarrelRaceAuton(m_Drive);
-        m_Slalom = new SlalomAuton(m_Drive, m_Intake);
+        threeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, 15);
     }
 
     /**
-     * Use this method to define your button->command mappings. Buttons can be created by instantiating 
+     * Use this method to define your button->command mappings. Buttons can be created by instantiating
      * {@link GenericHID} or one of its subclasses ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}),
      * and then passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
      */
     private void configureButtonBindings()
     {
         //m_start.whileHeld(new InstantCommand(m_climber::elevatorUp, m_climber), true).whenReleased(m_climber::elevatorStop, m_climber);
-        m_start.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(0), m_Turret).alongWith(new InstantCommand(m_climber::elevatorUp, m_climber)), true).whenReleased(
-        new InstantCommand(() -> m_Turret.setPower(-90), m_Turret).alongWith(new InstantCommand(m_climber::elevatorStop, m_climber)), true);
+        m_start.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(0), m_Turret).alongWith(
+            new InstantCommand(m_climber::elevatorUp, m_climber)), true).whenReleased(
+                new InstantCommand(() -> m_Turret.setPower(-90), m_Turret).alongWith(
+                    new InstantCommand(m_climber::elevatorStop, m_climber)),
+                true);
         m_X.whileHeld(new InstantCommand(m_climber::elevatorDown, m_climber), true).whenReleased(
             m_climber::elevatorStop, m_climber);
 
@@ -149,7 +146,7 @@ public class RobotContainer
         m_RightPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(0), m_Turret)).whenReleased(
             new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
         m_DownPovButton.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(90), m_Turret)).whenReleased(
-            new InstantCommand(() -> m_Turret.setPower(0), m_Turret)); 
+            new InstantCommand(() -> m_Turret.setPower(0), m_Turret));
     }
 
     /**
@@ -161,7 +158,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_AutonSelector.m_Six;
+        return threeAuton;
     }
 
     public void teleopInit()
