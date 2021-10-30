@@ -45,6 +45,7 @@ public class ThreeAuton extends CommandBase
     public void initialize()
     {
         m_Timer.start();
+        m_Turret.setLightOff();
         m_Shooter.setVelocity(78000);
         m_Turret.setAngle(45);
     }
@@ -73,6 +74,7 @@ public class ThreeAuton extends CommandBase
     @Override
     public void end(boolean interrupted)
     {
+        m_Turret.setLightOn();
         m_Hopper.stop();
     }
 
