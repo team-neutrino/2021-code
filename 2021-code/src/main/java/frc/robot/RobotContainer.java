@@ -127,10 +127,10 @@ public class RobotContainer
             new InstantCommand(m_climber::elevatorStop, m_climber));
 
         m_back.whileHeld(new InstantCommand(m_climber::backButtonPressed, m_climber)).whenReleased(
-            new InstantCommand(m_climber::winchStop, m_climber));
+            new InstantCommand(m_climber::backButtonUnpressed, m_climber));
             
-            m_start.whileHeld(new InstantCommand(m_climber::winchClimb, m_climber), true).whenReleased(
-                new InstantCommand(m_climber::backButtonUnpressed, m_climber));
+        m_start.whileHeld(new InstantCommand(m_climber::winchClimb, m_climber), true).whenReleased(
+                new InstantCommand(m_climber::winchStop, m_climber));
 
         m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
             m_climber);

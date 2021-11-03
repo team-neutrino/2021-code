@@ -45,11 +45,10 @@ public class ClimberSubsystem extends SubsystemBase
     public void elevatorUp()
     {
         System.out.println("ELEVATOR UP - back button: " + backButton + " elevator pressed:" + elevatorPressed);
-        if(backButton == false)
+        if(backButton == false && elevatorPressed == false)
         {
             m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
         }
-        elevatorPressed = true;
     }
 
     public void elevatorDown()
@@ -70,12 +69,13 @@ public class ClimberSubsystem extends SubsystemBase
     public void backButtonPressed()
     {
         backButton = true;
-
+        elevatorPressed = true;
     }
 
     public void backButtonUnpressed()
     {
         backButton = false;
+        elevatorPressed = false;
     }
 
     public void elevatorStop()
