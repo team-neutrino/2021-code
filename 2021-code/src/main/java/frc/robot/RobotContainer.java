@@ -46,10 +46,10 @@ public class RobotContainer
     private final IntakePIDSubsystem m_Intake = new IntakePIDSubsystem();
     private final ShooterSubsystem m_Shooter = new ShooterSubsystem();
     private final DriveSubsystem m_Drive = new DriveSubsystem();
-    private final ClimberSubsystem m_climber = new ClimberSubsystem();
     private final HopperSubsystem m_Hopper = new HopperSubsystem(m_Shooter);
     private final TurretSubsystem m_Turret = new TurretSubsystem();
     private final HoodSubsystem m_hood = new HoodSubsystem();
+    private final ClimberSubsystem m_climber = new ClimberSubsystem(m_Turret);
 
     private Joystick m_leftJoystick = new Joystick(Constants.JoystickConstants.LEFT_JOYSTICK_PORT);
     private Joystick m_rightJoystick = new Joystick(Constants.JoystickConstants.RIGHT_JOYSTICK__PORT);
@@ -77,7 +77,7 @@ public class RobotContainer
 
     private RamseteGenCommand m_RamseteGen;
 
-    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
+    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper, m_climber);
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
         m_Intake, m_climber);
 
@@ -120,9 +120,7 @@ public class RobotContainer
         //m_start.whileHeld(new InstantCommand(m_climber::elevatorUp, m_climber), true).whenReleased(m_climber::elevatorStop, m_climber);
         m_start.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(0), m_Turret).alongWith(
             new InstantCommand(m_climber::elevatorUp, m_climber)), true).whenReleased(
-                new InstantCommand(() -> m_Turret.setPower(-90), m_Turret).alongWith(
-                    new InstantCommand (m_Turret::setLightOff, m_Turret)).alongWith(
-                     new InstantCommand(m_climber::elevatorStop, m_climber)),
+                    new InstantCommand(m_climber::elevatorStop, m_climber),
                 true);
         m_X.whileHeld(new InstantCommand(m_climber::elevatorDown, m_climber), true).whenReleased(
             m_climber::elevatorStop, m_climber);

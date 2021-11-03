@@ -16,33 +16,37 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CanId;
 import frc.robot.Constants.ClimberConstants;
+import frc.robot.subsystems.TurretSubsystem;
 
 public class ClimberSubsystem extends SubsystemBase
 {
     private TalonSRX m_ClimbElevator = new TalonSRX(CanId.MOTOR_CONTROLLER_CLIMBER);
     private CANSparkMax m_ClimbWinch = new CANSparkMax(CanId.MOTOR_CONTROLLER_CLIMBERWINCH, MotorType.kBrushless);
     private static boolean elevatorPressed = false;
+    private TurretSubsystem m_Turret;
     /**
      * Creates a new ClimberSubsystem.
      */
-    public ClimberSubsystem()
+    public ClimberSubsystem(TurretSubsystem p_Turret)
     {
         m_ClimbElevator.setNeutralMode(NeutralMode.Brake);
         elevatorPressed = false;
+        m_Turret = p_Turret;
     }
 
     @Override
     public void periodic()
     {
         // This method will be called once per scheduler run
-        // if (getHeight() < 0)
-        // {
-        //     m_ClimbElevator.setSelectedSensorPosition(0);
-        // }
+        if (getHeight() < 0)
+        {
+            m_ClimbElevator.setSelectedSensorPosition(0);
+        }
     }
 
     public void elevatorUp()
     {
+        m_Turret.setLightOff();
         if (getHeight() > ClimberConstants.CLIMBER_FULL_EXTEND)
         {
             elevatorStop();
@@ -50,6 +54,7 @@ public class ClimberSubsystem extends SubsystemBase
         else
         {
             m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
+            m_Turret.setLightOff();
         }
     }
 

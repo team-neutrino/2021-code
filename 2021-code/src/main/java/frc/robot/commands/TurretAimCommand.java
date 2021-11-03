@@ -29,6 +29,7 @@ public class TurretAimCommand extends CommandBase
     public void initialize()
     {
         m_turret.setLightOn();
+        System.out.println("turretAimCommand setLightOn");
     }
 
     // Called every time the scheduler runs while the command is scheduled.
