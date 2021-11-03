@@ -78,8 +78,8 @@ public class RobotContainer
 
     private RamseteGenCommand m_RamseteGen;
 
-    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper,
-        m_DistanceCalculator, m_climber);
+    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper, m_climber,
+        m_DistanceCalculator);
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
         m_Intake, m_climber);
 
@@ -122,8 +122,7 @@ public class RobotContainer
         //m_start.whileHeld(new InstantCommand(m_climber::elevatorUp, m_climber), true).whenReleased(m_climber::elevatorStop, m_climber);
         m_start.whileHeld(new InstantCommand(() -> m_Turret.setpointSetAngle(0), m_Turret).alongWith(
             new InstantCommand(m_climber::elevatorUp, m_climber)), true).whenReleased(
-                    new InstantCommand(m_climber::elevatorStop, m_climber),
-                true);
+                new InstantCommand(m_climber::elevatorStop, m_climber), true);
 
         m_X.whileHeld(new InstantCommand(m_climber::elevatorDown, m_climber), true).whenReleased(
             new InstantCommand(m_climber::elevatorStop, m_climber));
