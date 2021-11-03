@@ -22,7 +22,7 @@ public class ClimberSubsystem extends SubsystemBase
     private TalonSRX m_ClimbElevator = new TalonSRX(CanId.MOTOR_CONTROLLER_CLIMBER);
     private CANSparkMax m_ClimbWinch = new CANSparkMax(CanId.MOTOR_CONTROLLER_CLIMBERWINCH, MotorType.kBrushless);
     private static boolean elevatorPressed = false;
-    private static boolean startButton = false;
+    private static boolean backButton = false;
     /**
      * Creates a new ClimberSubsystem.
      */
@@ -44,7 +44,11 @@ public class ClimberSubsystem extends SubsystemBase
 
     public void elevatorUp()
     {
-        m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
+        System.out.println("ELEVATOR UP - back button: " + backButton + " elevator pressed:" + elevatorPressed);
+        if(backButton == false)
+        {
+            m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
+        }
         elevatorPressed = true;
     }
 
@@ -55,21 +59,23 @@ public class ClimberSubsystem extends SubsystemBase
 
     public void winchClimb()
     {
-        if (elevatorPressed && startButton)
+        System.out.println("WINCH UP - back button: " + backButton + " elevator pressed:" + elevatorPressed);
+        if (elevatorPressed && backButton)
         {
             m_ClimbWinch.set(ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
         }
+        backButton = false;
     }
 
-    public void startButtonPressed()
+    public void backButtonPressed()
     {
-        startButton = true;
+        backButton = true;
 
     }
 
-    public void startButtonUnpressed()
+    public void backButtonUnpressed()
     {
-        startButton = false;
+        backButton = false;
     }
 
     public void elevatorStop()
