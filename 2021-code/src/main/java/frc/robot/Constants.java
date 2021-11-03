@@ -53,7 +53,7 @@ public final class Constants
     {
         public static final double INTAKE_MOTOR_POWER = -1;
         public static final double OUTTAKE_MOTOR_POWER = 1;
-        public static final double ARM_UP_ANGLE = 41;
+        public static final double ARM_UP_ANGLE = 85;
         public static final int ENCODER_PORT = 8;
 
         public static final double KP = 0.015;
@@ -120,9 +120,9 @@ public final class Constants
 
     public static final class ClimberConstants
     {
-        public static final double CLIMBER_MOTOR_POWER_UP = .2;
-        public static final double CLIMBER_MOTOR_POWER_DOWN = .2;
-        public static final double CLIMBER_MOTOR_WINCHPOWER = 1;
+        public static final double CLIMBER_MOTOR_POWER_UP = .4;
+        public static final double CLIMBER_MOTOR_POWER_DOWN = .1;
+        public static final double CLIMBER_MOTOR_WINCHPOWER = -1;
         public static final double CLIMBER_BAR_HEIGHT = 0;
         public static final double CLIMBER_FULL_EXTEND = 40000;
     }

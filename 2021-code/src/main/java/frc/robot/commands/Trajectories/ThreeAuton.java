@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.HopperSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 
 /**
  * Implement in replacement of SixBallAuto, in the case that SixBallAuto is ineffective due to match specifics.
@@ -21,20 +22,20 @@ public class ThreeAuton extends CommandBase
     private ShooterSubsystem m_Shooter;
     private HopperSubsystem m_Hopper;
     private DriveSubsystem m_Drive;
-    private double m_Duration;
+    private TurretSubsystem m_Turret;
     private Timer m_Timer = new Timer();
 
     /**
      * Creates a new ShootAuton.
      */
-    public ThreeAuton(ShooterSubsystem p_Shooter, HopperSubsystem p_Hopper, DriveSubsystem p_Drive, double p_Duration)
+    public ThreeAuton(ShooterSubsystem p_Shooter, HopperSubsystem p_Hopper, DriveSubsystem p_Drive,
+            TurretSubsystem p_Turret)
     {
         addRequirements(p_Shooter, p_Hopper, p_Drive);
         m_Shooter = p_Shooter;
         m_Hopper = p_Hopper;
         m_Drive = p_Drive;
-
-        m_Duration = p_Duration;
+        m_Turret = p_Turret;
     }
 
     /**
@@ -44,7 +45,9 @@ public class ThreeAuton extends CommandBase
     public void initialize()
     {
         m_Timer.start();
+        m_Turret.setLightOff();
         m_Shooter.setVelocity(78000);
+        m_Turret.setAngle(130);
     }
 
     /**
@@ -71,11 +74,12 @@ public class ThreeAuton extends CommandBase
     @Override
     public void end(boolean interrupted)
     {
+        m_Turret.setLightOn();
         m_Hopper.stop();
     }
 
     /**
-     * @return true when command should
+     * @return true when command should 
      */
     @Override
     public boolean isFinished()
