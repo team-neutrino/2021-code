@@ -44,7 +44,7 @@ public class ClimberSubsystem extends SubsystemBase
 
     public void elevatorUp()
     {
-        System.out.println("ELEVATOR UP - back button: " + backButton + " elevator pressed:" + elevatorPressed);
+
         if(backButton == false && elevatorPressed == false)
         {
             m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
@@ -58,7 +58,6 @@ public class ClimberSubsystem extends SubsystemBase
 
     public void winchClimb()
     {
-        System.out.println("WINCH UP - back button: " + backButton + " elevator pressed:" + elevatorPressed);
         if (elevatorPressed && backButton)
         {
             m_ClimbWinch.set(ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
