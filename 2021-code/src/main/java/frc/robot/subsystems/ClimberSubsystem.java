@@ -74,6 +74,7 @@ public class ClimberSubsystem extends SubsystemBase
     public void elevatorStop()
     {
         m_ClimbElevator.set(ControlMode.PercentOutput, 0);
+        m_Turret.setLightOff();
     }
 
     public void winchStop()
