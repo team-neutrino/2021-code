@@ -105,7 +105,7 @@ public class RobotContainer
         m_SixAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
     }
 
-    public void initAuton() 
+    public void initAuton()
     {
         m_shootThree = new JustShoot(m_Turret, m_Shooter, m_Hopper, m_Drive, m_angle);
     }
@@ -128,9 +128,9 @@ public class RobotContainer
 
         m_back.whileHeld(new InstantCommand(m_climber::backButtonPressed, m_climber)).whenReleased(
             new InstantCommand(m_climber::backButtonUnpressed, m_climber));
-            
+
         m_start.whileHeld(new InstantCommand(m_climber::winchClimb, m_climber), true).whenReleased(
-                new InstantCommand(m_climber::winchStop, m_climber));
+            new InstantCommand(m_climber::winchStop, m_climber));
 
         m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
             m_climber);

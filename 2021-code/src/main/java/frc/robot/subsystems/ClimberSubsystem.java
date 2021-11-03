@@ -45,7 +45,7 @@ public class ClimberSubsystem extends SubsystemBase
     public void elevatorUp()
     {
 
-        if(backButton == false && elevatorPressed == false)
+        if (backButton == false && elevatorPressed == false)
         {
             m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
         }

@@ -50,7 +50,8 @@ public class TroubleshootingSubsystem extends SubsystemBase
         m_arm_angle = m_troubleshooting_tab.add("Arm angle", 0).withPosition(0, 3).withSize(1, 1).getEntry();
 
         m_drive_distance = m_troubleshooting_tab.add("Drive distance", 0).withPosition(4, 4).withSize(2, 2).getEntry();
-        m_just_shoot_angle = m_troubleshooting_tab.add("Just Shoot Angle", 70).withPosition(4, 4).withSize(2, 1).getEntry();
+        m_just_shoot_angle = m_troubleshooting_tab.add("Just Shoot Angle", 70).withPosition(4, 4).withSize(2,
+            1).getEntry();
         m_angle = m_just_shoot_angle.getNumber(70).doubleValue();
     }
 
@@ -66,7 +67,8 @@ public class TroubleshootingSubsystem extends SubsystemBase
         m_speed = m_input_shooter_Speed.getNumber(0).doubleValue();
     }
 
-    public double getAutonAngle() {
+    public double getAutonAngle()
+    {
         return m_angle;
     }
 
