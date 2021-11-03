@@ -79,7 +79,7 @@ public class ThreeAuton extends CommandBase
     }
 
     /**
-     * @return true when command should 
+     * @return true when command should
      */
     @Override
     public boolean isFinished()
