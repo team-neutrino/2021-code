@@ -35,12 +35,13 @@ public class DriverViewSubsystem extends SubsystemBase
     private NetworkTableEntry m_beam_break_bot;
     private NetworkTableEntry m_limelight_distance;
 
-    public DriverViewSubsystem(ShooterSubsystem p_Shooter, TurretSubsystem p_Turret, HopperSubsystem p_Hopper, DistanceCalculator p_DistanceCalculator)
+    public DriverViewSubsystem(ShooterSubsystem p_Shooter, TurretSubsystem p_Turret, HopperSubsystem p_Hopper,
+            DistanceCalculator p_DistanceCalculator)
     {
         m_Shooter = p_Shooter;
         m_Turret = p_Turret;
         m_Hopper = p_Hopper;
-        m_DistanceCalculator= p_DistanceCalculator;
+        m_DistanceCalculator = p_DistanceCalculator;
 
         // setup driver view tab
         m_driver_view_tab = Shuffleboard.getTab("Driver View");
