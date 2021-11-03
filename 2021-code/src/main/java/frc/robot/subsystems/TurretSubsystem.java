@@ -164,11 +164,13 @@ public class TurretSubsystem extends SubsystemBase
     public void setLightOn()
     {
         ledMode.setNumber(3);
+        System.out.println("on");
     }
 
     public void setLightOff()
     {
         ledMode.setNumber(1);
+        System.out.println("off");
     }
 
     public void setDriverCamMode()
