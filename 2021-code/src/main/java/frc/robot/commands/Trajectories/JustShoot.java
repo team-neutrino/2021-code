@@ -31,26 +31,26 @@ public class JustShoot extends SequentialCommandGroup
 {
     /** Creates a new TenBallAuton. */
 
-    public JustShoot(TurretSubsystem p_Turret, ShooterSubsystem p_Shooter, HopperSubsystem p_Hopper, DriveSubsystem p_Drive, double angle)
+    public JustShoot(TurretSubsystem p_Turret, ShooterSubsystem p_Shooter, HopperSubsystem p_Hopper,
+            DriveSubsystem p_Drive, double angle)
     {
-      
-      Trajectory trajectory = SixBallTrajectory.sixBall0;
 
-      PIDController leftController = new PIDController(DriveConstants.KP_DRIVE_VEL, 0, 0);
-      PIDController rightController = new PIDController(DriveConstants.KP_DRIVE_VEL, 0, 0);
+        Trajectory trajectory = SixBallTrajectory.sixBall0;
 
-      RamseteController controller = new RamseteController(DriveConstants.K_RAMSETE_B, DriveConstants.K_RAMSETE_ZETA);
+        PIDController leftController = new PIDController(DriveConstants.KP_DRIVE_VEL, 0, 0);
+        PIDController rightController = new PIDController(DriveConstants.KP_DRIVE_VEL, 0, 0);
 
-      SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(DriveConstants.KS_VOLTS,
-          DriveConstants.KV_VOLT_SECONDS_PER_METER, DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER);
+        RamseteController controller = new RamseteController(DriveConstants.K_RAMSETE_B, DriveConstants.K_RAMSETE_ZETA);
 
-      RamseteCommand sixBallTraj0 = new RamseteCommand(trajectory, p_Drive::getPose, controller, feedforward,
+        SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(DriveConstants.KS_VOLTS,
+            DriveConstants.KV_VOLT_SECONDS_PER_METER, DriveConstants.KA_VOLT_SECONDS_SQUARED_PER_METER);
+
+        RamseteCommand sixBallTraj0 = new RamseteCommand(trajectory, p_Drive::getPose, controller, feedforward,
             DriveConstants.K_DRIVE_KINEMATICS, p_Drive::getWheelSpeeds, leftController, rightController,
             p_Drive::tankDriveVolts, p_Drive);
 
-      // addCommands(new TurretSetAngleCommand(p_Turret, 70).alongWith(new InstantCommand(p_Turret::setLightOn)));
-      addCommands(new TurretSetAngleCommand(p_Turret, angle).alongWith(
-            new SequentialCommandGroup(new InstantCommand(p_Turret::setLightOn),
-                new ShootAuton(p_Shooter, p_Hopper, 3, 80000), sixBallTraj0)));
-    } 
+        // addCommands(new TurretSetAngleCommand(p_Turret, 70).alongWith(new InstantCommand(p_Turret::setLightOn)));
+        addCommands(new TurretSetAngleCommand(p_Turret, angle).alongWith(new SequentialCommandGroup(
+            new InstantCommand(p_Turret::setLightOn), new ShootAuton(p_Shooter, p_Hopper, 3, 80000), sixBallTraj0)));
+    }
 }
