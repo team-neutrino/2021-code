@@ -74,14 +74,14 @@ public class RobotContainer
     private POVButton m_UpPovButton = new POVButton(m_OperatorController, 0);
     private POVButton m_RightPovButton = new POVButton(m_OperatorController, 90);
     private POVButton m_DownPovButton = new POVButton(m_OperatorController, 180);
+    private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
 
     private RamseteGenCommand m_RamseteGen;
 
-    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper);
+    private final DriverViewSubsystem m_DriverView = new DriverViewSubsystem(m_Shooter, m_Turret, m_Hopper, m_DistanceCalculator);
     private final TroubleshootingSubsystem m_Troubleshooting = new TroubleshootingSubsystem(m_Shooter, m_Drive,
         m_Intake, m_climber);
 
-    private DistanceCalculator m_DistanceCalculator = new DistanceCalculator(m_hood);
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
 
@@ -101,11 +101,12 @@ public class RobotContainer
         m_Hopper.setDefaultCommand(new HopperDefaultCommand(m_Hopper));
         m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
+        //limelight tuning: http://limelight.local:5801
         m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, m_Turret);
         m_SixAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
     }
 
-    public void initAuton()
+    public void initAuton() 
     {
         m_shootThree = new JustShoot(m_Turret, m_Shooter, m_Hopper, m_Drive, m_angle);
     }
@@ -123,13 +124,11 @@ public class RobotContainer
                 new InstantCommand(() -> m_Turret.setPower(-90), m_Turret).alongWith(
                     new InstantCommand(m_climber::elevatorStop, m_climber)),
                 true);
+                
         m_X.whileHeld(new InstantCommand(m_climber::elevatorDown, m_climber), true).whenReleased(
-            new InstantCommand(m_climber::elevatorStop, m_climber));
+            m_climber::elevatorStop, m_climber);
 
-        m_back.whileHeld(new InstantCommand(m_climber::backButtonPressed, m_climber)).whenReleased(
-            new InstantCommand(m_climber::backButtonUnpressed, m_climber));
-
-        m_start.whileHeld(new InstantCommand(m_climber::winchClimb, m_climber), true).whenReleased(
+        m_back.whileHeld(new ParallelCommandGroup(new InstantCommand(m_climber::winchClimb, m_climber))).whenReleased(
             new InstantCommand(m_climber::winchStop, m_climber));
 
         m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
