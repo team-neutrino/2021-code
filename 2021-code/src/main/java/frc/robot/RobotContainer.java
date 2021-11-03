@@ -106,7 +106,7 @@ public class RobotContainer
         m_SixAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
     }
 
-    public void initAuton() 
+    public void initAuton()
     {
         m_shootThree = new JustShoot(m_Turret, m_Shooter, m_Hopper, m_Drive, m_angle);
     }
