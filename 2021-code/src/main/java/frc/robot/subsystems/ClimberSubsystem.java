@@ -24,6 +24,7 @@ public class ClimberSubsystem extends SubsystemBase
     private CANSparkMax m_ClimbWinch = new CANSparkMax(CanId.MOTOR_CONTROLLER_CLIMBERWINCH, MotorType.kBrushless);
     private static boolean elevatorPressed = false;
     private TurretSubsystem m_Turret;
+    private static boolean backButton = false;
     /**
      * Creates a new ClimberSubsystem.
      */
@@ -51,7 +52,7 @@ public class ClimberSubsystem extends SubsystemBase
         {
             elevatorStop();
         }
-        else
+        else if(backButton == false && elevatorPressed == false)
         {
             m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
             m_Turret.setLightOff();
@@ -65,10 +66,23 @@ public class ClimberSubsystem extends SubsystemBase
 
     public void winchClimb()
     {
-        if (elevatorPressed)
+        if (elevatorPressed && backButton)
         {
             m_ClimbWinch.set(ClimberConstants.CLIMBER_MOTOR_WINCHPOWER);
         }
+        backButton = false;
+    }
+
+    public void backButtonPressed()
+    {
+        backButton = true;
+        elevatorPressed = true;
+    }
+
+    public void backButtonUnpressed()
+    {
+        backButton = false;
+        elevatorPressed = false;
     }
 
     public void elevatorStop()

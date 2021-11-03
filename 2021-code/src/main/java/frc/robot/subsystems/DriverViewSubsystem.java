@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.util.DistanceCalculator;
 
 public class DriverViewSubsystem extends SubsystemBase
 {
@@ -27,6 +28,7 @@ public class DriverViewSubsystem extends SubsystemBase
     private TurretSubsystem m_Turret;
     private HopperSubsystem m_Hopper;
     private ClimberSubsystem m_Climber;
+    private DistanceCalculator m_DistanceCalculator;
 
     private ShuffleboardTab m_driver_view_tab;
     private NetworkTableEntry m_shooter_velocity;
@@ -34,15 +36,16 @@ public class DriverViewSubsystem extends SubsystemBase
     private NetworkTableEntry m_beam_break_top;
     private NetworkTableEntry m_beam_break_bot;
     private NetworkTableEntry m_climber_height;
-    //private NetworkTableEntry m_path;
+    private NetworkTableEntry m_limelight_distance;
 
     public DriverViewSubsystem(ShooterSubsystem p_Shooter, TurretSubsystem p_Turret, HopperSubsystem p_Hopper,
-            ClimberSubsystem p_Climber)
+            ClimberSubsystem p_Climber, DistanceCalculator p_DistanceCalculator)
     {
         m_Shooter = p_Shooter;
         m_Turret = p_Turret;
         m_Hopper = p_Hopper;
         m_Climber = p_Climber;
+        m_DistanceCalculator = p_DistanceCalculator;
 
         // setup driver view tab
         m_driver_view_tab = Shuffleboard.getTab("Driver View");
@@ -52,8 +55,8 @@ public class DriverViewSubsystem extends SubsystemBase
             2).withSize(2, 2).withProperties(Map.of("min", -180, "max", 180)).getEntry();
         m_beam_break_top = m_driver_view_tab.add("Top Beam Status", false).withPosition(0, 0).getEntry();
         m_beam_break_bot = m_driver_view_tab.add("Bottom Beam Status", false).withPosition(0, 1).getEntry();
-        //m_path = m_driver_view_tab.add("Updating Path", "").withPosition(10, 0).getEntry();
         m_climber_height = m_driver_view_tab.add("Climber Height", 0).withPosition(5, 5).getEntry();
+        m_limelight_distance = m_driver_view_tab.add("Lightlime Distance", 0).withPosition(0, 4).getEntry();
 
         HttpCamera limelightFeed = new HttpCamera("limelight", "http://limelight.local:5800/stream.mjpg",
             HttpCameraKind.kMJPGStreamer);
@@ -69,5 +72,6 @@ public class DriverViewSubsystem extends SubsystemBase
         m_beam_break_top.setBoolean(m_Hopper.topBeamStatus());
         m_beam_break_bot.setBoolean(m_Hopper.bottomBeamStatus());
         m_climber_height.setDouble(m_Climber.getHeight());
+        m_limelight_distance.setDouble(m_DistanceCalculator.getDistance());
     }
 }
