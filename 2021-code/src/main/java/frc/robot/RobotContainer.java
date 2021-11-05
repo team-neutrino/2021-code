@@ -109,7 +109,8 @@ public class RobotContainer
 
     public void initAuton()
     {
-        m_shootThree = new JustShoot(m_Turret, m_Shooter, m_Hopper, m_Drive, m_angle);
+        
+        m_shootThree = new JustShoot(m_Turret, m_Shooter, m_Hopper, m_Drive, m_angle, m_Intake);
     }
 
     /**
