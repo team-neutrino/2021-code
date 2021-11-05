@@ -16,8 +16,10 @@ public class TroubleshootingSubsystem extends SubsystemBase
     private ClimberSubsystem m_Climber;
 
     private ShuffleboardTab m_troubleshooting_tab;
-    private NetworkTableEntry m_input_shooter_Speed;
-    private double m_speed;
+    private NetworkTableEntry m_a_shooter_speed;
+    private NetworkTableEntry m_y_shooter_speed;
+    private double m_speed_a;
+    private double m_speed_y;
     private NetworkTableEntry m_shooter_velocity_two;
     private NetworkTableEntry m_navx_yaw;
     private NetworkTableEntry m_left_encoder;
@@ -39,8 +41,10 @@ public class TroubleshootingSubsystem extends SubsystemBase
         m_troubleshooting_tab = Shuffleboard.getTab("Troubleshooting Tab");
         m_shooter_velocity_two = m_troubleshooting_tab.add("Shooter Velocity Two", 0).withPosition(2, 0).withSize(2,
             2).withWidget(BuiltInWidgets.kDial).withProperties(Map.of("min", 0, "max", 120000)).getEntry();
-        m_input_shooter_Speed = m_troubleshooting_tab.add("Input Shooter Speed", 0).withPosition(2, 2).withSize(2,
+        m_a_shooter_speed = m_troubleshooting_tab.add("A Shooter Speed", 0).withPosition(2, 2).withSize(2,
             1).getEntry();
+        m_y_shooter_speed = m_troubleshooting_tab.add("Y Shooter Speed", 0).withPosition(4, 2).withSize(2,
+            1).getEntry();  
         m_climber_height = m_troubleshooting_tab.add("Climber Height", 0).withPosition(0, 0).withSize(2, 2).getEntry();
 
         m_navx_yaw = m_troubleshooting_tab.add("NavX Yaw", 0).withPosition(1, 3).withSize(1, 1).withProperties(
@@ -64,7 +68,8 @@ public class TroubleshootingSubsystem extends SubsystemBase
         m_arm_angle.setDouble(m_Intake.getMeasurement());
         m_climber_height.setDouble(m_Climber.getHeight());
         m_shooter_velocity_two.setDouble(m_Shooter.getVelocity());
-        m_speed = m_input_shooter_Speed.getNumber(0).doubleValue();
+        m_speed_a = m_a_shooter_speed.getNumber(0).doubleValue();
+        m_speed_y = m_y_shooter_speed.getNumber(0).doubleValue();
     }
 
     public double getAutonAngle()
@@ -74,7 +79,13 @@ public class TroubleshootingSubsystem extends SubsystemBase
 
     public double getVelocity()
     {
-        System.out.println(m_speed);
-        return m_speed;
+        System.out.println(m_speed_a);
+        return m_speed_a;
+    }
+
+    public double getVelocityY()
+    {
+        System.out.println(m_speed_y);
+        return m_speed_y;
     }
 }
