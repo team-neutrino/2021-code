@@ -135,8 +135,8 @@ public class RobotContainer
 
         m_LJoy8.whenHeld(new InstantCommand(m_climber::winchReverse, m_climber)).whenReleased(m_climber::winchStop,
             m_climber);
-
-        m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocity()));
+        m_Y.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocityY()));
+        m_A.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_Troubleshooting.getVelocityA()));
         m_B.whenHeld(new ShooterSetSpeedCommand(m_Shooter, m_DistanceCalculator.getShooterSpeed()));
         m_trigger.whenPressed(new InstantCommand(() -> counter++));
         m_top3.toggleWhenPressed(new HoodCommand(m_hood));

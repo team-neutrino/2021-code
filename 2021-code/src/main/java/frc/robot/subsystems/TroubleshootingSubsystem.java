@@ -77,7 +77,7 @@ public class TroubleshootingSubsystem extends SubsystemBase
         return m_angle;
     }
 
-    public double getVelocity()
+    public double getVelocityA()
     {
         System.out.println(m_speed_a);
         return m_speed_a;
