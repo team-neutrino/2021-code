@@ -51,6 +51,7 @@ public class JustShoot extends SequentialCommandGroup
 
         // addCommands(new TurretSetAngleCommand(p_Turret, 70).alongWith(new InstantCommand(p_Turret::setLightOn)));
         addCommands(new TurretSetAngleCommand(p_Turret, angle).alongWith(new SequentialCommandGroup(
-            new InstantCommand(p_Turret::setLightOn), new InstantCommand(p_Intake::setIntakeOn), new ShootAuton(p_Shooter, p_Hopper, 3, 70000), sixBallTraj0)));
+            new InstantCommand(p_Intake::setArmDown), new InstantCommand(p_Turret::setLightOn),
+            new InstantCommand(p_Intake::setIntakeOn), new ShootAuton(p_Shooter, p_Hopper, 3, 70000), sixBallTraj0)));
     }
 }
