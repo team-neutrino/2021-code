@@ -109,7 +109,8 @@ public class RobotContainer
 
     public void initAuton()
     {
-        m_shootThree = new JustShoot(m_Turret, m_Shooter, m_Hopper, m_Drive, m_angle);
+        m_Turret.setLightOn();
+        m_shootThree = new JustShoot(m_Turret, m_Shooter, m_Hopper, m_Drive, m_angle, m_Intake);
     }
 
     /**
@@ -172,7 +173,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_shootThree;
+        return m_SixAuton;
     }
 
     public void teleopInit()

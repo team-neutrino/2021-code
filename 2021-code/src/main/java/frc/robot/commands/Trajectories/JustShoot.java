@@ -32,7 +32,7 @@ public class JustShoot extends SequentialCommandGroup
     /** Creates a new TenBallAuton. */
 
     public JustShoot(TurretSubsystem p_Turret, ShooterSubsystem p_Shooter, HopperSubsystem p_Hopper,
-            DriveSubsystem p_Drive, double angle)
+            DriveSubsystem p_Drive, double angle, IntakePIDSubsystem p_Intake)
     {
 
         Trajectory trajectory = SixBallTrajectory.sixBall0;
@@ -51,6 +51,7 @@ public class JustShoot extends SequentialCommandGroup
 
         // addCommands(new TurretSetAngleCommand(p_Turret, 70).alongWith(new InstantCommand(p_Turret::setLightOn)));
         addCommands(new TurretSetAngleCommand(p_Turret, angle).alongWith(new SequentialCommandGroup(
-            new InstantCommand(p_Turret::setLightOn), new ShootAuton(p_Shooter, p_Hopper, 3, 80000), sixBallTraj0)));
+            new InstantCommand(p_Intake::setArmDown), new InstantCommand(p_Turret::setLightOn),
+            new InstantCommand(p_Intake::setIntakeOn), new ShootAuton(p_Shooter, p_Hopper, 3, 70000), sixBallTraj0)));
     }
 }

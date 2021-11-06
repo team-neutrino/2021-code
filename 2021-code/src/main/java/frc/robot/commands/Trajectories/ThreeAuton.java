@@ -45,7 +45,7 @@ public class ThreeAuton extends CommandBase
     public void initialize()
     {
         m_Timer.start();
-        m_Turret.setLightOff();
+        m_Turret.setLightOn();
         m_Shooter.setVelocity(78000);
         m_Turret.setAngle(130);
     }
