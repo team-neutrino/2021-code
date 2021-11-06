@@ -37,6 +37,7 @@ public class SixBallAuton extends SequentialCommandGroup
             DriveSubsystem p_Drive, TurretSubsystem p_Turret)
     {
         Trajectory trajectory = SixBallTrajectory.sixBall0;
+        Trajectory trajectoryBack = SixBallTrajectory.sixBall0Back;
 
         PIDController leftController = new PIDController(DriveConstants.KP_DRIVE_VEL, 0, 0);
         PIDController rightController = new PIDController(DriveConstants.KP_DRIVE_VEL, 0, 0);
@@ -50,11 +51,14 @@ public class SixBallAuton extends SequentialCommandGroup
             DriveConstants.K_DRIVE_KINEMATICS, p_Drive::getWheelSpeeds, leftController, rightController,
             p_Drive::tankDriveVolts, p_Drive);
 
+        RamseteCommand sixBallTraj0Back = new RamseteCommand(trajectoryBack, p_Drive::getPose, controller, feedforward,
+            DriveConstants.K_DRIVE_KINEMATICS, p_Drive::getWheelSpeeds, leftController, rightController,
+            p_Drive::tankDriveVolts, p_Drive);
+
         addCommands(new TurretSetAngleCommand(p_Turret, 70).alongWith(new SequentialCommandGroup(
             new InstantCommand(p_Turret::setLightOn), new InstantCommand(p_Intake::setArmDown), new WaitCommand(.75),
             new ShootAuton(p_Shooter, p_Hopper, 3, 65000), new InstantCommand(p_Intake::setIntakeOn, p_Intake),
-            sixBallTraj0, new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)),
-            new InstantCommand(() -> p_Intake.setAngle(Constants.IntakeConstants.ARM_UP_ANGLE)), new WaitCommand(1),
-            new ShootAuton(p_Shooter, p_Hopper, 7, 70000))));
+            sixBallTraj0, new InstantCommand(p_Intake::setArmDown), sixBallTraj0Back,
+            new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)), new ShootAuton(p_Shooter, p_Hopper, 6, 70000))));
     }
 }
