@@ -124,7 +124,7 @@ public final class Constants
         public static final double CLIMBER_MOTOR_POWER_DOWN = .1;
         public static final double CLIMBER_MOTOR_WINCHPOWER = -1;
         public static final double CLIMBER_BAR_HEIGHT = 0;
-        public static final double CLIMBER_FULL_EXTEND = 40000;
+        public static final double CLIMBER_FULL_EXTEND = 54000;
     }
     public static final class HopperConstants
     {

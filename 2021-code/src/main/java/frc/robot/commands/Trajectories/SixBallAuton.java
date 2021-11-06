@@ -53,7 +53,8 @@ public class SixBallAuton extends SequentialCommandGroup
         addCommands(new TurretSetAngleCommand(p_Turret, 70).alongWith(new SequentialCommandGroup(
             new InstantCommand(p_Turret::setLightOn), new InstantCommand(p_Intake::setArmDown), new WaitCommand(.75),
             new ShootAuton(p_Shooter, p_Hopper, 3, 65000), new InstantCommand(p_Intake::setIntakeOn, p_Intake),
-            sixBallTraj0, new InstantCommand(() -> p_Intake.setAngle(Constants.IntakeConstants.ARM_UP_ANGLE)),
-            new WaitCommand(1), new ShootAuton(p_Shooter, p_Hopper, 7, 70000))));
+            sixBallTraj0, new InstantCommand(() -> p_Drive.tankDriveVolts(0, 0)),
+            new InstantCommand(() -> p_Intake.setAngle(Constants.IntakeConstants.ARM_UP_ANGLE)), new WaitCommand(1),
+            new ShootAuton(p_Shooter, p_Hopper, 7, 70000))));
     }
 }
