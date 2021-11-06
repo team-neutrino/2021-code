@@ -22,9 +22,9 @@ public class SixBallTrajectory
         List.of(new Pose2d(0, 0, new Rotation2d(0)), new Pose2d(4.6, 0, new Rotation2d(0))/*, new Pose2d(1, 0, new Rotation2d(0))*/),
         NeutrinoTrajectoryConfigs.m_SlowForwardConfig);
 
-        public static final Trajectory sixBall0Back = TrajectoryGenerator.generateTrajectory(
-            List.of(new Pose2d(4.6, 0, new Rotation2d(0)), new Pose2d(1, 0, new Rotation2d(0))/*, new Pose2d(1, 0, new Rotation2d(0))*/),
-            NeutrinoTrajectoryConfigs.m_TwixtReverseConfig);
+    public static final Trajectory sixBall0Back = TrajectoryGenerator.generateTrajectory(
+        List.of(new Pose2d(4.6, 0, new Rotation2d(0)), new Pose2d(1, 0, new Rotation2d(0))/*, new Pose2d(1, 0, new Rotation2d(0))*/),
+        NeutrinoTrajectoryConfigs.m_TwixtReverseConfig);
 
 
     public static final Trajectory sixBall1 = TrajectoryGenerator.generateTrajectory(
