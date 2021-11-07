@@ -48,11 +48,10 @@ public class ClimberSubsystem extends SubsystemBase
     public void elevatorUp()
     {
         m_Turret.setLightOff();
-        if (getHeight() > ClimberConstants.CLIMBER_FULL_EXTEND)
-        {
-            elevatorStop();
-        }
-        else if (backButton == false && elevatorPressed == false)
+        /*
+         * if (getHeight() > ClimberConstants.CLIMBER_FULL_EXTEND) { elevatorStop(); }
+         */
+        if (backButton == false && elevatorPressed == false)
         {
             m_ClimbElevator.set(ControlMode.PercentOutput, ClimberConstants.CLIMBER_MOTOR_POWER_UP);
             m_Turret.setLightOff();

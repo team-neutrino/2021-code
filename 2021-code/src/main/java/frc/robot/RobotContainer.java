@@ -86,7 +86,7 @@ public class RobotContainer
     private Command m_tankDriveCommand;
     private boolean isSingleJoystick;
 
-    private JustShoot m_JustShoot;
+    //private JustShoot m_JustShoot;
     private JustShoot m_shootThree;
     private double m_angle = m_Troubleshooting.getAutonAngle();
     private ThreeAuton m_ThreeAuton;
@@ -103,13 +103,14 @@ public class RobotContainer
         m_Turret.setDefaultCommand(new TurretAimCommand(m_Turret));
         //limelightFeed = new HttpCamera("limeight", "http://limelight.local:5800/stream.mjpg");
         //limelight tuning: http://limelight.local:5801
-        m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, m_Turret);
+        m_ThreeAuton = new ThreeAuton(m_Shooter, m_Hopper, m_Drive, m_Turret, m_angle);
         m_SixAuton = new SixBallAuton(m_Shooter, m_Hopper, m_Intake, m_Drive, m_Turret);
     }
 
     public void initAuton()
     {
-        m_shootThree = new JustShoot(m_Turret, m_Shooter, m_Hopper, m_Drive, m_angle);
+        m_Turret.setLightOn();
+        m_shootThree = new JustShoot(m_Turret, m_Shooter, m_Hopper, m_Drive, m_angle, m_Intake);
     }
 
     /**
@@ -172,7 +173,7 @@ public class RobotContainer
     public Command getAutonomousCommand()
     {
         m_Drive.initAuton();
-        return m_shootThree;
+        return m_SixAuton;
     }
 
     public void teleopInit()

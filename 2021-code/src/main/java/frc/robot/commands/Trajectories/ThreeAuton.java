@@ -24,18 +24,20 @@ public class ThreeAuton extends CommandBase
     private DriveSubsystem m_Drive;
     private TurretSubsystem m_Turret;
     private Timer m_Timer = new Timer();
+    private double m_Angle;
 
     /**
      * Creates a new ShootAuton.
      */
     public ThreeAuton(ShooterSubsystem p_Shooter, HopperSubsystem p_Hopper, DriveSubsystem p_Drive,
-            TurretSubsystem p_Turret)
+            TurretSubsystem p_Turret, double p_Angle)
     {
-        addRequirements(p_Shooter, p_Hopper, p_Drive);
+        addRequirements(p_Shooter, p_Hopper, p_Drive, p_Turret);
         m_Shooter = p_Shooter;
         m_Hopper = p_Hopper;
         m_Drive = p_Drive;
         m_Turret = p_Turret;
+        m_Angle = p_Angle;
     }
 
     /**
@@ -45,9 +47,9 @@ public class ThreeAuton extends CommandBase
     public void initialize()
     {
         m_Timer.start();
-        m_Turret.setLightOff();
-        m_Shooter.setVelocity(78000);
-        m_Turret.setAngle(130);
+        m_Turret.startTimer();
+        m_Turret.setLightOn();
+        m_Shooter.setVelocity(65000);
     }
 
     /**
@@ -56,6 +58,7 @@ public class ThreeAuton extends CommandBase
     @Override
     public void execute()
     {
+        m_Turret.setAngle(70);
         if (m_Timer.get() > 2.5)
         {
             m_Hopper.towerShoot();
@@ -64,6 +67,10 @@ public class ThreeAuton extends CommandBase
         {
             m_Shooter.setPower(0);
             m_Drive.tankDrive(-0.25, -0.25);
+        }
+        if (m_Timer.get() >= 8)
+        {
+            m_Drive.tankDriveVolts(0, 0);
         }
 
     }

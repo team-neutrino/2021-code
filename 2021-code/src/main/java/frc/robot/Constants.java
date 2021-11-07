@@ -124,7 +124,7 @@ public final class Constants
         public static final double CLIMBER_MOTOR_POWER_DOWN = .1;
         public static final double CLIMBER_MOTOR_WINCHPOWER = -1;
         public static final double CLIMBER_BAR_HEIGHT = 0;
-        public static final double CLIMBER_FULL_EXTEND = 40000;
+        public static final double CLIMBER_FULL_EXTEND = 54000;
     }
     public static final class HopperConstants
     {
@@ -151,7 +151,7 @@ public final class Constants
         public static final double TURRET_OFFSET_ANGLE = -128;
         public static final double DEGREE_BOUNDS = 180.0;
         public static final double ANGLE_SCALE = (7.0 * 360.0) / (27.0 * 1024.0);
-        public static final double kP = 0.10;
+        public static final double kP = 0.05;
     }
 
     public static final class DistanceCalculatorConstant
