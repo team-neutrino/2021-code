@@ -33,7 +33,6 @@ import frc.robot.util.DistanceCalculator;
 import frc.robot.util.TriggerToBoolean;
 import frc.robot.commands.*;
 import frc.robot.commands.Trajectories.*;
-import edu.wpi.first.wpilibj.GenericHID.Hand;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -62,10 +61,10 @@ public class RobotContainer
     private JoystickButton m_A = new JoystickButton(m_OperatorController, Button.kA.value);
     private JoystickButton m_B = new JoystickButton(m_OperatorController, Button.kB.value);
     private JoystickButton m_X = new JoystickButton(m_OperatorController, Button.kX.value);
-    private JoystickButton m_rightJoystickButton = new JoystickButton(m_OperatorController, Button.kStickRight.value);
+    private JoystickButton m_rightJoystickButton = new JoystickButton(m_OperatorController, Button.kRightStick.value);
     private JoystickButton m_Y = new JoystickButton(m_OperatorController, Button.kY.value);
-    private JoystickButton m_BumperLeft = new JoystickButton(m_OperatorController, Button.kBumperLeft.value);
-    private JoystickButton m_BumperRight = new JoystickButton(m_OperatorController, Button.kBumperRight.value);
+    private JoystickButton m_BumperLeft = new JoystickButton(m_OperatorController, Button.kLeftBumper.value);
+    private JoystickButton m_BumperRight = new JoystickButton(m_OperatorController, Button.kRightBumper.value);
     private JoystickButton m_LJoy8 = new JoystickButton(m_leftJoystick, 8);
     private TriggerToBoolean m_TriggerLeft = new TriggerToBoolean(m_OperatorController, Axis.kLeftTrigger.value,
         Constants.IntakeConstants.LEFT_TRIGGER_THRESHOLD);
